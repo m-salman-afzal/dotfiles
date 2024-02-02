@@ -1,2 +1,2 @@
 # dotfiles
-Personal dotfiles management.
+Personal dotfiles management
