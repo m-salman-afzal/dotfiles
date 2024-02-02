@@ -1,0 +1,12 @@
+[user]
+        email = m.salmanafzal@hotmail.com
+        name = m-salman-afzal
+	signingkey = /home/salman/.ssh/id_rsa.pub
+[core]
+	autocrlf = false
+[pull]
+	rebase = false
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
