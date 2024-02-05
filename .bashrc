@@ -141,6 +141,8 @@ alias nrd="npm run dev"
 
 alias nrdh="npm run dev:https"
 
+alias nrb="npm run build"
+
 #-----function
 killPort() { 
 	sudo kill -9 $(lsof -t -i :"$1")
