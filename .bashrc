@@ -75,7 +75,7 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto -all'
+    alias ls='ls --color=auto -all -h'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -119,7 +119,7 @@ fi
 
 
 #----Aliases
-alias updade="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean all -y"
+alias uuac="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean all -y"
 
 alias Python="/usr/bin/python"
 
@@ -131,17 +131,32 @@ alias dropCache="sudo sh -c \"echo 1 >'/proc/sys/vm/drop_caches' && echo 1 >'/pr
 
 alias startRedis="sudo systemctl start redis-server"
 
+#-----git aliases
+alias g="git"
+
 alias gfo="git fetch origin"
 
 alias gp="git pull"
 
 alias gc="git checkout"
 
+alias gph="git push"
+
+#-----node aliases
+alias n="npm"
+alias p="pnpm"
+
 alias nrd="npm run dev"
+alias prd="pnpm run dev"
 
 alias nrdh="npm run dev:https"
+alias prdh="pnpm run dev:https"
 
 alias nrb="npm run build"
+alias prb="pnpm run build"
+
+alias nrs="npm run start"
+alias prs="pnpm run start"
 
 #-----function
 killPort() { 
