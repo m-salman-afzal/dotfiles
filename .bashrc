@@ -132,6 +132,8 @@ alias dropCache="sudo sh -c \"echo 1 >'/proc/sys/vm/drop_caches' && echo 1 >'/pr
 alias startRedis="sudo systemctl start redis-server"
 
 #-----git aliases
+alias gdrb="git remote prune origin && git branch --merged >/tmp/merged-branches && nano /tmp/merged-branches && xargs git branch -d </tmp/merged-branches"
+
 alias g="git"
 
 alias gfo="git fetch origin"
