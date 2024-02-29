@@ -136,11 +136,15 @@ alias gdrb="git remote prune origin && git branch --merged >/tmp/merged-branches
 
 alias g="git"
 
+alias gb="git branch"
+
 alias gfo="git fetch origin"
 
 alias gp="git pull"
 
-alias gc="git checkout"
+alias gc="git commit"
+
+alias gch="git checkout"
 
 alias gph="git push"
 
@@ -153,6 +157,7 @@ alias prd="pnpm run dev"
 
 alias nrdh="npm run dev:https"
 alias prdh="pnpm run dev:https"
+alias nrdht="npx next dev --turbo --experimental-https -p 3001 -H 127.0.0.1"
 
 alias nrb="npm run build"
 alias prb="pnpm run build"
@@ -187,3 +192,11 @@ export PATH=$BUN_INSTALL/bin:$PATH
 
 # node
 corepack enable
+
+# pnpm
+export PNPM_HOME="/home/salman/.pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
