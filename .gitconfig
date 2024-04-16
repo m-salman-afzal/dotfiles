@@ -3,10 +3,15 @@
         name = m-salman-afzal
 	signingkey = /home/salman/.ssh/id_ed25519.pub
 [core]
-	autocrlf = false
+	autocrlf = input
 [pull]
 	rebase = false
 [gpg]
 	format = ssh
 [commit]
 	sshsign = true
+[rerere]
+	enabled = true
+	autoUpdate = true
+[column]
+	ui=auto

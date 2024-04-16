@@ -121,15 +121,15 @@ fi
 #----Aliases
 alias uuac="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean all -y"
 
-alias Python="/usr/bin/python"
+alias Python="/usr/bin/python3"
+
+alias python="/use/bin/python3"
 
 alias vsStaging="ssh salman.afzal@studentapp-viralsolutions.carbonteq.com"
 
-alias delRemotelyRemovedBranches="git remote prune origin && git branch --merged >/tmp/merged-branches && nano /tmp/merged-branches && xargs git branch -d </tmp/merged-branches"
-
 alias dropCache="sudo sh -c \"echo 1 >'/proc/sys/vm/drop_caches' && echo 1 >'/proc/sys/vm/compact_memory' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\" && sudo service mysql stop"
 
-alias startRedis="sudo systemctl start redis-server"
+alias srs="sudo systemctl start redis-server"
 
 #-----git aliases
 alias gdrb="git remote prune origin && git branch --merged >/tmp/merged-branches && nano /tmp/merged-branches && xargs git branch -d </tmp/merged-branches"
@@ -158,6 +158,7 @@ alias prd="pnpm run dev"
 alias nrdh="npm run dev:https"
 alias prdh="pnpm run dev:https"
 alias nrdht="npx next dev --turbo --experimental-https -p 3001 -H 127.0.0.1"
+alias prdht="pnpx next dev --turbo --experimental-https -p 3001 -H 127.0.0.1"
 
 alias nrb="npm run build"
 alias prb="pnpm run build"
@@ -190,13 +191,18 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH
 
 
-# node
-corepack enable
+#-----node
+corepack enable pnpm
 
-# pnpm
-export PNPM_HOME="/home/salman/.pnpm"
+#-----pnpm
+export PNPM_HOME="/home/salman/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+
+#-----java
+export JAVA_HOME="/home/salman/jdk-21.0.2"
+export PATH=$JAVA_HOME/bin:$PATH
