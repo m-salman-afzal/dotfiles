@@ -1,48 +1,34 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+#-----Set dir we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-#Set dir we want to store zinit and plugins
-export ZINIT_HOME="$XDG_DATA_HOME:-$HOME/.local/share/zinit/zinit.git"
-
-# Download zinit if not already exists
+#-----Download zinit if not already exists
 if [ ! -d "$ZINIT_HOME" ]; then
     mkdir -p "$(dirname $ZINIT_HOME)"
     git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
-# Source and load zinit
+#-----Source and load zinit
 source "$ZINIT_HOME/zinit.zsh"
 
-# run starship
-#####eval "$(starship init zsh)"
+#-----load oh my posh theme
+eval "$(oh-my-posh init zsh --config /home/salman/.poshthemes/themes/di4am0nd.omp.json)"
 
-# Add Powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# PLUGINS
+#-----Plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 
-# Load completions
+#-----Load completions
 autoload -U compinit && compinit
 
 zinit cdreplay -q
 
-# Keybindings
+#-----Keybindings
 bindkey '^f' autosuggest-accept
-#bindkey -e
 bindkey '5A' history-search-backward
 bindkey '5B' history-search-forward
 
-# History
+#-----History
 HISTSIZE=10000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
@@ -55,14 +41,13 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_find_no_dups
 
-# Completion styling
+#-----Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors '${(s.:.)LS_COLORS}'
 
-# Aliases
+#----Aliases
 alias ls='ls -la --color'
 
-#----Aliases
 alias uuac="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean all -y"
 
 alias Python="/usr/bin/python3"
@@ -153,6 +138,6 @@ esac
 export JAVA_HOME="/home/salman/jdk-21.0.2"
 export PATH=$JAVA_HOME/bin:$PATH
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+#-----THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
