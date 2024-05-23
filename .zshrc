@@ -24,7 +24,7 @@ autoload -U compinit && compinit
 zinit cdreplay -q
 
 #-----Keybindings
-bindkey '^f' autosuggest-accept
+#bindkey '^f' autosuggest-accept
 bindkey '5A' history-search-backward
 bindkey '5B' history-search-forward
 
