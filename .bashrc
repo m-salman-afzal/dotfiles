@@ -157,6 +157,7 @@ alias prd="pnpm run dev"
 
 alias nrdh="npm run dev:https"
 alias prdh="pnpm run dev:https"
+
 alias nrdht="npx next dev --turbo --experimental-https -p 3001 -H 127.0.0.1"
 alias prdht="pnpx next dev --turbo --experimental-https -p 3001 -H 127.0.0.1"
 
@@ -165,6 +166,12 @@ alias prb="pnpm run build"
 
 alias nrs="npm run start"
 alias prs="pnpm run start"
+
+alias nrt="npm run test"
+alias prt="pnpm run test"
+
+alias nrdt="npm run dev:test"
+alias prdt="pnpm run dev:test"
 
 #-----function
 killPort() { 
@@ -193,6 +200,7 @@ export PATH=$BUN_INSTALL/bin:$PATH
 
 #-----node
 corepack enable pnpm
+corepack enable yarn
 
 #-----pnpm
 export PNPM_HOME="/home/salman/.local/share/pnpm"
@@ -206,3 +214,7 @@ esac
 #-----java
 export JAVA_HOME="/home/salman/jdk-21.0.2"
 export PATH=$JAVA_HOME/bin:$PATH
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
