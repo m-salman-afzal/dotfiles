@@ -55,6 +55,7 @@ alias Python="/usr/bin/python3"
 alias python="/use/bin/python3"
 
 alias vsStaging="ssh salman.afzal@studentapp-viralsolutions.carbonteq.com"
+alias vsTunnel="ssh -f -L 3307:127.0.0.1:3307 salman.afzal@34.69.17.153"
 
 alias dropCache="sudo sh -c \"echo 1 >'/proc/sys/vm/drop_caches' && echo 1 >'/proc/sys/vm/compact_memory' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\" && sudo service mysql stop"
 
