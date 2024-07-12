@@ -15,3 +15,7 @@
 	autoUpdate = true
 [column]
 	ui=auto
+[diff]
+	context = 0
+[alias]
+	uncommit = reset HEAD^
