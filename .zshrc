@@ -13,6 +13,10 @@ fi
 source "$ZINIT_HOME/zinit.zsh"
 
 
+#-----Paths
+export PATH=$PATH:/home/salman/.local/bin
+
+
 #-----load oh my posh theme
 eval "$(oh-my-posh init zsh --config /home/salman/.poshthemes/themes/di4am0nd.omp.json)"
 
