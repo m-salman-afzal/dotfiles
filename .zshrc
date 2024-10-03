@@ -97,6 +97,9 @@ alias gph="git push"
 alias n="npm"
 alias p="pnpm"
 
+alias nr="npm run"
+alias pr="pnpm run"
+
 alias nrd="npm run dev"
 alias prd="pnpm run dev"
 
@@ -115,9 +118,11 @@ alias prs="pnpm run start"
 alias nrt="npm run test"
 alias prt="pnpm run test"
 
-alias nrdt="npm run dev:test"
-alias prdt="pnpm run dev:test"
+alias nrtd="npm run test:dev"
+alias prtd="pnpm run test:dev"
 
+alias nrtp="npm run test:prod"
+alias prtp="pnpm run test:prod"
 
 #-----function
 killPort() { 
@@ -144,11 +149,6 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH
 
 
-#-----node
-corepack enable pnpm
-corepack enable yarn
-
-
 #-----pnpm
 export PNPM_HOME="/home/salman/.local/share/pnpm"
 case ":$PATH:" in
@@ -162,19 +162,11 @@ export JAVA_HOME="/home/salman/jdk-21.0.2"
 export PATH=$JAVA_HOME/bin:$PATH
 
 
-#-----THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-
 #-----bun completions
 [ -s "/home/salman/.bun/_bun" ] && source "/home/salman/.bun/_bun"
 
 
-#-----Volta
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
 
-#-----asdf
-#. "$HOME/.asdf/asdf.sh"
-export PATH=$HOME/.local/bin:$PATH
+#-----THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
