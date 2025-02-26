@@ -28,8 +28,8 @@ zinit light zsh-users/zsh-autosuggestions
 
 
 #-----asdf
-. "$HOME/.asdf/asdf.sh"
-fpath=(${ASDF_DIR}/completions $fpath)
+#. "$HOME/.asdf/asdf.sh"
+#fpath=(${ASDF_DIR}/completions $fpath)
 
 #-----Load completions
 autoload -Uz compinit && compinit
@@ -80,22 +80,27 @@ alias srs="sudo systemctl start redis-server"
 
 
 #-----git aliases
-alias gdrb="git remote prune origin && git branch --merged >/tmp/merged-branches && nano /tmp/merged-branches && xargs git branch -d </tmp/merged-branches"
-
 alias g="git"
 
 alias gb="git branch"
 
-alias gfo="git fetch origin"
+alias gdrb="g remote prune origin && gb --merged >/tmp/merged-branches && nano /tmp/merged-branches && xargs gb -d </tmp/merged-branches"
 
-alias gp="git pull"
+alias gfo="g fetch origin"
 
-alias gc="git commit"
+alias gp="g pull"
 
-alias gch="git checkout"
+alias gc="g commit"
 
-alias gph="git push"
+alias gco="g checkout"
 
+alias gph="g push"
+
+alias gmtm="gch main && g merge staging && gph && gch -"
+
+alias gce="gc --allow-empty -m 'temp' && gph"
+
+alias gmts="gch staging && g merge main && gph && gch -"
 
 #-----node aliases
 alias n="npm"
@@ -145,7 +150,7 @@ export OPENSSL_CONF=/tmp/openssl.cnf
 
 
 #-----rust
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"
 
 
 #-----bun
@@ -162,15 +167,28 @@ esac
 
 
 #-----java
-export JAVA_HOME="/home/salman/jdk-21.0.2"
+export JAVA_HOME="/home/salman/jdk-23.0.1"
 export PATH=$JAVA_HOME/bin:$PATH
 
 
 #-----bun completions
 [ -s "/home/salman/.bun/_bun" ] && source "/home/salman/.bun/_bun"
 
-
+#-----android sdk
+export ANDROID_HOME="/mnt/c/Users/CarbonTeq/AppData/Local/Android/Sdk"
+export PATH=$ANDROID_HOME:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
 
 #-----THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/salman/google-cloud-sdk/path.zsh.inc' ]; then . '/home/salman/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/salman/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/salman/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Android
+export ANDROID_HOME=/mnt/c/Users/CarbonTeq/AppData/Local/Android/Sdk
+export WSLENV=ANDROID_HOME/p
