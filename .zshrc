@@ -96,11 +96,11 @@ alias gco="g checkout"
 
 alias gph="g push"
 
-alias gmtm="gch main && g merge staging && gph && gch -"
+alias gmtm="gco main && g merge staging && gph && gco -"
 
 alias gce="gc --allow-empty -m 'temp' && gph"
 
-alias gmts="gch staging && g merge main && gph && gch -"
+alias gmts="gco staging && g merge main && gph && gco -"
 
 #-----node aliases
 alias n="npm"
@@ -192,3 +192,6 @@ if [ -f '/home/salman/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/salm
 # Android
 export ANDROID_HOME=/mnt/c/Users/CarbonTeq/AppData/Local/Android/Sdk
 export WSLENV=ANDROID_HOME/p
+
+# Node
+export NODE_COMPILE_CACHE=/home/salman/.cache/node

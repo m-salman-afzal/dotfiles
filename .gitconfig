@@ -1,7 +1,7 @@
 [user]
-        email = m.salmanafzal@hotmail.com
+	email = m.salmanafzal@proton.me
         name = m-salman-afzal
-	signingkey = /home/salman/.ssh/id_ed25519_signing.pub
+	signingkey = /home/salman/.ssh/id_ed25519_commit_sign.pub
 [core]
 	autocrlf = false
 [pull]
