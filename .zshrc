@@ -14,11 +14,11 @@ source "$ZINIT_HOME/zinit.zsh"
 
 
 #-----Paths
-export PATH=$PATH:/home/salman/.local/bin
+export PATH=$PATH:$HOME/.local/bin
 
 
 #-----load oh my posh theme
-eval "$(oh-my-posh init zsh --config /home/salman/.poshthemes/themes/di4am0nd.omp.json)"
+eval "$(oh-my-posh init zsh --config $HOME/.poshthemes/themes/di4am0nd.omp.json)"
 
 
 #-----Plugins
@@ -71,9 +71,6 @@ alias Python="/usr/bin/python3"
 
 alias python="/use/bin/python3"
 
-alias vsStaging="ssh salman.afzal@studentapp-viralsolutions.carbonteq.com"
-alias vsTunnel="ssh -L 3307:127.0.0.1:3307 salman.afzal@34.69.17.153"
-
 alias dropCache="sudo sh -c \"echo 1 >'/proc/sys/vm/drop_caches' && echo 1 >'/proc/sys/vm/compact_memory' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\" && sudo service mysql stop"
 
 alias srs="sudo systemctl start redis-server"
@@ -114,9 +111,6 @@ alias prd="pnpm run dev"
 
 alias nrdh="npm run dev:https"
 alias prdh="pnpm run dev:https"
-
-alias nrdht="npx next dev --turbo --experimental-https -p 3001 -H 127.0.0.1"
-alias prdht="pnpx next dev --turbo --experimental-https -p 3001 -H 127.0.0.1"
 
 alias nrb="npm run build"
 alias prb="pnpm run build"
@@ -159,7 +153,7 @@ export PATH=$BUN_INSTALL/bin:$PATH
 
 
 #-----pnpm
-export PNPM_HOME="/home/salman/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -167,12 +161,12 @@ esac
 
 
 #-----java
-export JAVA_HOME="/home/salman/jdk-23.0.1"
+export JAVA_HOME="$HOME/jdk-23.0.1"
 export PATH=$JAVA_HOME/bin:$PATH
 
 
 #-----bun completions
-[ -s "/home/salman/.bun/_bun" ] && source "/home/salman/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 #-----android sdk
 export ANDROID_HOME="/mnt/c/Users/CarbonTeq/AppData/Local/Android/Sdk"
@@ -184,14 +178,14 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/salman/google-cloud-sdk/path.zsh.inc' ]; then . '/home/salman/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/salman/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/salman/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Android
 export ANDROID_HOME=/mnt/c/Users/CarbonTeq/AppData/Local/Android/Sdk
 export WSLENV=ANDROID_HOME/p
 
 # Node
-export NODE_COMPILE_CACHE=/home/salman/.cache/node
+export NODE_COMPILE_CACHE="$HOME/.cache/node"
