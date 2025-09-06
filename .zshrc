@@ -69,7 +69,7 @@ alias uuac="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y 
 
 alias Python="/usr/bin/python3"
 
-alias python="/use/bin/python3"
+alias python="/usr/bin/python3"
 
 alias dropCache="sudo sh -c \"echo 1 >'/proc/sys/vm/drop_caches' && echo 1 >'/proc/sys/vm/compact_memory' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\" && sudo service mysql stop"
 
@@ -81,7 +81,11 @@ alias g="git"
 
 alias gb="git branch"
 
-alias gdrb="g remote prune origin && gb --merged >/tmp/merged-branches && nano /tmp/merged-branches && xargs gb -d </tmp/merged-branches"
+gdrb() {
+	git remote prune origin
+	git branch -vv | grep ': gone]' | awk '{print $1}' > /tmp/merged-branches
+	cat /tmp/merged-branches | xargs git branch -D
+}
 
 alias gfo="g fetch origin"
 
@@ -93,11 +97,27 @@ alias gco="g checkout"
 
 alias gph="g push"
 
-alias gmtm="gco main && g merge staging && gph && gco -"
+alias gmtmfs="gco main && g merge staging && gph && gco -"
 
 alias gce="gc --allow-empty -m 'temp' && gph"
 
-alias gmts="gco staging && g merge main && gph && gco -"
+alias gmtsfm="gco staging && g merge main && gph && gco -"
+
+alias gs="g stash"
+
+alias gsl="gs list"
+
+gsp() {
+        git stash push -m $1
+}
+
+gsa() {
+	git stash apply stash@{$1}
+}
+
+gsd() {
+        git stash drop stash@{$1}
+}
 
 #-----node aliases
 alias n="npm"
@@ -192,6 +212,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 #-----bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
+
 #-----android sdk
 export ANDROID_HOME="/mnt/c/Users/CarbonTeq/AppData/Local/Android/Sdk"
 export PATH=$ANDROID_HOME:$PATH
@@ -207,9 +228,15 @@ if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/
 # The next line enables shell command completion for gcloud.
 if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
 
-# Android
+
+#-----Android
 export ANDROID_HOME=/mnt/c/Users/CarbonTeq/AppData/Local/Android/Sdk
 export WSLENV=ANDROID_HOME/p
 
-# Node
+
+#-----Node
 export NODE_COMPILE_CACHE="$HOME/.cache/node"
+
+
+#-----claude
+alias claude="/Users/satop/.claude/local/claude"

@@ -1,9 +1,10 @@
 [user]
 	email = m.salmanafzal@proton.me
         name = m-salman-afzal
-	signingkey = /home/satop/.ssh/gitCommitSigningKey_ed25519.pub
+	signingkey = /Users/satop/.ssh/gitCommitSigningKey_ed25519.pub
 [core]
 	autocrlf = false
+	editor = nano
 [pull]
 	rebase = false
 [gpg]
@@ -19,3 +20,5 @@
 	context = 0
 [alias]
 	uncommit = reset HEAD^
+[push]
+	autoSetupRemote = true
