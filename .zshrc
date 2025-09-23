@@ -27,10 +27,6 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 
 
-#-----asdf
-#. "$HOME/.asdf/asdf.sh"
-#fpath=(${ASDF_DIR}/completions $fpath)
-
 #-----Load completions
 autoload -Uz compinit && compinit
 
@@ -112,11 +108,21 @@ gsp() {
 }
 
 gsa() {
-	git stash apply stash@{$1}
+	gsl
+
+	echo -n "Enter the stash number to apply: "
+	read stash_no
+
+ 	git stash apply "stash@{$stash_no}"
 }
 
 gsd() {
-        git stash drop stash@{$1}
+	gsl
+
+        echo -n "Enter the stash number to drop: "
+	read stash_no
+
+        git stash drop "stash@{$stash_no}"
 }
 
 #-----node aliases
@@ -214,9 +220,9 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 
 #-----android sdk
-export ANDROID_HOME="/mnt/c/Users/CarbonTeq/AppData/Local/Android/Sdk"
-export PATH=$ANDROID_HOME:$PATH
-export PATH=$ANDROID_HOME/platform-tools:$PATH
+#export ANDROID_HOME="/mnt/c/Users/CarbonTeq/AppData/Local/Android/Sdk"
+#export PATH=$ANDROID_HOME:$PATH
+#export PATH=$ANDROID_HOME/platform-tools:$PATH
 
 #-----THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -230,8 +236,8 @@ if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-clou
 
 
 #-----Android
-export ANDROID_HOME=/mnt/c/Users/CarbonTeq/AppData/Local/Android/Sdk
-export WSLENV=ANDROID_HOME/p
+#export ANDROID_HOME=/mnt/c/Users/CarbonTeq/AppData/Local/Android/Sdk
+#export WSLENV=ANDROID_HOME/p
 
 
 #-----Node
