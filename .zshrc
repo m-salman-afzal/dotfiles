@@ -125,6 +125,13 @@ gsd() {
         git stash drop "stash@{$stash_no}"
 }
 
+gacph() {
+        g add .
+	gc -m $1
+	gph
+}
+
+
 #-----node aliases
 alias n="npm"
 alias p="pnpm"
@@ -246,3 +253,6 @@ export NODE_COMPILE_CACHE="$HOME/.cache/node"
 
 #-----claude
 alias claude="/Users/satop/.claude/local/claude"
+
+# Turso
+export PATH="$PATH:/home/satop/.turso"
