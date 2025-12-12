@@ -131,6 +131,38 @@ gacph() {
 	gph
 }
 
+alias gw="g worktree"
+
+alias gwl="gw list"
+
+gwa() {
+    branch="$1"
+
+    if [ -z "$branch" ]; then
+        echo "Usage: gwa <branch>"
+        return 1
+    fi
+
+    # current repo folder name
+    repo_name="$(basename "$PWD")"
+
+    # worktree dir path
+    target="../${repo_name}-${branch}"
+
+    # Create branch if it does not exist
+    if ! git show-ref --verify --quiet "refs/heads/$branch"; then
+        echo "Branch '$branch' does not exist — creating it..."
+        git fetch origin main 2>/dev/null
+        git branch "$branch" origin/main 2>/dev/null || git branch "$branch"
+    fi
+
+    echo "Creating worktree at $target ..."
+    gw add "$target" "$branch"
+
+    # Your push helper
+    gph
+}
+
 
 #-----node aliases
 alias n="npm"
