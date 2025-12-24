@@ -1,0 +1,1 @@
+../../../../../dotfiles/.local/share/gnome-shell/extensions/auto-move-windows@gnome-shell-extensions.gcampax.github.com/prefs.js

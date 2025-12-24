@@ -1,0 +1,1 @@
+../../../../../../../../dotfiles/.local/share/gnome-shell/extensions/Vitals@CoreCoding.com/locale/fi_FI/LC_MESSAGES/vitals.mo

@@ -288,3 +288,6 @@ alias claude="/Users/satop/.claude/local/claude"
 
 # Turso
 export PATH="$PATH:/home/satop/.turso"
+
+# imagine
+alias mountChatlyCdn="rclone mount r2CloudflareStorageChatly:chatly ~/r2mount --daemon"

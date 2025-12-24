@@ -1,0 +1,1 @@
+../../../../../dotfiles/.local/share/gnome-shell/extensions/Vitals@CoreCoding.com/values.js

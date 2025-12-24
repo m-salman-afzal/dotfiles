@@ -1,0 +1,1 @@
+../../../../../../../../dotfiles/.local/share/gnome-shell/extensions/color-picker@tuberry/locale/tr_TR/LC_MESSAGES/gnome-shell-extension-color-picker.mo

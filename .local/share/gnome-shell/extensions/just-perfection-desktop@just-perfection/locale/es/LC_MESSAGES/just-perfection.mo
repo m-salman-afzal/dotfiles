@@ -1,0 +1,1 @@
+../../../../../../../../dotfiles/.local/share/gnome-shell/extensions/just-perfection-desktop@just-perfection/locale/es/LC_MESSAGES/just-perfection.mo

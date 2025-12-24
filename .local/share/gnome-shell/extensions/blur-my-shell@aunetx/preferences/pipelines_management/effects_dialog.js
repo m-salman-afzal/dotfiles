@@ -1,0 +1,1 @@
+../../../../../../../dotfiles/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/preferences/pipelines_management/effects_dialog.js

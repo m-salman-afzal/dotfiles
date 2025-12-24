@@ -1,0 +1,1 @@
+../../../../../../../dotfiles/.local/share/gnome-shell/extensions/just-perfection-desktop@just-perfection/lib/Prefs/PrefsKeys.js

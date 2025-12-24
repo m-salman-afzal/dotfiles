@@ -1,0 +1,1 @@
+../../../../../../dotfiles/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/effects/monte_carlo_blur.glsl

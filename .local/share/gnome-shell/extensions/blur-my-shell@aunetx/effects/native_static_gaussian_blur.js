@@ -1,0 +1,1 @@
+../../../../../../dotfiles/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/effects/native_static_gaussian_blur.js

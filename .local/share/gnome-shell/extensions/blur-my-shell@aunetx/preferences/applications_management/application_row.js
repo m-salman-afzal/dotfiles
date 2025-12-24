@@ -1,0 +1,1 @@
+../../../../../../../dotfiles/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/preferences/applications_management/application_row.js
