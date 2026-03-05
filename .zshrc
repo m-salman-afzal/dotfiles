@@ -61,7 +61,7 @@ zstyle ':completion:*' list-colors '${(s.:.)LS_COLORS}'
 #----Aliases
 alias ls='ls -la --color'
 
-alias uuac="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean all -y"
+alias uuac="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt clean all -y && sudo snap refresh && sudo flatpak update && sudo flatpak uninstall --unused"
 
 alias Python="/usr/bin/python3"
 
@@ -103,10 +103,12 @@ alias gs="g stash"
 
 alias gsl="gs list"
 
+# push to stash
 gsp() {
-        git stash push -m $1
+        git stash push -u -m $1
 }
 
+# apply stash
 gsa() {
 	gsl
 
@@ -116,6 +118,7 @@ gsa() {
  	git stash apply "stash@{$stash_no}"
 }
 
+# drop stash
 gsd() {
 	gsl
 
@@ -125,6 +128,7 @@ gsd() {
         git stash drop "stash@{$stash_no}"
 }
 
+# git add, commit, and push
 gacph() {
         g add .
 	gc -m $1
@@ -232,8 +236,9 @@ load-nvmrc
 export OPENSSL_CONF=/tmp/openssl.cnf
 
 
-#-----rust
+#-----rust-cargo
 #. "$HOME/.cargo/env"
+export PATH=$HOME/.cargo/bin:$PATH
 
 
 #-----bun
@@ -284,10 +289,14 @@ export NODE_COMPILE_CACHE="$HOME/.cache/node"
 
 
 #-----claude
-alias claude="/Users/satop/.claude/local/claude"
+alias claude="$HOME/.local/bin/claude"
 
 # Turso
-export PATH="$PATH:/home/satop/.turso"
+export PATH="$PATH:$HOME/.turso"
 
 # imagine
 alias mountChatlyCdn="rclone mount r2CloudflareStorageChatly:chatly ~/r2mount --daemon"
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+export TIPTAP_PRO_TOKEN=KrUUi3xRZwXBLWBz5+ovXEOYdSNkgqfCwGM7kvrwSn8LLZx3CTTWbvMcUF8lGgEd

@@ -1,1 +1,0 @@
-../../../../../../dotfiles/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/components/coverflow_alt_tab.js

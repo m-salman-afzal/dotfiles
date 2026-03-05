@@ -1,1 +1,0 @@
-../../../../../../../../dotfiles/.local/share/gnome-shell/extensions/blur-my-shell@aunetx/locale/bg/LC_MESSAGES/blur-my-shell@aunetx.mo

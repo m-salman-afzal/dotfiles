@@ -1,1 +1,0 @@
-../../../../../dotfiles/.local/share/gnome-shell/extensions/Vitals@CoreCoding.com/extension.js

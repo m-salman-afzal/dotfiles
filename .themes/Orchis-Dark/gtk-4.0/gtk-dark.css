@@ -5493,7 +5493,7 @@ popover.entry-completion > contents {
 .nautilus-window .sidebar-pane > toolbarview > placessidebar > scrolledwindow > viewport > list.navigation-sidebar > row.activatable {
   border-radius: 0;
   padding: 0;
-  margin: -8px 0 -8px 0;
+  margin: 0;
   animation: none;
 }
 

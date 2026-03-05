@@ -1,1 +1,0 @@
-../../../../../dotfiles/.local/share/gnome-shell/extensions/color-picker@tuberry/prefs.js

@@ -1,1 +1,0 @@
-../../../../../dotfiles/.local/share/gnome-shell/extensions/dash-to-panel@jderose9.github.com/intellihide.js
