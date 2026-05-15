@@ -277,7 +277,6 @@ export PATH="$PATH:$HOME/.turso"
 
 #-----imagine
 alias mountChatlyCdn="rclone mount r2CloudflareStorageChatly:chatly ~/r2mount --daemon"
-export TIPTAP_PRO_TOKEN=KrUUi3xRZwXBLWBz5+ovXEOYdSNkgqfCwGM7kvrwSn8LLZx3CTTWbvMcUF8lGgEd
 
 #-----LM Studio CLI
 export PATH="$PATH:/home/satop/.lmstudio/bin"
