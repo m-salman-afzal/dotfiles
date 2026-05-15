@@ -71,6 +71,10 @@ alias dropCache="sudo sh -c \"echo 1 >'/proc/sys/vm/drop_caches' && echo 1 >'/pr
 
 alias srs="sudo systemctl start redis-server"
 
+alias disableKernelIpv6="sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1"
+
+alias enableKernelIpv6="sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0 && sudo sysctl -w net.ipv6.conf.default.disable_ipv6=0"
+
 
 #-----git aliases
 alias g="git"
@@ -139,32 +143,33 @@ alias gw="g worktree"
 
 alias gwl="gw list"
 
+#-----Create worktree (creates branch if it doesn't exist)
 gwa() {
-    branch="$1"
-
+    local branch="$1"
     if [ -z "$branch" ]; then
-        echo "Usage: gwa <branch>"
+        echo "Usage: wta <branch-name>" >&2
         return 1
     fi
 
-    # current repo folder name
-    repo_name="$(basename "$PWD")"
+    local path="./.worktrees/$branch"
 
-    # worktree dir path
-    target="../${repo_name}-${branch}"
-
-    # Create branch if it does not exist
-    if ! git show-ref --verify --quiet "refs/heads/$branch"; then
-        echo "Branch '$branch' does not exist — creating it..."
-        git fetch origin main 2>/dev/null
-        git branch "$branch" origin/main 2>/dev/null || git branch "$branch"
+    if git show-ref --verify --quiet "refs/heads/$branch"; then
+        git worktree add "$path" "$branch"
+    else
+        git worktree add -b "$branch" "$path"
     fi
+}
 
-    echo "Creating worktree at $target ..."
-    gw add "$target" "$branch"
+#-----Remove worktree (pass extra args like --force if needed)
+gwr() {
+    local branch="$1"
+    if [ -z "$branch" ]; then
+        echo "Usage: wtr <branch-name> [--force]" >&2
+        return 1
+    fi
+    shift
 
-    # Your push helper
-    gph
+    git worktree remove "./.worktrees/$branch" "$@"
 }
 
 
@@ -244,6 +249,7 @@ export PATH=$HOME/.cargo/bin:$PATH
 #-----bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 
 #-----pnpm
@@ -254,34 +260,9 @@ case ":$PATH:" in
 esac
 
 
-#-----java
-export JAVA_HOME="$HOME/jdk-23.0.1"
-export PATH=$JAVA_HOME/bin:$PATH
-
-
-#-----bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-
-#-----android sdk
-#export ANDROID_HOME="/mnt/c/Users/CarbonTeq/AppData/Local/Android/Sdk"
-#export PATH=$ANDROID_HOME:$PATH
-#export PATH=$ANDROID_HOME/platform-tools:$PATH
-
-#-----THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# The next line updates PATH for the Google Cloud SDK.
+#-----google cloud sdk.
 if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
 if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
-
-
-#-----Android
-#export ANDROID_HOME=/mnt/c/Users/CarbonTeq/AppData/Local/Android/Sdk
-#export WSLENV=ANDROID_HOME/p
 
 
 #-----Node
@@ -291,12 +272,13 @@ export NODE_COMPILE_CACHE="$HOME/.cache/node"
 #-----claude
 alias claude="$HOME/.local/bin/claude"
 
-# Turso
+#-----Turso
 export PATH="$PATH:$HOME/.turso"
 
-# imagine
+#-----imagine
 alias mountChatlyCdn="rclone mount r2CloudflareStorageChatly:chatly ~/r2mount --daemon"
-
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 export TIPTAP_PRO_TOKEN=KrUUi3xRZwXBLWBz5+ovXEOYdSNkgqfCwGM7kvrwSn8LLZx3CTTWbvMcUF8lGgEd
+
+#-----LM Studio CLI
+export PATH="$PATH:/home/satop/.lmstudio/bin"
+
