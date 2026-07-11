@@ -2,7 +2,7 @@
 # the anonymous function keeps the option local instead of changing it globally
 () {
   emulate -L zsh -o extendedglob
-
+ #asd
   #* dotfiles — daily sync, but it asks first: shows the diff in this terminal,
   #  pushes only on go-ahead. Silent when nothing changed. Stamp file = last run.
   if [[ -t 0 && ( ! -e $HOME/.cache/dotfiles-last-sync || -n $HOME/.cache/dotfiles-last-sync(#qNm+0) ) ]]; then
