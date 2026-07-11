@@ -1,0 +1,25 @@
+[user]
+	email = m.salmanafzal@proton.me
+        name = m-salman-afzal
+	signingkey = /home/satop/.ssh/gitCommitSigningKey.pub
+[core]
+	autocrlf = false
+	editor = nano
+[pull]
+	rebase = false
+[gpg]
+	format = ssh
+[commit]
+	sshsign = true
+[rerere]
+	enabled = true
+	autoUpdate = true
+[column]
+	ui=auto
+[diff]
+	context = 0
+[alias]
+	uncommit = reset HEAD^
+	tree = log --graph --decorate --oneline --all
+[push]
+	autoSetupRemote = true
