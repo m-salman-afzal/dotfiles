@@ -23,3 +23,5 @@
 	tree = log --graph --decorate --oneline --all
 [push]
 	autoSetupRemote = true
+[filter "secrets"]
+	clean = cat >/dev/null

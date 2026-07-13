@@ -2,6 +2,11 @@ killPort() {
 	sudo kill -9 $(lsof -t -i :"$1")
 }
 
+# remove all files/folder from current and children dirs
+rmrf() {
+  rm -rf ./**/$1
+}
+
 # cycle-sink: toggle laptop speakers <-> headphones.
 # On UCM cards (e.g. skl_hda_dsp) Speaker and Headphones are mutually
 # exclusive card *profiles*, so we switch the profile, not just the sink.
