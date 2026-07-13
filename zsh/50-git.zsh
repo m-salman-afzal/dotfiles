@@ -3,24 +3,24 @@ alias g="git"
 alias gb="git branch"
 
 gdrb() {
-	g remote prune origin
-	g branch -vv | grep ': gone]' | awk '{print $1}' > /tmp/merged-branches
-	cat /tmp/merged-branches | xargs g branch -D
+	git remote prune origin
+	git branch -vv | grep ': gone]' | awk '{print $1}' > /tmp/merged-branches
+	cat /tmp/merged-branches | xargs git branch -D
 }
 
-alias gfo="g fetch origin"
+alias gfo="git fetch origin"
 
-alias gp="g pull"
+alias gp="git pull"
 
-alias gc="g commit"
+alias gc="git commit"
 
-alias gco="g checkout"
+alias gco="git checkout"
 
-alias gph="g push"
+alias gph="git push"
 
-alias gceph="gc --allow-empty -m 'temp' && gph"
+alias gceph="git commit --allow-empty -m 'temp' && git push"
 
-alias gs="g stash"
+alias gs="git stash"
 
 alias gsl="gs list"
 
@@ -31,7 +31,7 @@ gsp() {
 
 # apply stash
 gsa() {
-	gsl
+	git stash list
 
 	echo -n "Enter the stash number to apply: "
 	read stash_no
@@ -41,7 +41,7 @@ gsa() {
 
 # drop stash
 gsd() {
-	gsl
+	git stash list
 
   echo -n "Enter the stash number to drop: "
 	read stash_no
@@ -51,14 +51,14 @@ gsd() {
 
 # git add, commit, and push
 gacph() {
-  g add .
-	gc -m $1
-	gph
+  git add .
+	git commit -m $1
+	git push
 }
 
-alias gw="g worktree"
+alias gw="git worktree"
 
-alias gwl="gw list"
+alias gwl="git worktree list"
 
 # Create worktree (creates branch if it doesn't exist)
 gwa() {
@@ -128,7 +128,7 @@ gwa() {
 gwr() {
     local branch="$1"
     if [ -z "$branch" ]; then
-        echo "Usage: wtr <branch-name> [--force]" >&2
+        echo "Usage: gwr <branch-name> [--force]" >&2
         return 1
     fi
     shift
