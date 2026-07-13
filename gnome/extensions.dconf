@@ -68,6 +68,7 @@ tray-pos='right'
 
 [audio-visual]
 alpha-rise=0.59999999999999998
+audio-backend='gstreamer'
 bar-color='rgba(36, 31, 49, 1.00)'
 bar-count=24
 bottom-padding=6
@@ -790,7 +791,7 @@ window-buttons-theme='auto'
 name='Orchis-Dark'
 
 [vertical-workspaces]
-aaa-loading-profile=true
+aaa-loading-profile=false
 activate-settings-window=2
 always-activate-selected-window=false
 animation-speed-factor=1
