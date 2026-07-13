@@ -1,0 +1,4 @@
+[/]
+screenshot=@as []
+show-screenshot-ui=['Print']
+toggle-overview=['<Super>Tab']

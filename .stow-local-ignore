@@ -6,5 +6,6 @@
 ^/zsh
 ^/gnome
 ^/flatpak
+^/apt
 ^/CLAUDE.md
 ^/\.gitattributes

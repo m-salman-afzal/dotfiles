@@ -21,6 +21,11 @@ done < "$DOT/gnome/extensions.list"
 #* settings
 dconf load /org/gnome/shell/extensions/ < "$DOT/gnome/extensions.dconf"
 
+#* custom keyboard shortcuts
+dconf load /org/gnome/settings-daemon/plugins/media-keys/ < "$DOT/gnome/media-keys.dconf"
+dconf load /org/gnome/desktop/wm/keybindings/ < "$DOT/gnome/wm-keybindings.dconf"
+dconf load /org/gnome/shell/keybindings/ < "$DOT/gnome/shell-keybindings.dconf"
+
 #* enable everything in the list (set directly; gnome-extensions enable needs the shell to have loaded them)
 mapfile -t uuids < "$DOT/gnome/extensions.list"
 printf -v joined "'%s'," "${uuids[@]}"

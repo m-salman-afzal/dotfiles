@@ -1,0 +1,22 @@
+[/]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/']
+
+[custom-keybindings/custom0]
+binding='<Control><Alt>space'
+command='pkill -USR2 -n handy'
+name='Toggle Handy Recording'
+
+[custom-keybindings/custom1]
+binding='<Super>apostrophe'
+command='flatpak run it.mijorus.smile'
+name='smile'
+
+[custom-keybindings/custom2]
+binding='<Shift>Print'
+command='flameshot gui'
+name='flameshot'
+
+[custom-keybindings/custom3]
+binding='<Shift><Super>o'
+command='zsh -ic cycle-sink'
+name='switchOutputDevices'

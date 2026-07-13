@@ -1,0 +1,41 @@
+[
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 276,
+                "origin_hash": "46064211e1205cc86236124068cf7950"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "Control_L + Alt_L + Right",
+        "name": "goRight",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 275,
+                "origin_hash": "46064211e1205cc86236124068cf7950"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "Control_L + Alt_L + Left",
+        "name": "goLeft",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 277,
+                "origin_hash": "46064211e1205cc86236124068cf7950"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "Super_L",
+        "name": "overview",
+        "mapping_type": "key_macro"
+    }
+]
