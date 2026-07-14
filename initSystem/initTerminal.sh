@@ -27,6 +27,7 @@ echo "GitHub auth OK."
 
 #* 3. dotfiles (ssh remote so pushes work later)
 [[ -d ~/dotfiles ]] || git clone git@github.com:m-salman-afzal/dotfiles.git ~/dotfiles
+git -C ~/dotfiles config core.hooksPath .githooks   # pre-push touches the daily-sync stamp
 
 #* 4. stow — nuke the distro defaults that block the symlinks, then link
 sudo apt update && sudo apt install -y stow zsh

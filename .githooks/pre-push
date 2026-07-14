@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#* any push of this repo counts as today's sync — stops the daily prompt
+touch "$HOME/.cache/dotfiles-last-sync"

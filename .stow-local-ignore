@@ -7,5 +7,6 @@
 ^/gnome
 ^/flatpak
 ^/apt
+^/\.githooks
 ^/CLAUDE.md
 ^/\.gitattributes

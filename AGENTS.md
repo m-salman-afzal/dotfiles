@@ -25,7 +25,10 @@ an entry.
 - `zsh/80-sync-dotfiles.zsh` — self-updating repo: on the first interactive shell of a day (stamp file
   `~/.cache/dotfiles-last-sync`) it regenerates `gnome/extensions.list`, `gnome/extensions.dconf`, the keyboard-shortcut
   dumps (`gnome/{media-keys,wm-keybindings,shell-keybindings}.dconf`), `flatpak/apps.list`, and `apt/packages.list`,
-  then stages everything, shows the diff, and asks before committing ("updated config") and pushing. Consequences:
+  then stages everything, shows the diff, and asks before committing ("updated config") and pushing. The stamp is
+  touched by `.githooks/pre-push` (repo-local `core.hooksPath`, set by `initTerminal.sh`; on a clone made another way,
+  run `git config core.hooksPath .githooks`) — so any manual commit+push (e.g. from VS Code) counts as that day's
+  sync. Consequences:
   (1) any uncommitted change in this repo lands in the next sync prompt — never leave experiments lying around;
   (2) never run a full interactive zsh (`zsh -i -c ...`) for testing unless you want the sync to fire.
 - `zsh/81-sync-dircolors.zsh` — monthly background refresh of the dracula dircolors file.
@@ -33,7 +36,9 @@ an entry.
   otherwise). `apt/ignore.list` is HAND-maintained: packages that are manual on this machine but unwanted on a fresh
   one. To drop a package from `packages.list`, add it to `ignore.list` (keep it sorted) — deleting the line directly
   gets undone by the next sync. If the package is really a dependency (e.g. libs named in some build instructions),
-  `sudo apt-mark auto <pkg>` is better: it leaves both lists and becomes autoremovable.
+  `sudo apt-mark auto <pkg>` is better: it leaves both lists and becomes autoremovable. `apt/markAuto.sh` does this in
+  bulk: it demotes every non-keeper manual package that something installed depends on, re-promotes anything
+  `apt autoremove` would then remove (so it never uninstalls), and regenerates `ignore.list`.
 - `(#q...)` glob qualifiers in the sync require EXTENDED_GLOB, which is off globally; the code wraps in
   `() { emulate -L zsh -o extendedglob; ... }`. With the option off the pattern is a literal string and `[[ -n ]]` is
   always true — it degrades silently, not loudly. Keep new glob-qualifier code inside such a wrapper.

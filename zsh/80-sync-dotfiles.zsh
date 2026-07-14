@@ -42,8 +42,7 @@
       read -k1 "reply?sync dotfiles -> github? [p]ush [d]iff [n]ot-today [s]kip-once: "; echo
       case $reply in
         p) git -C $HOME/dotfiles commit -m "updated config" \
-             && git -C $HOME/dotfiles push \
-             && touch $HOME/.cache/dotfiles-last-sync ;;
+             && git -C $HOME/dotfiles push ;;   # stamp touched by .githooks/pre-push
         d) git -C $HOME/dotfiles diff --cached ;;
         n) git -C $HOME/dotfiles reset -q && touch $HOME/.cache/dotfiles-last-sync ;;   # ask again tomorrow
         s) git -C $HOME/dotfiles reset -q ;;   # ask again next terminal
@@ -51,6 +50,7 @@
     done
   else
     #* nothing new: quietly retry a previously failed/pending push
-    { git -C $HOME/dotfiles push && touch $HOME/.cache/dotfiles-last-sync } &>/dev/null &!
+    #  (any push that reaches github touches the stamp via .githooks/pre-push)
+    git -C $HOME/dotfiles push &>/dev/null &!
   fi
 }
