@@ -58,10 +58,10 @@ ws-switch-popup=false
 
 [appindicator]
 compact-mode-enabled=true
-icon-brightness=2.7755575615628914e-17
-icon-contrast=2.7755575615628914e-17
+icon-brightness=-1.3877787807814457e-16
+icon-contrast=-1.3877787807814457e-16
 icon-opacity=255
-icon-saturation=2.7755575615628914e-17
+icon-saturation=0.0
 icon-size=16
 legacy-tray-enabled=true
 tray-pos='right'
@@ -92,7 +92,7 @@ use-vertical-gradient=false
 visualization-mode='led-bars'
 
 [auto-move-windows]
-application-list=['slack.desktop:3', 'com.stremio.Stremio.desktop:4', 'org.gnome.Ptyxis.desktop:1', 'cursor.desktop:2', 'google-chrome.desktop:2', 'docker-desktop.desktop:1']
+application-list=@as []
 
 [battery-power-mode-indicator]
 balanced-enabled=true
@@ -747,7 +747,7 @@ tile-topright-quarter-ignore-ta=@as []
 tiling-popup-all-workspace=false
 toggle-always-on-top=@as []
 toggle-tiling-popup=@as []
-window-gap=8
+window-gap=16
 
 [touchpad-gesture-customization]
 alttab-delay=0
@@ -788,10 +788,10 @@ window-buttons-placement='left'
 window-buttons-theme='auto'
 
 [user-theme]
-name='Orchis-Dark'
+name='Yaru-dark'
 
 [vertical-workspaces]
-aaa-loading-profile=false
+aaa-loading-profile=true
 activate-settings-window=2
 always-activate-selected-window=false
 animation-speed-factor=1
