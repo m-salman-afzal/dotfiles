@@ -43,7 +43,7 @@
       case $reply in
         p) git -C $HOME/dotfiles commit -m "updated config" \
              && git -C $HOME/dotfiles push ;;   # stamp touched by .githooks/pre-push
-        d) git -C $HOME/dotfiles diff --cached ;;
+        d) git -C $HOME/dotfiles diff --cached --color-words ;;   # word-level diff: long dconf lines stay readable
         n) git -C $HOME/dotfiles reset -q && touch $HOME/.cache/dotfiles-last-sync ;;   # ask again tomorrow
         s) git -C $HOME/dotfiles reset -q ;;   # ask again next terminal
       esac

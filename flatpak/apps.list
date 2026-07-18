@@ -8,6 +8,7 @@ com.slack.Slack
 com.surfshark.Surfshark
 de.haeckerfelix.Fragments
 io.github.alainm23.planify
+io.missioncenter.MissionCenter
 net.nokyan.Resources
 org.gnome.Calculator
 org.gnome.Calendar
