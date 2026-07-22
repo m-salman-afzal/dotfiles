@@ -791,7 +791,7 @@ window-buttons-theme='auto'
 name='Yaru-dark'
 
 [vertical-workspaces]
-aaa-loading-profile=true
+aaa-loading-profile=false
 activate-settings-window=2
 always-activate-selected-window=false
 animation-speed-factor=1
