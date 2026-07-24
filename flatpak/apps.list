@@ -4,7 +4,9 @@ com.getpostman.Postman
 com.github.tchx84.Flatseal
 com.google.Chrome
 com.obsproject.Studio
+com.rtosta.zapzap
 com.slack.Slack
+com.stremio.Stremio
 com.surfshark.Surfshark
 de.haeckerfelix.Fragments
 io.github.alainm23.planify
