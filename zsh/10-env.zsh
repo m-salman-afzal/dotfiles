@@ -15,10 +15,10 @@ export PATH=$BUN_INSTALL/bin:$PATH
 #* pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
-export PATH="$HOME/.local/bin:$PATH"
+# pnpm end
 
 #* google cloud sdk.
 if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi

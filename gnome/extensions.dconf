@@ -404,7 +404,7 @@ invert-calendar-column-items=false
 keyboard-layout=false
 looking-glass-height=0
 looking-glass-width=0
-notification-banner-position=2
+notification-banner-position=1
 overlay-key=true
 panel=true
 panel-icon-size=0
@@ -800,7 +800,7 @@ window-buttons-theme='auto'
 name='Yaru-dark'
 
 [vertical-workspaces]
-aaa-loading-profile=true
+aaa-loading-profile=false
 activate-settings-window=2
 always-activate-selected-window=false
 animation-speed-factor=1
