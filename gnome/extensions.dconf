@@ -99,7 +99,7 @@ balanced-enabled=true
 
 [blur-my-shell]
 debug=false
-hacks-level=1
+hacks-level=0
 pipelines={'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_000000000000'>, 'params': <{'radius': <30>, 'brightness': <0.59999999999999998>, 'unscaled_radius': <80>}>}>, <{'type': <'corner'>, 'id': <'effect_97596975462215'>, 'params': <{'radius': <16>}>}>]>}}
 rounded-blur-found=false
 settings-version=2
@@ -112,16 +112,16 @@ style-dialogs=1
 [blur-my-shell/applications]
 blacklist=['Plank', 'com.desktop.ding', 'Conky', 'firefox', 'google-chrome']
 blur=false
-blur-on-overview=false
-brightness=1.0
+blur-on-overview=true
+brightness=0.54000000000000004
 corner-radius=16
 corner-when-maximized=false
 dynamic-opacity=false
 enable-all=true
-opacity=255
+opacity=220
 pipeline='pipeline_default'
-sigma=44
-static-blur=true
+sigma=60
+static-blur=false
 whitelist=['org.gnome.Shell.Extensions', 'com.mattjakeman.ExtensionManager', 'org.gnome.Settings', 'org.gnome.Ptyxis', 'Slack', 'Slack', 'org.gnome.Nautilus', 'cursor', 'org.gnome.Shell.Extensions']
 
 [blur-my-shell/coverflow-alt-tab]
@@ -134,7 +134,7 @@ override-background=false
 pipeline='pipeline_default'
 
 [blur-my-shell/dash-to-panel]
-blur-original-panel=false
+blur-original-panel=true
 
 [blur-my-shell/hidetopbar]
 compatibility=true
@@ -144,23 +144,23 @@ blur=true
 pipeline='pipeline_default'
 
 [blur-my-shell/overview]
-blur=false
+blur=true
 pipeline='pipeline_default'
 style-components=1
 
 [blur-my-shell/panel]
-blur=false
-brightness=1.0
+blur=true
+brightness=0.46000000000000002
 force-light-text=false
 override-background=false
 pipeline='pipeline_default'
-sigma=7
+sigma=21
 static-blur=true
 style-panel=0
 unblur-in-overview=false
 
 [blur-my-shell/screenshot]
-blur=false
+blur=true
 pipeline='pipeline_default'
 
 [blur-my-shell/window-list]
@@ -182,9 +182,12 @@ strip-text=true
 window-width-percentage=18
 
 [clipboard-indicator]
-clear-history-on-interval=true
-clear-on-boot=true
-next-history-clear=1766275782
+blink-icon-on-copy=true
+cache-size=1000
+clear-history-on-interval=false
+clear-on-boot=false
+history-size=100
+next-history-clear=-1
 strip-text=true
 
 [color-picker]
@@ -797,7 +800,7 @@ window-buttons-placement='left'
 window-buttons-theme='auto'
 
 [user-theme]
-name='Yaru-dark'
+name=''
 
 [vertical-workspaces]
 aaa-loading-profile=false
