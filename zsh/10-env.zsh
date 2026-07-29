@@ -1,10 +1,11 @@
 
 #* Paths
 export PATH=$PATH:$HOME/.local/bin
+export PATH="/var/lib/flatpak/exports/bin:$PATH"
 
 #* Editor — sudo drops these, so visudo/sudoedit rely on the `editor` alternative instead (set in initApt.sh)
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 #* rust
 #. "$HOME/.cargo/env"
