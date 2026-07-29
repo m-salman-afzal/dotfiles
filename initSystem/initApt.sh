@@ -20,5 +20,10 @@ sudo add-apt-repository -y ppa:solaar-unifying/stable
 sudo apt update
 xargs -r sudo apt install -y < "$DOT/apt/packages.list"
 
+#* inotify limits — distro defaults run out under VS Code / bundlers / file watchers
+#* ("ENOSPC: System limit for number of file watchers reached"). Not stowable: /etc, not $HOME.
+printf 'fs.inotify.max_user_watches=524288\nfs.inotify.max_user_instances=1024\n' | sudo tee /etc/sysctl.d/99-inotify.conf >/dev/null
+sudo sysctl --system >/dev/null
+
 echo "Done. Installed manually when needed (not part of this bootstrap):"
 echo "  nvidia driver (ubuntu-drivers install), docker, vscode,  lm-studio"

@@ -48,6 +48,12 @@ an entry.
   for GitHub → clone → stow → zsh default shell), then `initApt.sh` (third-party repos with keys fetched from the
   vendors, then `apt/packages.list`), then `initGnomeExtension.sh` / `initFlatpak.sh`, which install from the
   generated lists. `initTerminal.sh` must stay `curl | bash`-safe (interactive `read`s need `</dev/tty`).
+- System-level (`/etc`) config can't be stowed — stow only targets `$HOME` — so it lives inline in
+  `initSystem/initApt.sh`. Currently that's `/etc/sysctl.d/99-inotify.conf`:
+  `fs.inotify.max_user_watches=524288` + `max_user_instances=1024`, applied with `sudo sysctl --system`. The distro
+  defaults (8192 watches / 128 instances) are exhausted by VS Code, bundlers and other file watchers, which then die
+  with `ENOSPC: System limit for number of file watchers reached`. Already applied on this machine; a fresh PC gets it
+  from the bootstrap. Add future `/etc` config the same way, not as a stow package.
 - Aliases: `ls` is aliased — scripts/subshells that parse `ls` output must use `command ls`.
 
 ## Conventions
