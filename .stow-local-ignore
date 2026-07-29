@@ -6,6 +6,7 @@
 ^/zsh
 ^/gnome
 ^/flatpak
+^/snap
 ^/apt
 ^/\.githooks
 ^/CLAUDE.md

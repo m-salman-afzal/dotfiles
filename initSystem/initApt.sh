@@ -20,6 +20,11 @@ sudo add-apt-repository -y ppa:solaar-unifying/stable
 sudo apt update
 xargs -r sudo apt install -y < "$DOT/apt/packages.list"
 
+#* vim as the system editor (visudo, sudoedit, git without core.editor). --set = the non-interactive
+#* `update-alternatives --config editor`. vim is an auto dep here, so it's absent from packages.list — install it.
+sudo apt install -y vim
+sudo update-alternatives --set editor /usr/bin/vim.basic
+
 #* inotify limits — distro defaults run out under VS Code / bundlers / file watchers
 #* ("ENOSPC: System limit for number of file watchers reached"). Not stowable: /etc, not $HOME.
 printf 'fs.inotify.max_user_watches=524288\nfs.inotify.max_user_instances=1024\n' | sudo tee /etc/sysctl.d/99-inotify.conf >/dev/null

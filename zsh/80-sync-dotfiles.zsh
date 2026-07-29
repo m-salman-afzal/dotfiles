@@ -28,6 +28,11 @@
   #* refresh flatpak app list (runtimes excluded; they install as deps)
   flatpak list --app --columns=application > $HOME/dotfiles/flatpak/apps.list
 
+  #* refresh snap list — bases/snapd drop out by their Notes column (they arrive as deps);
+  #  preinstalled canonical bits and content snaps are hand-listed in snap/ignore.list
+  snap list | awk 'NR>1 && $NF !~ /base|snapd/ {print $1}' | LC_ALL=C sort \
+    | LC_ALL=C comm -23 - $HOME/dotfiles/snap/ignore.list > $HOME/dotfiles/snap/apps.list
+
   #* refresh apt manual-package list, minus baseline noise (apt/ignore.list)
   #  LC_ALL=C: ignore.list is C-sorted; comm errors out if collations differ
   apt-mark showmanual | LC_ALL=C sort | LC_ALL=C comm -23 - $HOME/dotfiles/apt/ignore.list > $HOME/dotfiles/apt/packages.list

@@ -46,7 +46,7 @@ an entry.
   day.
 - `initSystem/` — fresh-PC bootstrap chain, run via the curl one-liner in README.md: `initTerminal.sh` (SSH keys → wait
   for GitHub → clone → stow → zsh default shell), then `initApt.sh` (third-party repos with keys fetched from the
-  vendors, then `apt/packages.list`), then `initGnomeExtension.sh` / `initFlatpak.sh`, which install from the
+  vendors, then `apt/packages.list`), then `initGnomeExtension.sh` / `initFlatpak.sh` / `initSnap.sh`, which install from the
   generated lists. `initTerminal.sh` must stay `curl | bash`-safe (interactive `read`s need `</dev/tty`).
 - System-level (`/etc`) config can't be stowed — stow only targets `$HOME` — so it lives inline in
   `initSystem/initApt.sh`. Currently that's `/etc/sysctl.d/99-inotify.conf`:
@@ -54,6 +54,23 @@ an entry.
   defaults (8192 watches / 128 instances) are exhausted by VS Code, bundlers and other file watchers, which then die
   with `ENOSPC: System limit for number of file watchers reached`. Already applied on this machine; a fresh PC gets it
   from the bootstrap. Add future `/etc` config the same way, not as a stow package.
+- Default editor / terminal live in three places, one per mechanism: `EDITOR`/`VISUAL=vim` in `zsh/10-env.zsh` (sudo
+  strips them, hence the next one); `update-alternatives --set editor /usr/bin/vim.basic` in `initApt.sh` for
+  visudo/sudoedit; `.config/xdg-terminals.list` (stowed) naming `ghostty_ghostty.desktop` for the terminal.
+  GNOME's Ctrl+Alt+T on 26.04 runs `xdg-terminal-exec`, which reads that list — do NOT add the old custom-keybinding
+  or `xdg-mime application/x-terminal` workarounds; both are stale and neither is applied here. Ghostty comes from
+  `snap/apps.list`, and its snap registers the winning `x-terminal-emulator` alternative on its own. Desktop id is the snap's
+  `ghostty_ghostty.desktop`, not `com.mitchellh.ghostty.desktop`.
+- `snap/apps.list` is GENERATED, same shape as apt's: `snap list` minus the base/snapd-noted snaps (those arrive as
+  deps) minus the HAND-maintained `snap/ignore.list` (both LC_ALL=C sorted — comm breaks otherwise). `ignore.list`
+  holds the Canonical preinstalls and content snaps (gnome-*, mesa, gtk-common-themes, snap-store…) that a fresh
+  Ubuntu already has. To drop a snap, add it to `ignore.list`, don't delete the `apps.list` line — the next sync puts
+  it back. `initSnap.sh` installs plain, then retries `--classic` on failure, so classic-only snaps (ghostty) need no
+  metadata in the list. The hand-maintained ignore list is unavoidable, unlike flatpak's `--app`: snapd records no
+  install reason (checked on 2.76.1 — no `snap list` flag, no `/v2/snaps` field, `snap changes` is pruned) and
+  `snap autoremove` has been an open request for years. Deriving it from `seed.yaml` + content-slot providers in
+  `snap connections` was tried and misclassifies ~a third of the list (drops `bibata-all-cursor`, keeps
+  `desktop-security-center`/`prompting-client`/`gnome-3-28-1804`). Don't re-attempt it.
 - Aliases: `ls` is aliased — scripts/subshells that parse `ls` output must use `command ls`.
 
 ## Conventions

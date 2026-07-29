@@ -2,6 +2,10 @@
 #* Paths
 export PATH=$PATH:$HOME/.local/bin
 
+#* Editor — sudo drops these, so visudo/sudoedit rely on the `editor` alternative instead (set in initApt.sh)
+export EDITOR=vim
+export VISUAL=vim
+
 #* rust
 #. "$HOME/.cargo/env"
 export PATH=$HOME/.cargo/bin:$PATH
