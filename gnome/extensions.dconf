@@ -100,29 +100,29 @@ balanced-enabled=true
 [blur-my-shell]
 debug=false
 hacks-level=0
-pipelines={'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_000000000000'>, 'params': <{'radius': <30>, 'brightness': <0.59999999999999998>, 'unscaled_radius': <80>}>}>, <{'type': <'corner'>, 'id': <'effect_97596975462215'>, 'params': <{'radius': <16>}>}>]>}}
-rounded-blur-found=false
+pipelines={'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_43210166191037'>, 'params': <@a{sv} {}>}>, <{'type': <'noise'>, 'id': <'effect_93614133089206'>, 'params': <{'lightness': <0.45000000000000001>}>}>, <{'type': <'corner'>, 'id': <'effect_97596975462215'>, 'params': <{'radius': <16>}>}>]>}}
+rounded-blur-found=true
 settings-version=2
 
 [blur-my-shell/appfolder]
-blur=false
+blur=true
 sigma=51
-style-dialogs=1
+style-dialogs=3
 
 [blur-my-shell/applications]
 blacklist=['Plank', 'com.desktop.ding', 'Conky', 'firefox', 'google-chrome']
-blur=false
-blur-on-overview=true
+blur=true
+blur-on-overview=false
 brightness=0.54000000000000004
 corner-radius=16
 corner-when-maximized=false
 dynamic-opacity=false
-enable-all=true
-opacity=220
+enable-all=false
+opacity=200
 pipeline='pipeline_default'
 sigma=60
-static-blur=false
-whitelist=['org.gnome.Shell.Extensions', 'com.mattjakeman.ExtensionManager', 'org.gnome.Settings', 'org.gnome.Ptyxis', 'Slack', 'Slack', 'org.gnome.Nautilus', 'cursor', 'org.gnome.Shell.Extensions']
+static-blur=true
+whitelist=['org.gnome.Shell.Extensions', 'com.mattjakeman.ExtensionManager', 'org.gnome.Ptyxis', 'com.getmailspring.Mailspring', 'org.gnome.Settings', 'org.gnome.tweaks', 'org.gnome.Nautilus', 'org.gnome.TextEditor', 'io.missioncenter.MissionCenter', 'net.nokyan.Resources', 'solaar']
 
 [blur-my-shell/coverflow-alt-tab]
 blur=false
@@ -134,33 +134,48 @@ override-background=false
 pipeline='pipeline_default'
 
 [blur-my-shell/dash-to-panel]
-blur-original-panel=true
+blur-original-panel=false
 
 [blur-my-shell/hidetopbar]
 compatibility=true
 
 [blur-my-shell/lockscreen]
-blur=true
+blur=false
 pipeline='pipeline_default'
 
 [blur-my-shell/overview]
 blur=true
 pipeline='pipeline_default'
-style-components=1
+style-components=3
 
 [blur-my-shell/panel]
-blur=true
+blur=false
 brightness=0.46000000000000002
-force-light-text=false
-override-background=false
+force-light-text=true
+override-background=true
+override-background-dynamically=true
 pipeline='pipeline_default'
 sigma=21
 static-blur=true
-style-panel=0
+style-panel=1
 unblur-in-overview=false
 
+[blur-my-shell/popup]
+brightness=0.59999999999999998
+corner-radius=8
+dialog-corner-radius=8
+menu-corner-radius=8
+notification-corner-radius=40
+osd-corner-radius=8
+override-background=true
+pipeline='pipeline_default'
+quick-settings-corner-radius=8
+sigma=40
+static-blur=true
+style-popup=3
+
 [blur-my-shell/screenshot]
-blur=true
+blur=false
 pipeline='pipeline_default'
 
 [blur-my-shell/window-list]
@@ -431,13 +446,39 @@ window-preview-close-button=true
 workspace=true
 workspace-background-corner-size=0
 workspace-peek=true
-workspace-popup=true
+workspace-popup=false
 workspace-switcher-should-show=true
 workspace-switcher-size=10
 workspace-thumbnail-to-main-view=false
 workspace-wrap-around=false
 workspaces-in-app-grid=true
 world-clock=true
+
+[kiwi]
+add-username-to-quick-menu=false
+button-size='normal'
+button-type='titlebuttons'
+custom-dnd-button=true
+dock-blur=false
+enable-firefox-styling=true
+hide-activities-button=true
+lock-icon=false
+move-window-to-new-workspace=false
+notification-indicator-style='accent'
+overview-wallpaper-background=false
+panel-blur=true
+panel-color-inherit=false
+panel-transparency=false
+show-window-controls=false
+show-window-controls-fullscreen-only=false
+show-window-title=false
+
+[kiwimenu]
+activity-menu-visibility=true
+custom-menu-enabled=false
+hide-power-button=false
+icon=8
+macos-accelerators=true
 
 [medialine]
 icon-size=16
