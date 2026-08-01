@@ -1,4 +1,3 @@
-
 #* Paths
 export PATH=$PATH:$HOME/.local/bin
 export PATH="/var/lib/flatpak/exports/bin:$PATH"

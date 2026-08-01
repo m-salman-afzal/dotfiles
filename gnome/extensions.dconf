@@ -30,7 +30,8 @@ edit-saved-windows-position-x-max=1920
 edit-saved-windows-position-y-max=1080
 edit-saved-windows-width-max=1920
 edit-saved-windows-workspace-max=7
-overrides='{"com.mattjakeman.ExtensionManager":[{"action":0,"threshold":0.7}],"com.getmailspring.Mailspring":[{"action":0,"threshold":0.7}],"org.gnome.Settings":[{"action":0,"threshold":0.7}],"org.gnome.Nautilus":[{"action":0,"threshold":0.7}]}'
+freeze-saves=true
+overrides='{"com.mattjakeman.ExtensionManager":[{"action":0,"threshold":0.7}],"com.getmailspring.Mailspring":[{"action":0,"threshold":0.7}],"org.gnome.Settings":[{"action":0,"threshold":0.7}],"org.gnome.Nautilus":[{"action":0,"threshold":0.7}],"org.gnome.tweaks":[{"action":0,"threshold":0.7}],"org.gnome.Software":[{"action":0,"threshold":0.7}]}'
 
 [advanced-alt-tab-window-switcher]
 app-switcher-popup-fav-apps=false
@@ -99,15 +100,15 @@ balanced-enabled=true
 
 [blur-my-shell]
 debug=false
-hacks-level=0
+hacks-level=1
 pipelines={'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_43210166191037'>, 'params': <@a{sv} {}>}>, <{'type': <'noise'>, 'id': <'effect_93614133089206'>, 'params': <{'lightness': <0.45000000000000001>}>}>, <{'type': <'corner'>, 'id': <'effect_97596975462215'>, 'params': <{'radius': <16>}>}>]>}}
 rounded-blur-found=true
 settings-version=2
 
 [blur-my-shell/appfolder]
 blur=true
-sigma=51
-style-dialogs=3
+sigma=20
+style-dialogs=1
 
 [blur-my-shell/applications]
 blacklist=['Plank', 'com.desktop.ding', 'Conky', 'firefox', 'google-chrome']
@@ -122,7 +123,7 @@ opacity=200
 pipeline='pipeline_default'
 sigma=60
 static-blur=true
-whitelist=['org.gnome.Shell.Extensions', 'com.mattjakeman.ExtensionManager', 'org.gnome.Ptyxis', 'com.getmailspring.Mailspring', 'org.gnome.Settings', 'org.gnome.tweaks', 'org.gnome.Nautilus', 'org.gnome.TextEditor', 'io.missioncenter.MissionCenter', 'net.nokyan.Resources', 'solaar']
+whitelist=['org.gnome.Shell.Extensions', 'com.mattjakeman.ExtensionManager', 'org.gnome.Ptyxis', 'com.getmailspring.Mailspring', 'org.gnome.Settings', 'org.gnome.tweaks', 'org.gnome.Nautilus', 'org.gnome.TextEditor', 'io.missioncenter.MissionCenter', 'net.nokyan.Resources', 'solaar', 'de.haeckerfelix.Fragments']
 
 [blur-my-shell/coverflow-alt-tab]
 blur=false
@@ -161,16 +162,17 @@ style-panel=1
 unblur-in-overview=false
 
 [blur-my-shell/popup]
+blur=true
 brightness=0.59999999999999998
-corner-radius=8
-dialog-corner-radius=8
-menu-corner-radius=8
-notification-corner-radius=40
-osd-corner-radius=8
+corner-radius=24
+dialog-corner-radius=24
+menu-corner-radius=16
+notification-corner-radius=16
+osd-corner-radius=28
 override-background=true
 pipeline='pipeline_default'
-quick-settings-corner-radius=8
-sigma=40
+quick-settings-corner-radius=24
+sigma=32
 static-blur=true
 style-popup=3
 
@@ -191,6 +193,21 @@ indicator-position-max=3
 restore-state=true
 show-indicator='only-active'
 
+[chromaleon]
+accent-color='#242454'
+create-shortcut=true
+custom-color=false
+darker=false
+gnome-colors=false
+last-error=''
+morewaita=true
+prefer-light=false
+recolor-apps=true
+recolor-folders=false
+tint-apps=true
+tint-gtk3=true
+tint-shell=false
+
 [clipboard-history]
 display-mode=0
 strip-text=true
@@ -198,11 +215,20 @@ window-width-percentage=18
 
 [clipboard-indicator]
 blink-icon-on-copy=true
-cache-size=1000
+cache-size=1024
 clear-history-on-interval=false
 clear-on-boot=false
-history-size=100
+confirm-pinned-delete=true
+disable-down-arrow=true
+display-mode=3
+history-size=1000
 next-history-clear=-1
+notify-on-copy=false
+notify-on-cycle=true
+pinned-on-bottom=false
+preview-size=10
+show-edit-button=false
+show-tag-button=false
 strip-text=true
 
 [color-picker]
@@ -378,12 +404,12 @@ allow-zero-brightness=true
 button-location=1
 ddcutil-binary-path='/usr/bin/ddcutil'
 ddcutil-sleep-multiplier=40.0
-decrease-brightness-shortcut=['<Control>XF86MonBrightnessDown']
+decrease-brightness-shortcut=['']
 hide-system-indicator=true
-increase-brightness-shortcut=['<Control>XF86MonBrightnessUp']
+increase-brightness-shortcut=['']
 only-all-slider=false
 position-system-indicator=0.0
-position-system-menu=3.0
+position-system-menu=4.0
 show-all-slider=false
 show-internal-slider=false
 show-osd=true
@@ -784,12 +810,12 @@ tile-bottomleft-quarter-ignore-ta=@as []
 tile-bottomright-quarter=['<Super>KP_3']
 tile-bottomright-quarter-ignore-ta=@as []
 tile-edit-mode=@as []
-tile-left-half=['<Super>Left', '<Super>KP_4']
+tile-left-half=['<Control><Super>Left']
 tile-left-half-ignore-ta=@as []
 tile-maximize=['<Super>Up', '<Super>KP_5']
 tile-maximize-horizontally=@as []
 tile-maximize-vertically=@as []
-tile-right-half=['<Super>Right', '<Super>KP_6']
+tile-right-half=['<Control><Super>Right']
 tile-right-half-ignore-ta=@as []
 tile-top-half=['<Super>KP_8']
 tile-top-half-ignore-ta=@as []
@@ -800,7 +826,7 @@ tile-topright-quarter-ignore-ta=@as []
 tiling-popup-all-workspace=false
 toggle-always-on-top=@as []
 toggle-tiling-popup=@as []
-window-gap=16
+window-gap=6
 
 [touchpad-gesture-customization]
 alttab-delay=0
@@ -844,7 +870,7 @@ window-buttons-theme='auto'
 name=''
 
 [vertical-workspaces]
-aaa-loading-profile=false
+aaa-loading-profile=true
 activate-settings-window=2
 always-activate-selected-window=false
 animation-speed-factor=1
@@ -990,5 +1016,16 @@ ws-thumbnails-position=5
 wst-position-adjust=0
 
 [vitals]
+hide-icons=false
+hide-zeros=false
+hot-sensors=['_memory_usage_', '_processor_usage_']
 icon-style=1
+include-static-info=false
+menu-centered=true
 position-in-panel=0
+show-fan=false
+show-gpu=true
+show-storage=true
+show-voltage=false
+update-time=1
+use-higher-precision=true

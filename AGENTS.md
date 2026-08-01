@@ -54,7 +54,12 @@ an entry.
   defaults (8192 watches / 128 instances) are exhausted by VS Code, bundlers and other file watchers, which then die
   with `ENOSPC: System limit for number of file watchers reached`. Already applied on this machine; a fresh PC gets it
   from the bootstrap. Add future `/etc` config the same way, not as a stow package.
-- Default editor / terminal live in three places, one per mechanism: `EDITOR`/`VISUAL=vim` in `zsh/10-env.zsh` (sudo
+- Neovim is a flatpak (`io.neovim.nvim`). `initFlatpak.sh` writes `~/.local/bin/nvim` as a wrapper (not a symlink) that
+  launches it via `flatpak run --command=/usr/bin/env … nvim-wrapper`, setting `XDG_{CONFIG,DATA,STATE,CACHE}_HOME` to
+  the host dirs so it uses the stowed `.config/nvim` and keeps plugins/state in `~/.local`. `flatpak override
+  --env=XDG_*` can NOT do this — flatpak re-sets those to the per-app `~/.var/app` dirs after applying overrides (1.16,
+  verified) and silently ignores the override; don't "simplify" the wrapper back into one.
+- Default editor / terminal live in three places, one per mechanism: `EDITOR`/`VISUAL=nvim` in `zsh/10-env.zsh` (sudo
   strips them, hence the next one); `update-alternatives --set editor /usr/bin/vim.basic` in `initApt.sh` for
   visudo/sudoedit; `.config/xdg-terminals.list` (stowed) naming `ghostty_ghostty.desktop` for the terminal.
   GNOME's Ctrl+Alt+T on 26.04 runs `xdg-terminal-exec`, which reads that list — do NOT add the old custom-keybinding

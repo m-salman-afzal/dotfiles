@@ -2,6 +2,14 @@ killPort() {
 	sudo kill -9 $(lsof -t -i :"$1")
 }
 
+# Run a command in a memory-capped cgroup. next dev peaks ~8G warm / >11G on a
+# cold .next; without a cap the pressure lands on systemd-oomd, which kills the
+# swap-heaviest cgroup in the session — whichever browser has been open longest,
+# not the process that caused it. Usage: devcap pnpm dev
+devcap() {
+  systemd-run --user --scope -p MemoryMax=11G -p MemorySwapMax=0 --collect -- "$@"
+}
+
 # remove all files/folder from current and children dirs
 rmrf() {
   rm -rf ./**/$1

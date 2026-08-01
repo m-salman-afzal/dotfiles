@@ -1,20 +1,21 @@
 [/]
-custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/']
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/']
+terminal=['']
 
 [custom-keybindings/custom0]
-binding='<Control><Alt>space'
-command='pkill -USR2 -n handy'
-name='Toggle Handy Recording'
+binding='<Control><Alt>t'
+command='ghostty'
+name='Ghostty'
 
 [custom-keybindings/custom1]
-binding='<Super>apostrophe'
-command='flatpak run it.mijorus.smile'
-name='smile'
+binding='<Control><Alt>space'
+command='handy --toggle-transcription'
+name='handy'
 
 [custom-keybindings/custom2]
-binding='<Shift>Print'
-command='flameshot gui'
-name='flameshot'
+binding='<Shift><Super>o'
+command='cycle-sink'
+name='cycle-sink'
 
 [custom-keybindings/custom3]
 binding='<Shift><Super>o'
