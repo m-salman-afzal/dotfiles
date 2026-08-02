@@ -76,6 +76,14 @@ an entry.
   `snap autoremove` has been an open request for years. Deriving it from `seed.yaml` + content-slot providers in
   `snap connections` was tried and misclassifies ~a third of the list (drops `bibata-all-cursor`, keeps
   `desktop-security-center`/`prompting-client`/`gnome-3-28-1804`). Don't re-attempt it.
+- Solaar (MX Master 3S button remapping) replaces input-remapper. Only `.config/solaar/rules.yaml` is stowed —
+  `config.yaml` sits next to it unstowed on purpose: it's device state (pairing, per-device settings) the daemon
+  rewrites constantly. Rules alone aren't enough; the buttons must also be `Diverted` in `Key/Button Diversion`, and
+  that lives in `config.yaml`, so a fresh PC needs `solaar config "MX Master 3S" divert-keys "<Back|Forward|Mouse
+  Gesture> Button" Diverted` (with Solaar not running — a live daemon owns the file and overwrites CLI edits on exit).
+  Solaar's rule editor greys out entirely when `rules.yaml` is missing: with no file it loads only `built_in_rules`,
+  and built-in rules carry `source=None`, which is the flag the UI uses for editability. The file existing is what
+  creates the editable "User-defined rules" node.
 - Aliases: `ls` is aliased — scripts/subshells that parse `ls` output must use `command ls`.
 
 ## Conventions

@@ -20,6 +20,12 @@ sudo add-apt-repository -y ppa:solaar-unifying/stable
 sudo apt update
 xargs -r sudo apt install -y < "$DOT/apt/packages.list"
 
+#* solaar's modules live in /usr/share/solaar/lib, off the default sys.path. /usr/bin/solaar prepends that
+#* dir itself (init_paths()), so this is a no-op on a healthy install — it only fires if that ever stops working.
+#* Not dpkg-owned and not stowable (/usr, not $HOME); this machine has carried the .pth by hand since Jun 2026.
+solaar --version >/dev/null 2>&1 \
+	|| echo /usr/share/solaar/lib | sudo tee /usr/lib/python3/dist-packages/solaar.pth >/dev/null
+
 #* vim as the system editor (visudo, sudoedit, git without core.editor). --set = the non-interactive
 #* `update-alternatives --config editor`. vim is an auto dep here, so it's absent from packages.list — install it.
 sudo apt install -y vim
