@@ -76,6 +76,10 @@ an entry.
   `snap autoremove` has been an open request for years. Deriving it from `seed.yaml` + content-slot providers in
   `snap connections` was tried and misclassifies ~a third of the list (drops `bibata-all-cursor`, keeps
   `desktop-security-center`/`prompting-client`/`gnome-3-28-1804`). Don't re-attempt it.
+- `/dev/uinput` is shared infrastructure — two unrelated things now write to it, so don't "clean up"
+  `/etc/udev/rules.d/80-uinput.rules` (written by `initApt.sh`, not dpkg-owned): Handy's dictation typing and
+  Solaar's `KeyPress` rules both break without it. Logitech hidraw `uaccess` is a separate concern and comes from
+  solaar's own dpkg-owned `60-solaar.rules` — nothing in the bootstrap needs to grant it.
 - Solaar (MX Master 3S button remapping) replaces input-remapper. Only `.config/solaar/rules.yaml` is stowed —
   `config.yaml` sits next to it unstowed on purpose: it's device state (pairing, per-device settings) the daemon
   rewrites constantly. Rules alone aren't enough; the buttons must also be `Diverted` in `Key/Button Diversion`, and

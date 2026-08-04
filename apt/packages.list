@@ -1,3 +1,4 @@
+btop
 build-essential
 curl
 dconf-cli
@@ -7,6 +8,7 @@ fastfetch
 flatpak
 gettext
 gh
+ghostty
 git
 gnome-shell-extension-manager
 gnome-shell-extensions
@@ -14,13 +16,13 @@ gnome-software-plugin-flatpak
 gnome-tweaks
 gobject-introspection
 htop
-input-remapper
 libavcodec-extra
 libglib2.0-dev
 libinput-tools
 pkg-config
 ppa-purge
 rclone
+smem
 solaar
 ubuntu-restricted-addons
 unzip

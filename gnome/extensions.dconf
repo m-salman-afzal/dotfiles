@@ -29,9 +29,10 @@ edit-saved-windows-monitor-max=2
 edit-saved-windows-position-x-max=1920
 edit-saved-windows-position-y-max=1080
 edit-saved-windows-width-max=1920
-edit-saved-windows-workspace-max=7
-freeze-saves=true
-overrides='{"com.mattjakeman.ExtensionManager":[{"action":0,"threshold":0.7}],"com.getmailspring.Mailspring":[{"action":0,"threshold":0.7}],"org.gnome.Settings":[{"action":0,"threshold":0.7}],"org.gnome.Nautilus":[{"action":0,"threshold":0.7}],"org.gnome.tweaks":[{"action":0,"threshold":0.7}],"org.gnome.Software":[{"action":0,"threshold":0.7}]}'
+edit-saved-windows-workspace-max=5
+freeze-saves=false
+match-threshold=0.29999999999999988
+overrides='{"com.mattjakeman.ExtensionManager":[{"action":0,"threshold":0.7}],"org.gnome.Settings":[{"action":0,"threshold":0.7}],"org.gnome.Nautilus":[{"action":0,"threshold":0.7}],"org.gnome.tweaks":[{"action":0,"threshold":0.7}],"org.gnome.Software":[{"action":0,"threshold":0.7}],"com.getmailspring.Mailspring":[{"action":0,"threshold":0.7000000000000002}]}'
 
 [advanced-alt-tab-window-switcher]
 app-switcher-popup-fav-apps=false
@@ -119,11 +120,11 @@ corner-radius=16
 corner-when-maximized=false
 dynamic-opacity=false
 enable-all=false
-opacity=200
+opacity=190
 pipeline='pipeline_default'
 sigma=60
 static-blur=true
-whitelist=['org.gnome.Shell.Extensions', 'com.mattjakeman.ExtensionManager', 'org.gnome.Ptyxis', 'com.getmailspring.Mailspring', 'org.gnome.Settings', 'org.gnome.tweaks', 'org.gnome.Nautilus', 'org.gnome.TextEditor', 'io.missioncenter.MissionCenter', 'net.nokyan.Resources', 'solaar', 'de.haeckerfelix.Fragments']
+whitelist=['org.gnome.Shell.Extensions', 'com.mattjakeman.ExtensionManager', 'org.gnome.Ptyxis', 'com.getmailspring.Mailspring', 'org.gnome.Settings', 'org.gnome.tweaks', 'org.gnome.Nautilus', 'org.gnome.TextEditor', 'io.missioncenter.MissionCenter', 'net.nokyan.Resources', 'solaar', 'de.haeckerfelix.Fragments', 'com.mitchellh.ghostty']
 
 [blur-my-shell/coverflow-alt-tab]
 blur=false
@@ -150,7 +151,7 @@ pipeline='pipeline_default'
 style-components=3
 
 [blur-my-shell/panel]
-blur=false
+blur=true
 brightness=0.46000000000000002
 force-light-text=true
 override-background=true
@@ -158,17 +159,17 @@ override-background-dynamically=true
 pipeline='pipeline_default'
 sigma=21
 static-blur=true
-style-panel=1
+style-panel=0
 unblur-in-overview=false
 
 [blur-my-shell/popup]
-blur=true
+blur=false
 brightness=0.59999999999999998
 corner-radius=24
 dialog-corner-radius=24
 menu-corner-radius=16
 notification-corner-radius=16
-osd-corner-radius=28
+osd-corner-radius=32
 override-background=true
 pipeline='pipeline_default'
 quick-settings-corner-radius=24
@@ -197,7 +198,7 @@ show-indicator='only-active'
 accent-color='#242454'
 create-shortcut=true
 custom-color=false
-darker=false
+darker=true
 gnome-colors=false
 last-error=''
 morewaita=true
@@ -206,7 +207,7 @@ recolor-apps=true
 recolor-folders=false
 tint-apps=true
 tint-gtk3=true
-tint-shell=false
+tint-shell=true
 
 [clipboard-history]
 display-mode=0
@@ -435,7 +436,7 @@ activities-button=false
 alt-tab-icon-size=0
 alt-tab-small-icon-size=0
 alt-tab-window-preview-size=0
-animation=0
+animation=2
 clock-menu=true
 clock-menu-position-offset=0
 controls-manager-spacing-size=0
@@ -799,7 +800,7 @@ focus-hint-color='rgb(179,76,179)'
 import-layout-examples=false
 last-version-installed=54
 maximize-with-gap=false
-overridden-settings={'org.gnome.mutter.edge-tiling': <@mb nothing>, 'org.gnome.mutter.keybindings.toggle-tiled-left': <@mb nothing>, 'org.gnome.mutter.keybindings.toggle-tiled-right': <@mb nothing>}
+overridden-settings={'org.gnome.mutter.edge-tiling': <@mb nothing>}
 restore-window=['<Super>Down']
 search-popup-layout=@as []
 single-screen-gap=0
