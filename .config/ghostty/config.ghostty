@@ -14,6 +14,11 @@ keybind = ctrl+shift+l=goto_split:right
 theme=Dracula
 split-divider-color = #89b4fa
 
+# titlebar: merge tabs into it, no shadow, terminal bg color -> vscode-ish unified bar
+gtk-titlebar-style = tabs
+gtk-toolbar-style = flat
+window-theme = ghostty
+
 # unfocused
 unfocused-split-opacity = 0.65
 unfocused-split-fill = #1e1e2e

@@ -7,9 +7,11 @@ com.obsproject.Studio
 com.slack.Slack
 com.stremio.Stremio
 com.surfshark.Surfshark
+com.valvesoftware.Steam
 de.haeckerfelix.Fragments
 dev.zed.Zed
 io.github.alainm23.planify
+io.github.realmazharhussain.GdmSettings
 io.neovim.nvim
 net.nokyan.Resources
 org.gnome.Calculator
