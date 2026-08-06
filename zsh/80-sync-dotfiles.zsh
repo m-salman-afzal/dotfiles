@@ -17,6 +17,7 @@
     sec ~ /^\[(SmartAutoMoveNG|smart-auto-move)\]/ && /^saved-windows=/ { next }
     sec == "[Bluetooth-Battery-Meter]" && /^(device-list|gattbas-list|upower-device-list)=/ { next }
     sec == "[gsconnect]" && /^devices=/ { next }
+    sec == "[dynamic-music-pill]" && /^playback-history=/ { next }   # what was watched/played
     { print }
   ' > $HOME/dotfiles/gnome/extensions.dconf
 

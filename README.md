@@ -1,4 +1,5 @@
 # dotfiles
+
 Personal dotfiles management
 
 ## New PC bootstrap
@@ -13,10 +14,19 @@ curl -fsSL https://raw.githubusercontent.com/m-salman-afzal/dotfiles/main/initSy
 
 What it does, in order:
 
-1. **initTerminal.sh** — generates the two SSH keys (auth + commit signing), prints them and waits until they're added to GitHub, clones this repo, stows the symlinks (wiping the distro `.bashrc`/`.profile` first), installs zsh and makes it the default shell.
-2. **initApt.sh** — sets up the third-party apt repos (github-cli, solaar PPA — keys fetched fresh from the vendors), then installs every package in `apt/packages.list`, raises the inotify watch/instance limits in `/etc/sysctl.d/99-inotify.conf` (file watchers hit `ENOSPC` on the defaults), and makes vim the system `editor` alternative. Installed manually when needed: nvidia driver, docker, vscode, steam, cursor, protonvpn, lm-studio.
-3. **initGnomeExtension.sh** — installs every extension in `gnome/extensions.list` from extensions.gnome.org, restores their settings from `gnome/extensions.dconf`, enables them all. Log out/in to load them.
-4. **initFlatpak.sh** — installs flatpak + flathub and every app in `flatpak/apps.list` (runtimes come along as dependencies).
-5. **initSnap.sh** — installs every snap in `snap/apps.list` (bases and content snaps come along as dependencies). Includes ghostty, the default terminal — `.config/xdg-terminals.list` points Ctrl+Alt+T at it.
+1. **initTerminal.sh** — generates the two SSH keys (auth + commit signing), prints them and waits until they're added
+   to GitHub, clones this repo, stows the symlinks (wiping the distro `.bashrc`/`.profile` first), installs zsh and
+   makes it the default shell.
+2. **initApt.sh** — sets up the third-party apt repos (github-cli, solaar PPA — keys fetched fresh from the vendors),
+   then installs every package in `apt/packages.list`, raises the inotify watch/instance limits in
+   `/etc/sysctl.d/99-inotify.conf` (file watchers hit `ENOSPC` on the defaults), and makes vim the system `editor`
+   alternative. Installed manually when needed: nvidia driver, docker, vscode, steam, cursor, protonvpn, lm-studio.
+3. **initGnomeExtension.sh** — installs every extension in `gnome/extensions.list` from extensions.gnome.org, restores
+   their settings from `gnome/extensions.dconf`, enables them all. Log out/in to load them.
+4. **initFlatpak.sh** — installs flatpak + flathub and every app in `flatpak/apps.list` (runtimes come along as
+   dependencies).
+5. **initSnap.sh** — installs every snap in `snap/apps.list` (bases and content snaps come along as dependencies).
+   Includes ghostty, the default terminal — `.config/xdg-terminals.list` points Ctrl+Alt+T at it.
 
-The lists and settings dumps are refreshed automatically by the daily sync in `zsh/80-sync.zsh`, so they always reflect the current machine.
+The lists and settings dumps are refreshed automatically by the daily sync in `zsh/80-sync.zsh`, so they always reflect
+the current machine.

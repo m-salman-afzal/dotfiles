@@ -109,7 +109,7 @@ settings-version=2
 [blur-my-shell/appfolder]
 blur=true
 sigma=20
-style-dialogs=1
+style-dialogs=3
 
 [blur-my-shell/applications]
 blacklist=['Plank', 'com.desktop.ding', 'Conky', 'firefox', 'google-chrome', 'app.zen_browser.zen', 'app.zen_browser.zen', 'app.zen_browser.zen']
@@ -148,13 +148,13 @@ pipeline='pipeline_default'
 [blur-my-shell/overview]
 blur=true
 pipeline='pipeline_default'
-style-components=3
+style-components=2
 
 [blur-my-shell/panel]
 blur=false
 brightness=0.46000000000000002
 force-light-text=true
-override-background=true
+override-background=false
 override-background-dynamically=true
 pipeline='pipeline_default'
 sigma=21
@@ -167,12 +167,12 @@ blur=true
 brightness=0.59999999999999998
 corner-radius=18
 dialog-corner-radius=18
-menu-corner-radius=20
+menu-corner-radius=30
 notification-corner-radius=18
 osd-corner-radius=28
 override-background=true
 pipeline='pipeline_default'
-quick-settings-corner-radius=30
+quick-settings-corner-radius=18
 sigma=32
 static-blur=true
 style-popup=2
@@ -454,7 +454,6 @@ hover-delay=0
 invert-scroll-animation=true
 invert-scroll-direction=true
 pill-dynamic-width=false
-playback-history='[{"title":"NVIDIA RTX on Snapdragon laptops Actually Works Now!","artist":"ETA PRIME","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_a354d4bed3d04b39bd29e68c71a8b2bc.jpg","time":1785890674521,"avgColor":{"r":125,"g":122,"b":120}},{"title":"Install Hyprland + Caelestia Shell (Complete Guide)","artist":"Lau","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_c15f4a3603c43e8470cc742a50a711ef.jpg","time":1785889624299,"avgColor":{"r":158,"g":134,"b":126}},{"title":"Apple Just Killed AI Data Centers","artist":"Kiraa","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_7f056c64e092dcf89879be5eb5fe1722.jpg","time":1785889489862,"avgColor":{"r":106,"g":96,"b":97}},{"title":"Framework 13 Pro Shows Why Apple Solders Your Memory","artist":"Alex Ziskind","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_0b9e2988191fa6888c6d7eb1e2df2742.jpg","time":1785889091202,"avgColor":{"r":158,"g":134,"b":126}},{"title":"DO PALL - SURINDER KAUR X COACHSAHB","artist":"Coachsahb","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_6eb7fc871ebebd4abd3bba1b14d74f7c.jpg","time":1785885434798,"avgColor":{"r":195,"g":177,"b":149}},{"title":"ZULFAAN (Official Audio) SARRB | Starboy X","artist":"NorthWest Music","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_a7a35c12da8cdd412f6d2a80aa562adb.jpg","time":1785885425715,"avgColor":{"r":159,"g":171,"b":131}},{"title":"REGARDLESS - Asim Azhar (Official Video)","artist":"Asim Azhar","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_b4ea3acc18e9351c5bb54f11d2e6ecf1.jpg","time":1785885414399,"avgColor":{"r":145,"g":135,"b":101}},{"title":"CHAL DIYE TUM KAHAN | LYRICAL OST | VIDEO SONG - 4K | KABHI MAIN KABHI TUM | MUSTAFA x SHARJEENA","artist":"ARY Musik","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_f37e55cb7a545439974d19ba8c5ef33b.jpg","time":1785885406286,"avgColor":{"r":88,"g":84,"b":61}},{"title":"Kaifi Khalil - Kahani Suno 2.0 [Official Music Video]","artist":"Kaifi Khalil","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_1eb3a910a6bce591779251409a3799cd.jpg","time":1785885393978,"avgColor":{"r":32,"g":71,"b":97}},{"title":"Chalo Door Kahin (Official Video) - Samar Jafri","artist":"Samar Jafri","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_1ab716b1d9384d5eb6e70dc582b8705c.jpg","time":1785885364978,"avgColor":{"r":102,"g":90,"b":74}},{"title":"Farak - Taare | Official Music Video |","artist":"Farak","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_860aa9697cad8b6d9c748cec0d159e15.jpg","time":1785885251242,"avgColor":{"r":72,"g":54,"b":35}},{"title":"Ae Ajnabee (Official Music Video) - Aditya Rikhari, Ravator, Kutle Khan | Coke Studio Bharat","artist":"Coke Studio India","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_98073a86b4a27a96cd0cf79a1e5b714e.jpg","time":1785885240585,"avgColor":{"r":88,"g":53,"b":42}},{"title":"DARSHAN - Ahsan Javed,Usamasutra (Official Music Video)","artist":"Ahsan Javed","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_f48216fc6f2ef4723f8c80236c9e1fb8.jpg","time":1785885162507,"avgColor":{"r":7,"g":6,"b":5}},{"title":"Bayaan | Sanah Moidutty | Vaibhav Pani  - Tere Naal (Lyric Video)","artist":"Bayaan","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_c3b36cda2bec8117b2b3d8e34bbf7823.jpg","time":1785885078931,"avgColor":{"r":38,"g":54,"b":29}},{"title":"Bayaan & Sherazam - Safar (Lyrics)","artist":"seventyskye","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_2eaa9d107f4a71b3a1901e822072f254.jpg","time":1785885027743,"avgColor":{"r":79,"g":20,"b":77}},{"title":"BOYFRIEND(MUSIC VIDEO) KARAN AUJLA| SUNANDA | IKKY | Latest Punjabi Songs 2025","artist":"Karan Aujla","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_b118326deaf4ff4717c5d1c650c0df33.jpg","time":1785885010566,"avgColor":{"r":32,"g":29,"b":37}},{"title":"Aatish - Ahsan Javed and Usamasutra ","artist":"Ahsan Javed","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_cad1b8c5a2c7d0686ec9d6ebdb0d1f1b.jpg","time":1785884986805,"avgColor":{"r":39,"g":23,"b":37}},{"title":"Aatish - Ahsan Javed and Usamasutra","artist":"Ahsan Javed","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_0c8699c17f2f351a65110980cb92c195.jpg","time":1785884986497,"avgColor":{"r":158,"g":134,"b":126}},{"title":"ANMOL- Ahsan Javed & Usamasutra ","artist":"Ahsan Javed","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_bd80d42542964c1a0ea9e6fd6900de32.jpg","time":1785884990532,"avgColor":{"r":158,"g":134,"b":126}},{"title":"ANMOL- Ahsan Javed & Usamasutra","artist":"Ahsan Javed","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_baee03e8bf561fb7cc36c6eccf559bf0.jpg","time":1785884990148,"avgColor":{"r":183,"g":174,"b":146}},{"title":"MEMORIES - Hasan Raheem ft Justin Bibis (Official Music Video) | Latest Urdu Punjabi Song 2025","artist":"Hasan Raheem","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_1f46021447c74028a9e8c2402dbb8785.jpg","time":1785884996309,"avgColor":{"r":204,"g":153,"b":90}},{"title":"Abdul Hannan & Rovalio - Iraaday (Official Music Video)","artist":"Abdul Hannan","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_6104b2932e9e8c500bc0c5b9a993f55b.jpg","time":1785884992827,"avgColor":{"r":120,"g":102,"b":75}},{"title":"ANMOL- Ahsan Javed & Usamasutra ","artist":"Ahsan Javed","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_bd80d42542964c1a0ea9e6fd6900de32.jpg","time":1785884794545,"avgColor":{"r":158,"g":134,"b":126}},{"title":"ANMOL- Ahsan Javed & Usamasutra","artist":"Ahsan Javed","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_baee03e8bf561fb7cc36c6eccf559bf0.jpg","time":1785884736179,"avgColor":{"r":183,"g":174,"b":146}},{"title":"Aatish - Ahsan Javed and Usamasutra ","artist":"Ahsan Javed","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_cad1b8c5a2c7d0686ec9d6ebdb0d1f1b.jpg","time":1785884647082,"avgColor":{"r":39,"g":23,"b":37}},{"title":"Aatish - Ahsan Javed and Usamasutra","artist":"Ahsan Javed","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_0c8699c17f2f351a65110980cb92c195.jpg","time":1785884575487,"avgColor":{"r":158,"g":134,"b":126}},{"title":"Aarzu (with Asim Azhar) Official Music Video | Asim Azhar, Noor, Khan, Madhurxo","artist":"Asim Azhar","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_878f448b0a5051aae712afd7586dda8e.jpg","time":1785884571010,"avgColor":{"r":131,"g":109,"b":63}},{"title":"Unveiling the Magic: Pardes Katenda | Adnan Dhool | Saraiki Song 2023 |Official Visualizer","artist":"Adnan Dhool Official","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_354dbd8d18e11b0bb95ff3ac0af4d94d.jpg","time":1785884551149,"avgColor":{"r":80,"g":78,"b":73}},{"title":"all the way [AMV]","artist":"buildspace","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_440dcabaadf0870ecdf0c1d4c7f867e2.jpg","time":1785884542968,"avgColor":{"r":88,"g":88,"b":88}},{"title":"FARZI - Paisa Hai Toh Music Video | Vishal Dadlani, MellowD, Sachin-Jigar, Bhuvan Arora, Saqib","artist":"Prime Video India","artUrl":"file:///home/satop/.cache/dynamic-music-pill/art/hist_090e37609f5bcb5fd08aaa87bde68d58.jpg","time":1785884539799,"avgColor":{"r":94,"g":65,"b":51}}]'
 popup-custom-width=360
 popup-hide-pill-visualizer=false
 popup-show-album-title=true
@@ -941,7 +940,7 @@ window-buttons-theme='auto'
 name=''
 
 [vertical-workspaces]
-aaa-loading-profile=false
+aaa-loading-profile=true
 activate-settings-window=2
 always-activate-selected-window=false
 animation-speed-factor=1
