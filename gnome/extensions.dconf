@@ -167,12 +167,12 @@ blur=true
 brightness=0.59999999999999998
 corner-radius=18
 dialog-corner-radius=18
-menu-corner-radius=30
+menu-corner-radius=12
 notification-corner-radius=18
 osd-corner-radius=28
 override-background=true
 pipeline='pipeline_default'
-quick-settings-corner-radius=18
+quick-settings-corner-radius=20
 sigma=32
 static-blur=true
 style-popup=2
@@ -940,7 +940,7 @@ window-buttons-theme='auto'
 name=''
 
 [vertical-workspaces]
-aaa-loading-profile=true
+aaa-loading-profile=false
 activate-settings-window=2
 always-activate-selected-window=false
 animation-speed-factor=1
