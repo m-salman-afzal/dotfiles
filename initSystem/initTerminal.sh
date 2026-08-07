@@ -27,16 +27,18 @@ until [[ "$(ssh -n -o StrictHostKeyChecking=accept-new -T git@github.com 2>&1 ||
 done
 echo "GitHub auth OK."
 
-#* 3. dotfiles (ssh remote so pushes work later)
+#* 3. the three tools the rest of this script needs — none ship on a stock Ubuntu desktop
+sudo apt update && sudo apt install -y git stow zsh
+
+#* 4. dotfiles (ssh remote so pushes work later)
 [[ -d ~/dotfiles ]] || git clone git@github.com:m-salman-afzal/dotfiles.git ~/dotfiles
 git -C ~/dotfiles config core.hooksPath .githooks   # pre-push touches the daily-sync stamp
 
-#* 4. stow — nuke the distro defaults that block the symlinks, then link
-sudo apt update && sudo apt install -y stow zsh
+#* 5. stow — nuke the distro defaults that block the symlinks, then link
 rm -f ~/.bashrc ~/.profile
 stow -d "$HOME/dotfiles" -t "$HOME" .   # ignores per .stow-local-ignore
 
-#* 5. zsh as default shell (asks for your password)
+#* 6. zsh as default shell (asks for your password)
 chsh -s "$(command -v zsh)"
 
 echo "Done. Log out/in (or open a new terminal) to land in zsh."
