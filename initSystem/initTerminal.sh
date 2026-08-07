@@ -20,8 +20,9 @@ cat ~/.ssh/gitCommitSigningKey.pub
 echo
 
 #* 2. wait until github accepts the auth key
-#* no pipe: `ssh -T git@github.com` exits 1 even on success, and pipefail would hide grep's match
-until [[ "$(ssh -o StrictHostKeyChecking=accept-new -T git@github.com 2>&1 || true)" == *"successfully authenticated"* ]]; do
+#* -n is load-bearing under `curl | bash`: without it ssh slurps stdin, i.e. the rest of this script.
+#* no pipe either: `ssh -T git@github.com` exits 1 even on success, and pipefail would hide grep's match.
+until [[ "$(ssh -n -o StrictHostKeyChecking=accept-new -T git@github.com 2>&1 || true)" == *"successfully authenticated"* ]]; do
   read -rp "GitHub hasn't accepted the key yet — add it, then press Enter to retry... " </dev/tty   # works under curl|bash too
 done
 echo "GitHub auth OK."
