@@ -5,7 +5,8 @@ Personal dotfiles management
 ## New PC bootstrap
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/m-salman-afzal/dotfiles/main/initSystem/initTerminal.sh | bash \
+curl -fsSL https://raw.githubusercontent.com/m-salman-afzal/dotfiles/main/initSystem/initTerminal.sh -o /tmp/initTerminal.sh \
+  && bash /tmp/initTerminal.sh \
   && bash ~/dotfiles/initSystem/initApt.sh \
   && bash ~/dotfiles/initSystem/initGnomeExtension.sh \
   && bash ~/dotfiles/initSystem/initFlatpak.sh \
