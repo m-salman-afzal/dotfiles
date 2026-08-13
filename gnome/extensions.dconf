@@ -60,8 +60,8 @@ ws-switch-popup=false
 
 [appindicator]
 compact-mode-enabled=true
-icon-brightness=-1.3877787807814457e-16
-icon-contrast=-1.3877787807814457e-16
+icon-brightness=0.0
+icon-contrast=0.0
 icon-opacity=255
 icon-saturation=0.0
 icon-size=16
@@ -940,7 +940,7 @@ window-buttons-theme='auto'
 name=''
 
 [vertical-workspaces]
-aaa-loading-profile=true
+aaa-loading-profile=false
 activate-settings-window=2
 always-activate-selected-window=false
 animation-speed-factor=1
