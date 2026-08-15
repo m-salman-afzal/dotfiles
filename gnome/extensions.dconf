@@ -202,7 +202,7 @@ show-indicator='only-active'
 
 [chromaleon]
 accent-color='#242454'
-create-shortcut=true
+create-shortcut=false
 custom-color=true
 darker=true
 gnome-colors=false

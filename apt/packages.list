@@ -19,6 +19,7 @@ htop
 libavcodec-extra
 libglib2.0-dev
 libinput-tools
+openlogi
 pkg-config
 ppa-purge
 rclone
