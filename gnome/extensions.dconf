@@ -9,7 +9,7 @@ enable-galaxy-buds-device=true
 enable-gattbas-device=true
 enable-multi-indicator-mode=false
 enable-upower-level-icon=true
-galaxy-buds-list=['{"path":"/org/bluez/hci0/dev_C4_77_64_91_5A_6C","modelId":9,"alias":"sads","icon":"earbuds-stem","fw-version":"R630XXU0AZD2","case":"case-normal","wear-detection-mode":0,"s2c-time":2,"eq-preset":0,"stereo-bal":16,"tp-enabled":true,"tp-adv-swipe":false,"tp-adv-call-double":false,"tp-adv-call-hold":false,"tp-lighting":0,"th-left":3,"th-right":2,"sidetone":false,"nc-one":false,"2tap-vol":false,"amb-enable":false,"amb-left":1,"amb-right":1,"amb-tone":2,"ring-state":"stopped","nc-cycle-right":6,"nc-cycle-left":6}']
+galaxy-buds-list=['{"path":"/org/bluez/hci0/dev_C4_77_64_91_5A_6C","modelId":9,"alias":"sads","icon":"earbuds-stem","fw-version":"R630XXU0AZG2","case":"case-normal","wear-detection-mode":0,"s2c-time":2,"eq-preset":255,"stereo-bal":16,"tp-enabled":true,"tp-adv-swipe":false,"tp-adv-call-double":false,"tp-adv-call-hold":false,"tp-lighting":0,"th-left":3,"th-right":2,"sidetone":false,"nc-one":false,"2tap-vol":false,"amb-enable":false,"amb-left":1,"amb-right":1,"amb-tone":2,"ring-state":"stopped","nc-cycle-right":6,"nc-cycle-left":6}']
 hide-bluetooth-indicator=1
 indicator-size=80
 indicator-type=0
@@ -203,7 +203,7 @@ show-indicator='only-active'
 [chromaleon]
 accent-color='#242454'
 create-shortcut=false
-custom-color=true
+custom-color=false
 darker=true
 gnome-colors=false
 last-error=''
@@ -213,7 +213,9 @@ recolor-apps=true
 recolor-folders=false
 tint-apps=true
 tint-gtk3=true
+tint-panel=true
 tint-shell=false
+tinting-strength=2
 
 [clipboard-history]
 display-mode=0
@@ -940,7 +942,7 @@ window-buttons-theme='auto'
 name=''
 
 [vertical-workspaces]
-aaa-loading-profile=true
+aaa-loading-profile=false
 activate-settings-window=2
 always-activate-selected-window=false
 animation-speed-factor=1
