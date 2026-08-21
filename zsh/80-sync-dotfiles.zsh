@@ -15,7 +15,7 @@
     /^\[/ { sec=$0; if (sec ~ /^\[gsconnect\/device/) next }   # pairing state: certs, caps
     sec ~ /^\[gsconnect\/device/ { next }
     sec ~ /^\[(SmartAutoMoveNG|smart-auto-move)\]/ && /^saved-windows=/ { next }
-    sec == "[Bluetooth-Battery-Meter]" && /^(device-list|gattbas-list|upower-device-list)=/ { next }
+    sec == "[Bluetooth-Battery-Meter]" && /^(device-list|galaxy-buds-list|gattbas-list|upower-device-list)=/ { next }
     sec == "[gsconnect]" && /^devices=/ { next }
     sec == "[dynamic-music-pill]" && /^playback-history=/ { next }   # what was watched/played
     { print }

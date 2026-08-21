@@ -9,7 +9,6 @@ enable-galaxy-buds-device=true
 enable-gattbas-device=true
 enable-multi-indicator-mode=false
 enable-upower-level-icon=true
-galaxy-buds-list=['{"path":"/org/bluez/hci0/dev_C4_77_64_91_5A_6C","modelId":9,"alias":"sads","icon":"earbuds-stem","fw-version":"R630XXU0AZG2","case":"case-normal","wear-detection-mode":0,"s2c-time":2,"eq-preset":255,"stereo-bal":16,"tp-enabled":true,"tp-adv-swipe":false,"tp-adv-call-double":false,"tp-adv-call-hold":false,"tp-lighting":0,"th-left":3,"th-right":2,"sidetone":false,"nc-one":false,"2tap-vol":false,"amb-enable":false,"amb-left":1,"amb-right":1,"amb-tone":2,"ring-state":"stopped","nc-cycle-right":6,"nc-cycle-left":6}']
 hide-bluetooth-indicator=1
 indicator-size=80
 indicator-type=0
