@@ -3,12 +3,13 @@ com.bitwarden.desktop
 com.getmailspring.Mailspring
 com.getpostman.Postman
 com.github.tchx84.Flatseal
+com.github.wwmm.easyeffects
 com.google.Chrome
 com.kagi.Orion
 com.obsproject.Studio
+com.protonvpn.www
 com.slack.Slack
 com.stremio.Stremio
-com.surfshark.Surfshark
 com.valvesoftware.Steam
 de.haeckerfelix.Fragments
 dev.zed.Zed
@@ -24,4 +25,5 @@ org.gnome.Snapshot
 org.gnome.clocks
 org.gnome.gitlab.somas.Apostrophe
 org.mozilla.firefox
+org.pulseaudio.pavucontrol
 org.videolan.VLC
