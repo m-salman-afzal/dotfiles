@@ -1,27 +1,25 @@
 alias g="git"
 
-alias gb="git branch"
+alias gb="g branch"
 
 gdrb() {
 	git remote prune origin
 	git branch -vv | grep ': gone]' | awk '{print $1}' > /tmp/merged-branches
 	cat /tmp/merged-branches | xargs git branch -D
 }
+alias gf="g fetch"
+alias gfo="gf origin"
 
-alias gfo="git fetch origin"
+alias gm="g merge"
 
-alias gp="git pull"
+alias gp="g pull"
+alias gph="g push"
 
-alias gc="git commit"
+alias gco="g checkout"
 
-alias gco="git checkout"
+alias gceph="g commit --allow-empty -m 'temp' && g push"
 
-alias gph="git push"
-
-alias gceph="git commit --allow-empty -m 'temp' && git push"
-
-alias gs="git stash"
-
+alias gs="g stash"
 alias gsl="gs list"
 
 # push to stash
@@ -56,9 +54,9 @@ gacph() {
 	git push
 }
 
-alias gw="git worktree"
+alias gw="g worktree"
 
-alias gwl="git worktree list"
+alias gwl="g worktree list"
 
 # Create worktree (creates branch if it doesn't exist)
 gwa() {

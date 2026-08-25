@@ -7,7 +7,7 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 
 #* rust
-#. "$HOME/.cargo/env"
+. "$HOME/.cargo/env"
 export PATH=$HOME/.cargo/bin:$PATH
 
 #* bun
