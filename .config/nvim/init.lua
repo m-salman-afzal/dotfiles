@@ -16,6 +16,28 @@ if not vim.g.vscode then
   vim.opt.shiftwidth = 2
   vim.opt.tabstop = 2
 end
+local vscode = require("vscode")
+
+local cursor_styles = {
+  ["n"] = "block",           -- Normal: solid block
+  ["i"] = "line",            -- Insert: vertical beam
+  ["v"] = "block-outline",   -- Visual (char): hollow block
+  ["V"] = "block-outline",   -- Visual (line): hollow block
+  ["\22"] = "block-outline", -- Visual (block): hollow block (Ctrl-V)
+  ["R"] = "underline",       -- Replace: underline
+  ["c"] = "line-thin",       -- Command-line
+}
+vim.api.nvim_create_autocmd("ModeChanged",
+  {
+    pattern = "*:*",
+    callback = function()
+      local mode = vim.fn.mode()
+      local style = cursor_styles[mode] or "block"
+      vscode.eval_async(string.format(
+        [[        vscode.workspace.getConfiguration('editor').update('cursorStyle', '%s', vscode.ConfigurationTarget.Global);      ]],
+        style))
+    end,
+  })
 
 --* Keymaps
 -- ponytail: none yet, and nothing on a bare key — personal maps go behind <leader> so
