@@ -200,21 +200,22 @@ restore-state=true
 show-indicator='only-active'
 
 [chromaleon]
-accent-color='#242454'
+accent-color='#a56f9b'
 create-shortcut=false
-custom-color=false
+custom-color=true
+custom-css=true
 darker=true
 gnome-colors=false
 last-error=''
 morewaita=true
 prefer-light=false
 recolor-apps=true
-recolor-folders=false
+recolor-folders=true
 tint-apps=true
 tint-gtk3=true
 tint-panel=true
 tint-shell=false
-tinting-strength=2
+tinting-strength=1
 
 [clipboard-history]
 display-mode=0
@@ -488,6 +489,7 @@ window-maximized=true
 hide-bluetooth=true
 hide-microphone=false
 hide-network=false
+hide-night-light=true
 hide-power=false
 hide-power-profiles=true
 hide-volume=false
