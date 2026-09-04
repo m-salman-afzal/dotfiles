@@ -98,6 +98,16 @@ application-list=@as []
 [battery-power-mode-indicator]
 balanced-enabled=true
 
+[bettertrayicons]
+enable-symbolic-icons=false
+hide-background-apps=true
+icon-size=20
+keep-popup-after-click=false
+preview-show-margin=false
+preview-show-padding=false
+tray-position='right'
+visible-icon-limit=1
+
 [blur-my-shell]
 debug=false
 hacks-level=0
@@ -231,14 +241,14 @@ confirm-pinned-delete=true
 disable-down-arrow=true
 display-mode=3
 enable-keybindings=true
-history-size=1000
+history-size=100
 next-history-clear=-1
 notify-on-clear=false
 notify-on-copy=false
 notify-on-cycle=false
-open-at-cursor=false
+open-at-cursor=true
 pinned-on-bottom=false
-preview-size=10
+preview-size=20
 show-edit-button=false
 show-tag-button=false
 strip-text=true
@@ -1100,5 +1110,5 @@ show-fan=false
 show-gpu=true
 show-storage=true
 show-voltage=false
-update-time=1
+update-time=5
 use-higher-precision=true

@@ -21,6 +21,9 @@
     { print }
   ' > $HOME/dotfiles/gnome/extensions.dconf
 
+  #* refresh keyboard layout + xkb options (caps:escape lives here)
+  dconf dump /org/gnome/desktop/input-sources/ > $HOME/dotfiles/gnome/input-sources.dconf
+
   #* refresh custom keyboard shortcuts (app launchers, wm, shell)
   dconf dump /org/gnome/settings-daemon/plugins/media-keys/ > $HOME/dotfiles/gnome/media-keys.dconf
   dconf dump /org/gnome/desktop/wm/keybindings/ > $HOME/dotfiles/gnome/wm-keybindings.dconf

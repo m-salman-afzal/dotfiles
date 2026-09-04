@@ -25,5 +25,8 @@
         "titleBar.inactiveBackground": "#01344399",
         "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.color": "#013443"
+    "peacock.color": "#013443",
+    "Lua.diagnostics.globals": [
+        "vim"
+    ]
 }

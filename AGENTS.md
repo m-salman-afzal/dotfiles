@@ -23,8 +23,8 @@ an entry.
   (50/60) that use them — zsh expands aliases at parse time. In `20-plugins.zsh`, fpath-extending plugins load before
   `compinit`, fzf-tab right after it, autosuggestions/syntax-highlighting last.
 - `zsh/80-sync-dotfiles.zsh` — self-updating repo: on the first interactive shell of a day (stamp file
-  `~/.cache/dotfiles-last-sync`) it regenerates `gnome/extensions.list`, `gnome/extensions.dconf`, the keyboard-shortcut
-  dumps (`gnome/{media-keys,wm-keybindings,shell-keybindings}.dconf`), `flatpak/apps.list`, and `apt/packages.list`,
+  `~/.cache/dotfiles-last-sync`) it regenerates `gnome/extensions.list`, `gnome/extensions.dconf`, the keyboard dumps
+  (`gnome/{input-sources,media-keys,wm-keybindings,shell-keybindings}.dconf`), `flatpak/apps.list`, and `apt/packages.list`,
   then stages everything, shows the diff, and asks before committing ("updated config") and pushing. The stamp is
   touched by `.githooks/pre-push` (repo-local `core.hooksPath`, set by `initTerminal.sh`; on a clone made another way,
   run `git config core.hooksPath .githooks`) — so any manual commit+push (e.g. from VS Code) counts as that day's sync.

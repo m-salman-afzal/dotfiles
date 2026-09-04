@@ -21,6 +21,9 @@ done < "$DOT/gnome/extensions.list"
 #* settings
 dconf load /org/gnome/shell/extensions/ < "$DOT/gnome/extensions.dconf"
 
+#* keyboard layout + xkb options (caps:escape)
+dconf load /org/gnome/desktop/input-sources/ < "$DOT/gnome/input-sources.dconf"
+
 #* custom keyboard shortcuts
 dconf load /org/gnome/settings-daemon/plugins/media-keys/ < "$DOT/gnome/media-keys.dconf"
 dconf load /org/gnome/desktop/wm/keybindings/ < "$DOT/gnome/wm-keybindings.dconf"
