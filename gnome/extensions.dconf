@@ -832,12 +832,13 @@ panel-box='left'
 panel-detail='temp'
 panel-offset=100.0
 panel-priority=int64 0
+popup-layout='default-layout'
 secondary-panel-detail='feelsLike'
 show-refresh-button=true
 show-suntime=true
 show-suntime-as-countdown=true
 symbolic-icons-panel=false
-theme=''
+theme='immersive'
 
 [smart-auto-move]
 activate-workspace=false

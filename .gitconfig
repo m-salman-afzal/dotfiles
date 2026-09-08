@@ -1,10 +1,10 @@
 [user]
-	email = m.salmanafzal@proton.me
+	email = 53542416+m-salman-afzal@users.noreply.github.com
         name = m-salman-afzal
 	signingkey = /home/satop/.ssh/gitCommitSigningKey.pub
 [core]
 	autocrlf = false
-	editor = nano
+	editor = nvim
 [pull]
 	rebase = false
 [gpg]
