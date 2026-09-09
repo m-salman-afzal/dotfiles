@@ -17,6 +17,10 @@ DOT=$HOME/dotfiles
 #* solaar PPA (launchpad delivers the key automatically)
 sudo add-apt-repository -y ppa:solaar-unifying/stable
 
+#* mise (runtime/tool version manager) — debian's extrepo ships the vendor repo + key, so nothing to fetch by hand
+sudo apt install -y extrepo
+sudo extrepo enable mise
+
 sudo apt update
 xargs -r sudo apt install -y < "$DOT/apt/packages.list"
 
@@ -49,6 +53,17 @@ systemctl --user enable --now ydotool.service || true
 #* ("ENOSPC: System limit for number of file watchers reached"). Not stowable: /etc, not $HOME.
 printf 'fs.inotify.max_user_watches=524288\nfs.inotify.max_user_instances=1024\n' | sudo tee /etc/sysctl.d/99-inotify.conf >/dev/null
 sudo sysctl --system >/dev/null
+
+#* mise — installed explicitly (like vim above) so a fresh bootstrap works even before the daily sync has added
+#* it to packages.list; the apt line is a no-op once it's in there. `mise install` pulls every tool pinned in the
+#* stowed .config/mise/config.toml. Last in the file and `|| true`-guarded because it's the slow, network-bound,
+#* least critical step — a failed tool download must not skip the /etc config above. Completions are GENERATED,
+#* so not stowed: ~/.zsh/completions is already on FPATH (zsh/10-env.zsh), before 20-plugins.zsh's compinit.
+#* Re-run the completion line after a mise upgrade to refresh it.
+sudo apt install -y mise
+mkdir -p "$HOME/.zsh/completions"
+mise completion zsh > "$HOME/.zsh/completions/_mise"
+mise install || true
 
 echo "Done. Installed manually when needed (not part of this bootstrap):"
 echo "  nvidia driver (ubuntu-drivers install), docker, vscode,  lm-studio"

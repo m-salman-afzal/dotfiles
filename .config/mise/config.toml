@@ -1,0 +1,10 @@
+[tools]
+node = "26"
+deno = "2"
+bun = "1"
+pnpm = "12"
+rust = { version = "stable", components = ["clippy", "rustfmt", "rust-src"] }
+
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
+activate_shims = true

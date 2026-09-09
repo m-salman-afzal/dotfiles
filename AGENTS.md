@@ -87,6 +87,27 @@ an entry.
   live daemon owns the file and overwrites CLI edits on exit). Solaar's rule editor greys out entirely when `rules.yaml`
   is missing: with no file it loads only `built_in_rules`, and built-in rules carry `source=None`, which is the flag the
   UI uses for editability. The file existing is what creates the editable "User-defined rules" node.
+- mise (runtime version manager, replaced nvm) owns node/deno/bun/pnpm/rust, pinned in the stowed
+  `.config/mise/config.toml`; `zsh/70-mise.zsh` is just `mise activate zsh`. `extrepo enable mise` drops in the vendor
+  repo (`initApt.sh`, before the `packages.list` install), and the same script then installs mise explicitly and runs
+  `mise install` — explicitly because a fresh bootstrap can run before the daily sync has added `mise`/`extrepo` to
+  `packages.list`. Adding a tool here means `mise use -g <tool>`, not a new PATH export in `zsh/10-env.zsh` or
+  `.profile`; both used to carry hand-rolled volta/deno/cargo PATH lines and should not again. Note `rustup self
+  uninstall` rewrites `.profile`/`.bashrc` to strip its own PATH line — always pass `--no-modify-path`, or it edits
+  this repo through the stow symlinks. `PNPM_HOME`
+  is the one leftover — it is where `pnpm add -g` puts bins, not where pnpm itself lives.
+- mise's `rust` is a front-end to rustup, not a replacement: it installs rustup if absent, leaves toolchains in
+  `~/.rustup`, and reuses `~/.cargo` — so `mise activate` puts `~/.cargo/bin` on PATH itself and `cargo install`ed
+  binaries (dust, oha, rustlings) are found with no `mise reshim`. That is why `zsh/10-env.zsh` needs no cargo lines
+  at all; `. "$HOME/.cargo/env"` and the `~/.cargo/bin` export were both removed as redundant. Components are listed
+  explicitly in `config.toml` rather than trusting rustup's default profile. `rustup` still works directly for
+  one-offs (`rustup toolchain list`), but the declared version belongs in `config.toml` and upgrades ride `mise up`. `mise self-update` is refused
+  on an apt build (use apt); `mise up` upgrades the tools. Completions are GENERATED, so not stowed: `initApt.sh` writes
+  `~/.zsh/completions/_mise`, a dir put on `FPATH` by `zsh/10-env.zsh` (hence before `20-plugins.zsh`'s `compinit`).
+  Re-run that line after a mise upgrade.
+- `.bashrc` (and its nvm block, stale `/home/salman/...` oh-my-posh path, etc.) is DEPRECATED — zsh is the shell here
+  and bash is unused. Leave it alone; do not "fix" or modernise it, even when a change elsewhere has an obvious bash
+  counterpart.
 - Aliases: `ls` is aliased — scripts/subshells that parse `ls` output must use `command ls`.
 
 ## Conventions

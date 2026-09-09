@@ -25,12 +25,10 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-. "$HOME/.cargo/env"
-
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/home/satop/.lmstudio/bin"
 # End of LM Studio CLI section
 
-. "/home/satop/.deno/env"
+# Toolchains (node/deno/bun/pnpm/rust) come from mise in zsh/70-mise.zsh — no PATH lines here.
+# volta (~/.volta), rustup's .cargo/env and deno's env used to be sourced from this file; all three
+# are gone or mise-managed, and the deno one was already erroring on every login shell.

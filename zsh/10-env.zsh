@@ -6,17 +6,8 @@ export PATH="/var/lib/flatpak/exports/bin:$PATH"
 export EDITOR='nvim'
 export VISUAL='nvim'
 
-#* rust
-. "$HOME/.cargo/env"
-export PATH=$HOME/.cargo/bin:$PATH
-
-#* bun
-# export BUN_INSTALL="$HOME/.bun"
-# export PATH=$BUN_INSTALL/bin:$PATH
-# # bun completions
-# [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-#* pnpm
+#* pnpm — the pnpm binary itself comes from mise (.config/mise/config.toml). PNPM_HOME stays because
+#* `pnpm add -g` puts its bins there (ncu); mise activates at 70 and so wins the PATH order for pnpm itself.
 export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME/bin:"*) ;;
@@ -31,12 +22,9 @@ if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-clou
 #* Node
 export NODE_COMPILE_CACHE="$HOME/.cache/node"
 
-#* Turso
-export PATH="$PATH:$HOME/.turso"
-
 #* LM Studio CLI
 export PATH="$PATH:/home/satop/.lmstudio/bin"
 
-#* deno
-. "$HOME/.deno/env"
+#* Hand-generated zsh completions (_mise, written by initSystem/initApt.sh) — must stay ahead of the compinit
+#* in zsh/20-plugins.zsh.
 if [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then export FPATH="$HOME/.zsh/completions:$FPATH"; fi
