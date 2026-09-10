@@ -4,6 +4,7 @@ curl
 dconf-cli
 dconf-editor
 ddcutil
+extrepo
 fastfetch
 flatpak
 gettext
@@ -19,6 +20,7 @@ htop
 libavcodec-extra
 libglib2.0-dev
 libinput-tools
+mise
 openlogi
 pkg-config
 ppa-purge
