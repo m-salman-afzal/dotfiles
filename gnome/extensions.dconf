@@ -172,7 +172,7 @@ style-panel=0
 unblur-in-overview=false
 
 [blur-my-shell/popup]
-blur=true
+blur=false
 brightness=0.59999999999999998
 corner-radius=18
 dialog-corner-radius=18
@@ -224,7 +224,7 @@ recolor-folders=true
 tint-apps=true
 tint-gtk3=true
 tint-panel=true
-tint-shell=false
+tint-shell=true
 tinting-strength=1
 
 [clipboard-history]
@@ -825,7 +825,7 @@ hide-err-popup=false
 high-contrast=false
 is-activated=true
 locations=['{"name":"Faisalabad","lat":31.4123265,"lon":73.0549548}', '{"name":"Lahore","lat":31.5656822,"lon":74.3141829}', '{"name":"Islamabad","lat":33.6938118,"lon":73.0651511}']
-main-location-index=int64 0
+main-location-index=int64 1
 my-loc-provider='disable'
 my-loc-refresh-min=60.0
 panel-box='left'
@@ -954,7 +954,7 @@ window-buttons-theme='auto'
 name=''
 
 [vertical-workspaces]
-aaa-loading-profile=false
+aaa-loading-profile=true
 activate-settings-window=2
 always-activate-selected-window=false
 animation-speed-factor=1
