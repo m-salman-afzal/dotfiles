@@ -210,7 +210,7 @@ restore-state=true
 show-indicator='only-active'
 
 [chromaleon]
-accent-color='#a56f9b'
+accent-color='#8575bd'
 create-shortcut=false
 custom-color=true
 custom-css=true
@@ -226,6 +226,7 @@ tint-gtk3=true
 tint-panel=true
 tint-shell=true
 tinting-strength=1
+user-themes-warning=false
 
 [clipboard-history]
 display-mode=0
