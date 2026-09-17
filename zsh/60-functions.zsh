@@ -58,3 +58,31 @@ cycle-sink() {
 
   notify-send -a "Audio Output" -i "$icon" -t 2000 "Audio Output" "$label"
 }
+
+#* System update: apt, snap and flatpak side by side; quits itself once all three finish.
+#  ti@:te@ suppresses screen's alternate-screen swap, so the final frame is left behind in the
+#  terminal instead of being wiped on exit. Everything inside runs as root already: one password
+#  prompt, and no re-prompt when a long upgrade outlives the sudo ticket.
+#  =() not <() because sudo closes inherited fds. Each job parks on a marker-file barrier so all
+#  three regions stay on screen until the slowest one is done, then window 0 quits the session.
+function uuac {
+  sudo mkdir -p /run/uuac && sudo rm -f /run/uuac/apt /run/uuac/snap /run/uuac/flatpak || return
+  # screen draws at absolute row 1, so scroll the visible screen into scrollback first: without this it
+  # overwrites whatever was on screen, and a second run lands on top of the first one's leftovers
+  local n=$(tput lines)
+  printf "\e[${n}H"; repeat $n print
+  sudo screen -c =(cat <<'RC'
+startup_message off
+termcapinfo * ti@:te@
+caption always "%t"
+screen -t apt sh -c 'apt update -y && apt upgrade --with-new-pkgs -y && apt autoremove --purge -y && apt clean all -y; echo "[apt finished, exit $?]"; touch /run/uuac/apt; while [ $(ls /run/uuac | wc -l) -lt 3 ]; do sleep 1; done; sleep 1; screen -X quit'
+split -v
+focus
+screen -t snap sh -c 'snap refresh; echo "[snap finished, exit $?]"; touch /run/uuac/snap; sleep 3600'
+split -v
+focus
+screen -t flatpak sh -c 'flatpak update -y && flatpak uninstall --unused -y; echo "[flatpak finished, exit $?]"; touch /run/uuac/flatpak; sleep 3600'
+resize -h =
+RC
+)
+}

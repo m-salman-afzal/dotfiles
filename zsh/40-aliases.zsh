@@ -1,7 +1,5 @@
 alias ls='ls -la --color'
 
-alias uuac="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove --purge -y && sudo apt clean all -y && sudo snap refresh && sudo flatpak update && sudo flatpak uninstall --unused"
-
 alias Python="/usr/bin/python3"
 
 alias python="/usr/bin/python3"

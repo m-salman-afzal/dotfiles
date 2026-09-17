@@ -14,10 +14,5 @@ name='handy'
 
 [custom-keybindings/custom2]
 binding='<Shift><Super>o'
-command='cycle-sink'
-name='cycle-sink'
-
-[custom-keybindings/custom3]
-binding='<Shift><Super>o'
 command='zsh -ic cycle-sink'
-name='switchOutputDevices'
+name='cycle-sink'
