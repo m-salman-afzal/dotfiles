@@ -3,8 +3,9 @@ circle-widget-color=1
 circle-widget-custom-colors=['#ff7800', '#ff7800', '#15c931', '#15c931', '#15c931', '#15c931', '#15c931', '#15c931', '#15c931', '#15c931']
 disable-level-in-icon=false
 enable-battery-indicator-text=false
-enable-battery-level-icon=false
+enable-battery-level-icon=true
 enable-battery-level-text=true
+enable-companion=true
 enable-galaxy-buds-device=true
 enable-gattbas-device=true
 enable-multi-indicator-mode=false
@@ -18,7 +19,9 @@ level-indicator-custom-colors=['#ff7800', '#ff7800', '#15c931', '#15c931', '#15c
 level-indicator-type=0
 modify-quick-settings=true
 on-hover-delay=200
+panel-button-single-indicator=false
 popup-in-quick-settings=false
+sort-devices-by-history=true
 swap-icon-text=false
 
 [SmartAutoMoveNG]
@@ -97,16 +100,6 @@ application-list=@as []
 
 [battery-power-mode-indicator]
 balanced-enabled=true
-
-[bettertrayicons]
-enable-symbolic-icons=false
-hide-background-apps=true
-icon-size=20
-keep-popup-after-click=false
-preview-show-margin=false
-preview-show-padding=false
-tray-position='right'
-visible-icon-limit=1
 
 [blur-my-shell]
 debug=false
@@ -840,7 +833,7 @@ show-refresh-button=true
 show-suntime=true
 show-suntime-as-countdown=true
 symbolic-icons-panel=false
-theme='immersive'
+theme=''
 weather-provider='open-meteo'
 
 [smart-auto-move]
@@ -957,7 +950,7 @@ window-buttons-theme='auto'
 name=''
 
 [vertical-workspaces]
-aaa-loading-profile=false
+aaa-loading-profile=true
 activate-settings-window=2
 always-activate-selected-window=false
 animation-speed-factor=1
@@ -1103,16 +1096,29 @@ ws-thumbnails-position=5
 wst-position-adjust=0
 
 [vitals]
+battery-colors=@as []
+fan-colors=@as []
+gpu-colors=@as []
 hide-icons=false
 hide-zeros=false
 hot-sensors=['_memory_usage_', '_processor_usage_']
 icon-style=1
-include-static-info=false
+include-static-info=true
+memory-colors=@as []
 menu-centered=true
 position-in-panel=0
+processor-colors=@as []
 show-fan=false
-show-gpu=true
-show-storage=true
+show-gpu=false
+show-network=false
+show-storage=false
+show-system=false
+show-temperature=false
 show-voltage=false
+system-colors=@as []
+temperature-colors=@as []
 update-time=5
 use-higher-precision=true
+
+[workspace-indicator]
+embed-previews=true

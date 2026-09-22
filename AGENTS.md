@@ -47,6 +47,14 @@ an entry.
   for GitHub → clone → stow → zsh default shell), then `initApt.sh` (third-party repos with keys fetched from the
   vendors, then `apt/packages.list`), then `initGnomeExtension.sh` / `initFlatpak.sh` / `initSnap.sh`, which install
   from the generated lists. `initTerminal.sh` must stay `curl | bash`-safe (interactive `read`s need `</dev/tty`).
+- `initSystem/initTrim.sh` — last bootstrap step: apport/whoopsie off, kdump-tools purged (frees the 512 MB
+  `crashkernel=` reservation, so it runs `update-grub`), docker.service → socket activation, ModemManager/cups off,
+  gnome-software search provider off. All `/etc` + `systemctl`, hence a script. The one `$HOME` piece is stowed:
+  `.config/autostart/org.gnome.Software.desktop` with `Hidden=true` masks the `/etc/xdg/autostart` entry. Idempotent.
+  Deliberately excludes snap, GRUB_TIMEOUT and GNOME extensions — those stay manual for now.
+- `.config/autostart/` is stowed whole (folded dir symlink), so every login entry lands in the repo — including the ones
+  the flatpak Background portal and apps like Slack write themselves. `solaar.desktop` and `org.gnome.Software.desktop`
+  are `Hidden=true` masks of the `/etc/xdg/autostart` entries; Solaar must not run because openlogi-agent owns the mouse.
 - System-level (`/etc`) config can't be stowed — stow only targets `$HOME` — so it lives inline in
   `initSystem/initApt.sh`. Currently that's `/etc/sysctl.d/99-inotify.conf`: `fs.inotify.max_user_watches=524288` +
   `max_user_instances=1024`, applied with `sudo sysctl --system`. The distro defaults (8192 watches / 128 instances) are

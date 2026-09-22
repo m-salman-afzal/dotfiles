@@ -3,16 +3,17 @@ com.bitwarden.desktop
 com.getmailspring.Mailspring
 com.getpostman.Postman
 com.github.tchx84.Flatseal
-com.github.wwmm.easyeffects
 com.google.Chrome
 com.kagi.Orion
 com.obsproject.Studio
+com.rustdesk.RustDesk
 com.slack.Slack
 com.stremio.Stremio
 com.valvesoftware.Steam
 de.haeckerfelix.Fragments
 dev.zed.Zed
 io.github.alainm23.planify
+io.github.maniacx.BudsLink
 io.neovim.nvim
 net.nokyan.Resources
 org.gnome.Boxes
@@ -22,7 +23,6 @@ org.gnome.Decibels
 org.gnome.Epiphany
 org.gnome.Snapshot
 org.gnome.clocks
-org.gnome.gitlab.somas.Apostrophe
 org.mozilla.firefox
 org.pulseaudio.pavucontrol
 org.videolan.VLC

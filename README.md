@@ -10,7 +10,8 @@ curl -fsSL https://raw.githubusercontent.com/m-salman-afzal/dotfiles/main/initSy
   && bash ~/dotfiles/initSystem/initApt.sh \
   && bash ~/dotfiles/initSystem/initGnomeExtension.sh \
   && bash ~/dotfiles/initSystem/initFlatpak.sh \
-  && bash ~/dotfiles/initSystem/initSnap.sh
+  && bash ~/dotfiles/initSystem/initSnap.sh \
+  && bash ~/dotfiles/initSystem/initTrim.sh
 ```
 
 What it does, in order:
@@ -30,6 +31,14 @@ What it does, in order:
    dependencies).
 5. **initSnap.sh** — installs every snap in `snap/apps.list` (bases and content snaps come along as dependencies).
    Includes ghostty, the default terminal — `.config/xdg-terminals.list` points Ctrl+Alt+T at it.
+6. **initTrim.sh** — turns off stock Ubuntu pieces that only cost resources on a laptop (measured on the Victus,
+   2026-09-20). apport + whoopsie: crash reporter, never prevents a crash, autoreport sat failed 30 s at boot, whoopsie
+   held 100 MB, and its retracer has OOM-stormed the desktop. kdump-tools: 512 MB of RAM reserved for a kernel-panic
+   dump nobody reads. docker.service at boot: socket activation stays, the daemon starts on first use (0.8 s boot,
+   240 MB idle). ModemManager + cups/cups-browsed: no modem, no printer. gnome-software's background half: 270 MB +
+   packagekitd just to poll flatpak updates — the stowed `.config/autostart/org.gnome.Software.desktop` hides the
+   autostart, the script drops its overview search provider. Idempotent. Deliberately not in here: snap, GRUB_TIMEOUT,
+   GNOME extensions.
 
 The lists and settings dumps are refreshed automatically by the daily sync in `zsh/80-sync.zsh`, so they always reflect
 the current machine.

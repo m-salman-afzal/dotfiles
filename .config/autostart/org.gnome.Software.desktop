@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=GNOME Software
+# Hidden=true masks /etc/xdg/autostart/org.gnome.Software.desktop — no background App Center at login.
+Hidden=true
