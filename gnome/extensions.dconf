@@ -101,6 +101,19 @@ application-list=@as []
 [battery-power-mode-indicator]
 balanced-enabled=true
 
+[bettertrayicons]
+app-config-sync-meta='{"entries":{"handy":{"m":1789854084699,"h":"5465b825"},"flatpak-com.getmailspring.mailspring":{"m":1789854085478,"h":"5465b825"},"update-notifier@software-update-available":{"m":1789854085493,"h":"5465b825"},"update-notifier@unattended-upgrade":{"m":1789854085496,"h":"5465b825"},"update-notifier@livepatch":{"m":1789854085502,"h":"5465b825"}},"tombstones":{}}'
+app-configs='{"handy":{"title":"handy","detected_icon":"/run/user/1000/tray-icon/tray-icon-1064322-1-1.png","icon_theme_path":"/run/user/1000/tray-icon","seen_icons":["tray-icon-1064322-1-1"],"cached_icon_path":"/home/satop/.cache/bettertrayicons/icons/handy.png"},"flatpak-com.getmailspring.mailspring":{"title":"flatpak-com.getmailspring.mailspring","icon_theme_path":"/run/user/1000/app/com.getmailspring.Mailspring/org.chromium.Chromium.4YXMec","packaging":"flatpak","cached_icon_path":"/home/satop/.cache/bettertrayicons/icons/flatpak-com.getmailspring.mailspring.png"},"update-notifier@software-update-available":{"title":"update-notifier","detected_icon":"software-update-available","seen_icons":["software-update-available"]},"update-notifier@unattended-upgrade":{"title":"update-notifier","detected_icon":"system-software-update-symbolic","seen_icons":["system-software-update-symbolic"]},"update-notifier@livepatch":{"title":"update-notifier","detected_icon":"livepatch","seen_icons":["livepatch"]}}'
+enable-custom-icon-style=true
+enable-symbolic-icons=true
+hide-background-apps=true
+icon-size=20
+keep-popup-after-click=false
+preview-show-margin=true
+preview-show-padding=true
+tray-position='left'
+visible-icon-limit=0
+
 [blur-my-shell]
 debug=false
 hacks-level=0
@@ -203,13 +216,13 @@ restore-state=true
 show-indicator='only-active'
 
 [chromaleon]
-accent-color='#8575bd'
+accent-color='#3aa16e'
 create-shortcut=false
 custom-color=true
 custom-css=true
 darker=true
 gnome-colors=false
-last-error='isCancelledError is not defined'
+last-error=''
 morewaita=true
 prefer-light=false
 recolor-apps=true

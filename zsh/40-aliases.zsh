@@ -44,3 +44,11 @@ alias prtd="pnpm run test:dev"
 
 alias nrtp="npm run test:prod"
 alias prtp="pnpm run test:prod"
+
+#* docker
+alias updateStremioServer="docker pull stremio/server:latest && docker stop stremioLocal && docker rm stremioLocal && docker run -d \
+            --name stremioLocal \
+            -p 11470:11470 \
+            -p 12470:12470 \
+            -v ~/.stremio-server:/root/.stremio-server \
+            stremio/server"
