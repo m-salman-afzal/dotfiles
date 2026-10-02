@@ -96,23 +96,10 @@ use-vertical-gradient=false
 visualization-mode='led-bars'
 
 [auto-move-windows]
-application-list=@as []
+application-list=['com.slack.Slack.desktop:3', 'app.zen_browser.zen.desktop:3', 'com.google.Chrome.desktop:2', 'com.mitchellh.ghostty.desktop:1', 'com.microsoft.VSCode.desktop:2']
 
 [battery-power-mode-indicator]
 balanced-enabled=true
-
-[bettertrayicons]
-app-config-sync-meta='{"entries":{"handy":{"m":1789854084699,"h":"5465b825"},"flatpak-com.getmailspring.mailspring":{"m":1789854085478,"h":"5465b825"},"update-notifier@software-update-available":{"m":1789854085493,"h":"5465b825"},"update-notifier@unattended-upgrade":{"m":1789854085496,"h":"5465b825"},"update-notifier@livepatch":{"m":1789854085502,"h":"5465b825"}},"tombstones":{}}'
-app-configs='{"handy":{"title":"handy","detected_icon":"/run/user/1000/tray-icon/tray-icon-1064322-1-1.png","icon_theme_path":"/run/user/1000/tray-icon","seen_icons":["tray-icon-1064322-1-1"],"cached_icon_path":"/home/satop/.cache/bettertrayicons/icons/handy.png"},"flatpak-com.getmailspring.mailspring":{"title":"flatpak-com.getmailspring.mailspring","icon_theme_path":"/run/user/1000/app/com.getmailspring.Mailspring/org.chromium.Chromium.4YXMec","packaging":"flatpak","cached_icon_path":"/home/satop/.cache/bettertrayicons/icons/flatpak-com.getmailspring.mailspring.png"},"update-notifier@software-update-available":{"title":"update-notifier","detected_icon":"software-update-available","seen_icons":["software-update-available"]},"update-notifier@unattended-upgrade":{"title":"update-notifier","detected_icon":"system-software-update-symbolic","seen_icons":["system-software-update-symbolic"]},"update-notifier@livepatch":{"title":"update-notifier","detected_icon":"livepatch","seen_icons":["livepatch"]}}'
-enable-custom-icon-style=true
-enable-symbolic-icons=true
-hide-background-apps=true
-icon-size=20
-keep-popup-after-click=false
-preview-show-margin=true
-preview-show-padding=true
-tray-position='left'
-visible-icon-limit=0
 
 [blur-my-shell]
 debug=false
@@ -139,7 +126,7 @@ opacity=200
 pipeline='pipeline_default'
 sigma=60
 static-blur=true
-whitelist=['org.gnome.Shell.Extensions', 'com.mattjakeman.ExtensionManager', 'org.gnome.Ptyxis', 'com.getmailspring.Mailspring', 'org.gnome.Settings', 'org.gnome.tweaks', 'org.gnome.Nautilus', 'org.gnome.TextEditor', 'io.missioncenter.MissionCenter', 'net.nokyan.Resources', 'solaar', 'de.haeckerfelix.Fragments', 'com.mitchellh.ghostty', 'org.gnome.Software', 'io.github.swordpuffin.rewaita', 'com.github.tchx84.Flatseal', 'com.github.fabito02.chromaleon']
+whitelist=['org.gnome.Shell.Extensions', 'com.mattjakeman.ExtensionManager', 'org.gnome.Ptyxis', 'com.getmailspring.Mailspring', 'org.gnome.Settings', 'org.gnome.tweaks', 'org.gnome.Nautilus', 'org.gnome.TextEditor', 'io.missioncenter.MissionCenter', 'net.nokyan.Resources', 'de.haeckerfelix.Fragments', 'com.mitchellh.ghostty', 'org.gnome.Software', 'io.github.swordpuffin.rewaita', 'com.github.tchx84.Flatseal', 'com.github.fabito02.chromaleon']
 
 [blur-my-shell/coverflow-alt-tab]
 blur=false
@@ -842,10 +829,11 @@ panel-offset=100.0
 panel-priority=int64 0
 popup-layout='default-layout'
 secondary-panel-detail='feelsLike'
+show-panel-icon=true
 show-refresh-button=true
 show-suntime=true
 show-suntime-as-countdown=true
-symbolic-icons-panel=false
+symbolic-icons-panel=true
 theme=''
 weather-provider='open-meteo'
 
@@ -859,7 +847,7 @@ new-window-title-stability-ms=600
 overrides='{"org.gnome.Settings":[{"title":"Settings"}],"com.mattjakeman.ExtensionManager":[{"title":"Extension Manager","action":"IGNORE"},{"title":"Extension Manager","action":"IGNORE"}],"Surfshark":[{"title":"Surfshark","action":"IGNORE"}],"org.gnome.tweaks":[{"title":"GNOME Tweaks","action":"IGNORE"}],"snap-store_snap-store":[{"action":"IGNORE"}],"org.gnome.Calculator":[{"action":"IGNORE","threshold":0.7}],"org.gnome.Snapshot":[{"action":"IGNORE","threshold":0.7}],"org.gnome.Nautilus":[{"action":"IGNORE","threshold":0.7}],"net.nokyan.Resources":[{"action":"IGNORE","threshold":0.7}],"proton.vpn.app.gtk":[{"action":"IGNORE","threshold":0.7}],"com.transmissionbt.transmission":[{"title":"Transmission","action":"IGNORE"}],"transmission-gtk":[{"title":"Torrent Options","action":"IGNORE"}]}'
 
 [status-tray]
-app-order=[':1.131@', ':1.148@', ':1.302@', ':1.322@', 'indicator_solaar', 'livepatch', 'software_update_available', 'tray_icon_tray_app_4920_1', 'unattended_upgrade']
+app-order=[':1.131@', ':1.148@', ':1.302@', ':1.322@', 'livepatch', 'software_update_available', 'tray_icon_tray_app_4920_1', 'unattended_upgrade']
 disabled-apps=@as []
 icon-mode='original'
 icon-size=16
@@ -918,7 +906,7 @@ window-gap=6
 center-box-order=['dateMenu']
 hide=['a11y']
 left-box-order=['simple-weather@romanlefler.com', 'vitalsMenu', 'activities']
-right-box-order=['appindicator-kstatusnotifieritem-tray-icon tray app 18640-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4412-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4504-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4391-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4399-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4650-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 20260-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4540-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4475-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4496-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4576-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 93076-1', 'quickSettings', 'tiling-assistant@leleat-on-github', 'appindicator-kstatusnotifieritem-Mailspring_status_icon_1', 'appindicator-kstatusnotifieritem-chrome_status_icon_1', 'appindicator-kstatusnotifieritem-unattended-upgrade', 'appindicator-kstatusnotifieritem-livepatch', 'appindicator-kstatusnotifieritem-software-update-available', 'appindicator-kstatusnotifieritem-Slack_status_icon_1', 'appindicator-kstatusnotifieritem-tray-icon tray app 66388-1', 'appindicator-kstatusnotifieritem-indicator-solaar', 'screenRecording', 'clipboardIndicator', 'screenSharing', 'dwellClick', 'a11y', 'keyboard']
+right-box-order=['appindicator-kstatusnotifieritem-tray-icon tray app 18640-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4412-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4504-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4391-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4399-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4650-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 20260-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4540-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4475-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4496-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4576-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 93076-1', 'quickSettings', 'tiling-assistant@leleat-on-github', 'appindicator-kstatusnotifieritem-Mailspring_status_icon_1', 'appindicator-kstatusnotifieritem-chrome_status_icon_1', 'appindicator-kstatusnotifieritem-unattended-upgrade', 'appindicator-kstatusnotifieritem-livepatch', 'appindicator-kstatusnotifieritem-software-update-available', 'appindicator-kstatusnotifieritem-Slack_status_icon_1', 'appindicator-kstatusnotifieritem-tray-icon tray app 66388-1', 'screenRecording', 'clipboardIndicator', 'screenSharing', 'dwellClick', 'a11y', 'keyboard']
 show=@as []
 
 [touchpad-gesture-customization]
@@ -1111,6 +1099,7 @@ wst-position-adjust=0
 [vitals]
 battery-colors=@as []
 fan-colors=@as []
+fixed-widths=true
 gpu-colors=@as []
 hide-icons=false
 hide-zeros=false
@@ -1118,6 +1107,7 @@ hot-sensors=['_memory_usage_', '_processor_usage_']
 icon-style=1
 include-static-info=true
 memory-colors=@as []
+memory-measurement=0
 menu-centered=true
 position-in-panel=0
 processor-colors=@as []
@@ -1130,8 +1120,8 @@ show-temperature=false
 show-voltage=false
 system-colors=@as []
 temperature-colors=@as []
-update-time=5
-use-higher-precision=true
+update-time=10
+use-higher-precision=false
 
 [workspace-indicator]
 embed-previews=true

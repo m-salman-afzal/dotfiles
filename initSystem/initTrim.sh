@@ -32,6 +32,10 @@ fi
 #* Printer one day: `sudo systemctl enable --now cups.socket cups-browsed`.
 sudo systemctl disable --now ModemManager.service cups.service cups.socket cups.path cups-browsed.service
 
+#* motd-news + ua-timer — phone home to Canonical for the ssh/tty login banner and Ubuntu Pro nags (apt news, ESM
+#* upsell). No ssh logins here and Pro isn't attached, so nothing reads either. Attach Pro one day: re-enable ua-timer.
+sudo systemctl disable --now motd-news.timer ua-timer.timer
+
 #* gnome-software — App Center's background half: ~270 MB resident + packagekitd, only to poll flatpak updates.
 #* The stowed .config/autostart/org.gnome.Software.desktop (Hidden=true) kills the login autostart; this stops the
 #* overview search from D-Bus-activating it straight back. Updates: open it, or `flatpak update`.

@@ -42,19 +42,20 @@ an entry.
   `() { emulate -L zsh -o extendedglob; ... }`. With the option off the pattern is a literal string and `[[ -n ]]` is
   always true — it degrades silently, not loudly. Keep new glob-qualifier code inside such a wrapper.
 - `gnome/` and `flatpak/` contain GENERATED files (overwritten by the daily sync) — hand-edits there are lost within a
-  day.
+  day. Uninstalling an extension leaves its keys in dconf and the sync dumps all of `/org/gnome/shell/extensions/`, so
+  to drop one from `extensions.dconf` run `dconf reset -f /org/gnome/shell/extensions/<dir>/`.
 - `initSystem/` — fresh-PC bootstrap chain, run via the curl one-liner in README.md: `initTerminal.sh` (SSH keys → wait
   for GitHub → clone → stow → zsh default shell), then `initApt.sh` (third-party repos with keys fetched from the
   vendors, then `apt/packages.list`), then `initGnomeExtension.sh` / `initFlatpak.sh` / `initSnap.sh`, which install
   from the generated lists. `initTerminal.sh` must stay `curl | bash`-safe (interactive `read`s need `</dev/tty`).
 - `initSystem/initTrim.sh` — last bootstrap step: apport/whoopsie off, kdump-tools purged (frees the 512 MB
   `crashkernel=` reservation, so it runs `update-grub`), docker.service → socket activation, ModemManager/cups off,
-  gnome-software search provider off. All `/etc` + `systemctl`, hence a script. The one `$HOME` piece is stowed:
+  motd-news/ua-timer off, gnome-software search provider off. All `/etc` + `systemctl`, hence a script. The one `$HOME` piece is stowed:
   `.config/autostart/org.gnome.Software.desktop` with `Hidden=true` masks the `/etc/xdg/autostart` entry. Idempotent.
   Deliberately excludes snap, GRUB_TIMEOUT and GNOME extensions — those stay manual for now.
 - `.config/autostart/` is stowed whole (folded dir symlink), so every login entry lands in the repo — including the ones
-  the flatpak Background portal and apps like Slack write themselves. `solaar.desktop` and `org.gnome.Software.desktop`
-  are `Hidden=true` masks of the `/etc/xdg/autostart` entries; Solaar must not run because openlogi-agent owns the mouse.
+  the flatpak Background portal and apps like Slack write themselves. `org.gnome.Software.desktop` is a `Hidden=true`
+  mask of the `/etc/xdg/autostart` entry.
 - System-level (`/etc`) config can't be stowed — stow only targets `$HOME` — so it lives inline in
   `initSystem/initApt.sh`. Currently that's `/etc/sysctl.d/99-inotify.conf`: `fs.inotify.max_user_watches=524288` +
   `max_user_instances=1024`, applied with `sudo sysctl --system`. The distro defaults (8192 watches / 128 instances) are
@@ -83,18 +84,8 @@ an entry.
   been an open request for years. Deriving it from `seed.yaml` + content-slot providers in `snap connections` was tried
   and misclassifies ~a third of the list (drops `bibata-all-cursor`, keeps
   `desktop-security-center`/`prompting-client`/`gnome-3-28-1804`). Don't re-attempt it.
-- `/dev/uinput` is shared infrastructure — two unrelated things now write to it, so don't "clean up"
-  `/etc/udev/rules.d/80-uinput.rules` (written by `initApt.sh`, not dpkg-owned): Handy's dictation typing and Solaar's
-  `KeyPress` rules both break without it. Logitech hidraw `uaccess` is a separate concern and comes from solaar's own
-  dpkg-owned `60-solaar.rules` — nothing in the bootstrap needs to grant it.
-- Solaar (MX Master 3S button remapping) replaces input-remapper. Only `.config/solaar/rules.yaml` is stowed —
-  `config.yaml` sits next to it unstowed on purpose: it's device state (pairing, per-device settings) the daemon
-  rewrites constantly. Rules alone aren't enough; the buttons must also be `Diverted` in `Key/Button Diversion`, and
-  that lives in `config.yaml`, so a fresh PC needs
-  `solaar config "MX Master 3S" divert-keys "<Back|Forward|Mouse Gesture> Button" Diverted` (with Solaar not running — a
-  live daemon owns the file and overwrites CLI edits on exit). Solaar's rule editor greys out entirely when `rules.yaml`
-  is missing: with no file it loads only `built_in_rules`, and built-in rules carry `source=None`, which is the flag the
-  UI uses for editability. The file existing is what creates the editable "User-defined rules" node.
+- Don't "clean up" `/etc/udev/rules.d/80-uinput.rules` (written by `initApt.sh`, not dpkg-owned): Handy's dictation
+  typing goes through ydotool → `/dev/uinput` and breaks without it.
 - mise (runtime version manager, replaced nvm) owns node/deno/bun/pnpm/rust, pinned in the stowed
   `.config/mise/config.toml`; `zsh/70-mise.zsh` is just `mise activate zsh`. `extrepo enable mise` drops in the vendor
   repo (`initApt.sh`, before the `packages.list` install), and the same script then installs mise explicitly and runs

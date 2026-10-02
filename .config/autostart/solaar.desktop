@@ -1,5 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Solaar
-# Hidden=true masks /etc/xdg/autostart/solaar.desktop — MX Master buttons are handled by openlogi-agent, not Solaar.
-Hidden=true

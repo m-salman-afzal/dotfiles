@@ -10,6 +10,10 @@ alias disableKernelIpv6="sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sudo
 
 alias enableKernelIpv6="sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0 && sudo sysctl -w net.ipv6.conf.default.disable_ipv6=0"
 
+alias rmPkgLeftovers="dpkg -l | grep '^rc' && sudo apt purge $(dpkg -l | awk '/^rc/{print $2}')"
+
+alias rmSnapLeftovers="snap list --all | awk '/disabled/{print $1, $3}' | while read n r; do sudo snap remove "$n" --revision="$r"; done"
+
 #* claude
 alias claude="$HOME/.local/bin/claude"
 
