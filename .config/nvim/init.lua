@@ -35,9 +35,7 @@ end
 -- a toplevel and take keyboard focus to call wl_data_device.set_selection — that focus
 -- bounce is the Peacock titlebar flash on every dd/yy/cc. Terminal nvim still gets
 -- wl-copy, and still flashes; nothing to opt into there.
-if vim.g.vscode then
-  vim.g.clipboard = vim.g.vscode_clipboard
-end
+vim.g.clipboard = vim.g.vscode_clipboard
 
 --* Keymaps
 -- ponytail: nothing on a bare key — personal maps go behind <leader> so stock motions
