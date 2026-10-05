@@ -48,4 +48,17 @@ if command -v gnome-software &>/dev/null; then
 	esac
 fi
 
+#* debs a Flatpak replaces (apt/blocked.list) — mostly ubuntu-desktop Recommends that a fresh install ships. Pin them
+#* to -1 so neither a release upgrade (26.04 pulled showtime/gnome-calendar/gnome-snapshot in as new Recommends) nor a
+#* stray `apt install` brings them back, then purge any that are here. Recommends only: pinning a hard Depends
+#* (nautilus, yelp) would block ubuntu-desktop itself. The Flatpaks themselves come from flatpak/apps.list.
+printf 'Package: %s\nPin: release a=*\nPin-Priority: -1\n' "$(tr '\n' ' ' < "$HOME/dotfiles/apt/blocked.list")" \
+	| sudo tee /etc/apt/preferences.d/blocked-debs >/dev/null
+#* `|| true`: dpkg-query exits 1 for names it has never seen (purged = forgotten), and pipefail would abort on that
+installed=$(dpkg-query -W -f='${db:Status-Abbrev}${Package}\n' $(<"$HOME/dotfiles/apt/blocked.list") 2>/dev/null | sed -n 's/^ii //p' || true)
+if [[ -n $installed ]]; then
+	sudo apt purge -y $installed
+	sudo apt autoremove --purge -y
+fi
+
 echo "Done. Reboot to see the kdump RAM back and the apport boot delay gone."

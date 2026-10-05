@@ -1,8 +1,6 @@
-btop
 build-essential
 curl
 dconf-cli
-dconf-editor
 ddcutil
 extrepo
 fastfetch
@@ -11,7 +9,6 @@ gettext
 gh
 ghostty
 git
-gnome-shell-extension-manager
 gnome-shell-extensions
 gnome-software-plugin-flatpak
 gnome-tweaks
@@ -26,7 +23,6 @@ pkg-config
 ppa-purge
 rclone
 smem
-solaar
 ubuntu-restricted-addons
 unzip
 whois

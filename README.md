@@ -38,7 +38,8 @@ What it does, in order:
    240 MB idle). ModemManager + cups/cups-browsed: no modem, no printer. motd-news + ua-timer: Canonical's login-banner
    news and Ubuntu Pro nags, with no ssh logins and no Pro attached. gnome-software's background half: 270 MB +
    packagekitd just to poll flatpak updates — the stowed `.config/autostart/org.gnome.Software.desktop` hides the
-   autostart, the script drops its overview search provider. Idempotent. Deliberately not in here: snap, GRUB_TIMEOUT,
+   autostart, the script drops its overview search provider. Debs in `apt/blocked.list` (stock apps that Flatpaks
+   replace) are pinned to -1, so upgrades can't reinstall them, and are purged. Idempotent. Deliberately not in here: snap, GRUB_TIMEOUT,
    GNOME extensions.
 
 The lists and settings dumps are refreshed automatically by the daily sync in `zsh/80-sync.zsh`, so they always reflect

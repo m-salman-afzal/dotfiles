@@ -19,7 +19,9 @@ sudo apt install -y extrepo
 sudo extrepo enable mise
 
 sudo apt update
-xargs -r sudo apt install -y < "$DOT/apt/packages.list"
+#* skip debs a Flatpak replaces (apt/blocked.list): initTrim.sh pins them to -1, and one stale packages.list entry
+#* would then fail this whole install with "has no installation candidate"
+grep -vxFf "$DOT/apt/blocked.list" "$DOT/apt/packages.list" | xargs -r sudo apt install -y
 
 #* vim as the system editor (visudo, sudoedit, git without core.editor). --set = the non-interactive
 #* `update-alternatives --config editor`. vim is an auto dep here, so it's absent from packages.list — install it.

@@ -3,6 +3,7 @@ com.bitwarden.desktop
 com.getmailspring.Mailspring
 com.github.tchx84.Flatseal
 com.google.Chrome
+com.mattjakeman.ExtensionManager
 com.obsproject.Studio
 com.rustdesk.RustDesk
 com.slack.Slack
@@ -20,8 +21,13 @@ org.gnome.Calculator
 org.gnome.Calendar
 org.gnome.Decibels
 org.gnome.Epiphany
+org.gnome.Evince
+org.gnome.Logs
+org.gnome.Loupe
+org.gnome.Showtime
 org.gnome.Snapshot
 org.gnome.clocks
+org.gnome.seahorse.Application
 org.mozilla.firefox
 org.pulseaudio.pavucontrol
 org.videolan.VLC

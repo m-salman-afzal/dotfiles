@@ -38,6 +38,11 @@ an entry.
   `sudo apt-mark auto <pkg>` is better: it leaves both lists and becomes autoremovable. `apt/markAuto.sh` does this in
   bulk: it demotes every non-keeper manual package that something installed depends on, re-promotes anything
   `apt autoremove` would then remove (so it never uninstalls), and regenerates `ignore.list`.
+- `apt/blocked.list` is HAND-maintained (LC_ALL=C sorted): debs that a Flatpak replaces, mostly the ubuntu-desktop
+  Recommends a fresh install ships. `initTrim.sh` pins them to -1 in `/etc/apt/preferences.d/blocked-debs` and purges
+  any that are installed; `initApt.sh` filters them out of `packages.list`, since installing a pinned package fails
+  the whole `apt install`. Only Recommends belong here: pinning a hard Depends (`nautilus`, `yelp`) would block
+  `ubuntu-desktop`. Check with `apt-cache rdepends --installed --no-recommends --no-suggests <pkg>` before adding one.
 - `(#q...)` glob qualifiers in the sync require EXTENDED_GLOB, which is off globally; the code wraps in
   `() { emulate -L zsh -o extendedglob; ... }`. With the option off the pattern is a literal string and `[[ -n ]]` is
   always true — it degrades silently, not loudly. Keep new glob-qualifier code inside such a wrapper.
@@ -50,7 +55,8 @@ an entry.
   from the generated lists. `initTerminal.sh` must stay `curl | bash`-safe (interactive `read`s need `</dev/tty`).
 - `initSystem/initTrim.sh` — last bootstrap step: apport/whoopsie off, kdump-tools purged (frees the 512 MB
   `crashkernel=` reservation, so it runs `update-grub`), docker.service → socket activation, ModemManager/cups off,
-  motd-news/ua-timer off, gnome-software search provider off. All `/etc` + `systemctl`, hence a script. The one `$HOME` piece is stowed:
+  motd-news/ua-timer off, gnome-software search provider off, `apt/blocked.list` debs pinned out and purged. All
+  `/etc` + `systemctl`, hence a script. The one `$HOME` piece is stowed:
   `.config/autostart/org.gnome.Software.desktop` with `Hidden=true` masks the `/etc/xdg/autostart` entry. Idempotent.
   Deliberately excludes snap, GRUB_TIMEOUT and GNOME extensions — those stay manual for now.
 - `.config/autostart/` is stowed whole (folded dir symlink), so every login entry lands in the repo — including the ones
