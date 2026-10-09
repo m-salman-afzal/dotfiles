@@ -96,7 +96,7 @@ use-vertical-gradient=false
 visualization-mode='led-bars'
 
 [auto-move-windows]
-application-list=['com.slack.Slack.desktop:3', 'app.zen_browser.zen.desktop:3', 'com.google.Chrome.desktop:2', 'com.mitchellh.ghostty.desktop:1', 'com.microsoft.VSCode.desktop:2']
+application-list=['com.slack.Slack.desktop:3', 'app.zen_browser.zen.desktop:3', 'com.google.Chrome.desktop:2', 'com.mitchellh.ghostty.desktop:1', 'com.microsoft.VSCode.desktop:2', 'com.valvesoftware.Steam.desktop:4']
 
 [battery-power-mode-indicator]
 balanced-enabled=true
@@ -104,7 +104,7 @@ balanced-enabled=true
 [blur-my-shell]
 debug=false
 hacks-level=0
-pipelines={'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_43210166191037'>, 'params': <@a{sv} {}>}>, <{'type': <'pixelize'>, 'id': <'effect_30442965093595'>, 'params': <{'downsampling_mode': <0>, 'factor': <8>}>}>, <{'type': <'corner'>, 'id': <'effect_95491176377335'>, 'params': <{'radius': <16>}>}>]>}}
+pipelines={'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_03858154645042'>, 'params': <@a{sv} {}>}>, <{'type': <'pixelize'>, 'id': <'effect_18526018635311'>, 'params': <@a{sv} {}>}>, <{'type': <'corner'>, 'id': <'effect_95491176377335'>, 'params': <{'radius': <16>}>}>]>}}
 rounded-blur-found=false
 settings-version=2
 
@@ -148,7 +148,7 @@ blur=true
 pipeline='pipeline_default'
 
 [blur-my-shell/overview]
-blur=true
+blur=false
 pipeline='pipeline_default'
 style-components=2
 
@@ -165,14 +165,14 @@ style-panel=0
 unblur-in-overview=false
 
 [blur-my-shell/popup]
-blur=false
+blur=true
 brightness=0.59999999999999998
 corner-radius=18
 dialog-corner-radius=18
 menu-corner-radius=12
 notification-corner-radius=18
 osd-corner-radius=28
-override-background=true
+override-background=false
 pipeline='pipeline_default'
 quick-settings-corner-radius=20
 sigma=32

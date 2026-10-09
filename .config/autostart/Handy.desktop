@@ -1,9 +1,8 @@
 [Desktop Entry]
-Categories=
-Comment=Handy
-Exec=handy
-StartupWMClass=handy
-Icon=handy
-Name=Handy
-Terminal=false
 Type=Application
+Version=1.0
+Name=Handy
+Comment=Handystartup script
+Exec=/usr/bin/handy 
+StartupNotify=false
+Terminal=false
