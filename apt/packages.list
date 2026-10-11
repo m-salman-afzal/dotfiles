@@ -1,4 +1,5 @@
 build-essential
+claude-desktop
 curl
 dconf-cli
 ddcutil

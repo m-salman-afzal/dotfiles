@@ -29,6 +29,6 @@ fi
 export PATH="$PATH:/home/satop/.lmstudio/bin"
 # End of LM Studio CLI section
 
-# Toolchains (node/deno/bun/pnpm/rust) come from mise in zsh/70-mise.zsh — no PATH lines here.
-# volta (~/.volta), rustup's .cargo/env and deno's env used to be sourced from this file; all three
-# are gone or mise-managed, and the deno one was already erroring on every login shell.
+# Toolchains (node/bun/pnpm/rust) come from mise in zsh/70-mise.zsh — no PATH lines here.
+# volta (~/.volta) and rustup's .cargo/env used to be sourced from this file; both are gone or
+# mise-managed.

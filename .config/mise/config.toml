@@ -1,9 +1,14 @@
 [tools]
 node = "26"
-deno = "2"
 bun = "1"
 pnpm = "12"
 rust = { version = "stable", components = ["clippy", "rustfmt", "rust-src"] }
+"npm:vercel" = "latest"
+"npm:@vscode/vsce" = "latest"
+"npm:npm-check-updates" = "latest"
+"npm:agent-browser" = "latest"
+"npm:next-devtools-mcp" = "latest"
+"npm:chrome-devtools-mcp" = "1.9.0"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node"]

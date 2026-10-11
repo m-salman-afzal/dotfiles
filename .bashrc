@@ -225,4 +225,3 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 export PATH="$PATH:/home/satop/.lmstudio/bin"
 # End of LM Studio CLI section
 
-. "/home/satop/.deno/env"

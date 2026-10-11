@@ -92,12 +92,12 @@ an entry.
   `desktop-security-center`/`prompting-client`/`gnome-3-28-1804`). Don't re-attempt it.
 - Don't "clean up" `/etc/udev/rules.d/80-uinput.rules` (written by `initApt.sh`, not dpkg-owned): Handy's dictation
   typing goes through ydotool → `/dev/uinput` and breaks without it.
-- mise (runtime version manager, replaced nvm) owns node/deno/bun/pnpm/rust, pinned in the stowed
+- mise (runtime version manager, replaced nvm) owns node/bun/pnpm/rust, pinned in the stowed
   `.config/mise/config.toml`; `zsh/70-mise.zsh` is just `mise activate zsh`. `extrepo enable mise` drops in the vendor
   repo (`initApt.sh`, before the `packages.list` install), and the same script then installs mise explicitly and runs
   `mise install` — explicitly because a fresh bootstrap can run before the daily sync has added `mise`/`extrepo` to
   `packages.list`. Adding a tool here means `mise use -g <tool>`, not a new PATH export in `zsh/10-env.zsh` or
-  `.profile`; both used to carry hand-rolled volta/deno/cargo PATH lines and should not again. Note `rustup self
+  `.profile`; both used to carry hand-rolled volta/cargo PATH lines and should not again. Note `rustup self
   uninstall` rewrites `.profile`/`.bashrc` to strip its own PATH line — always pass `--no-modify-path`, or it edits
   this repo through the stow symlinks. `PNPM_HOME`
   is the one leftover — it is where `pnpm add -g` puts bins, not where pnpm itself lives.
