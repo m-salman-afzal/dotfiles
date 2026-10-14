@@ -165,7 +165,7 @@ style-panel=0
 unblur-in-overview=false
 
 [blur-my-shell/popup]
-blur=true
+blur=false
 brightness=0.59999999999999998
 corner-radius=18
 dialog-corner-radius=18
@@ -174,7 +174,7 @@ notification-corner-radius=18
 osd-corner-radius=28
 override-background=false
 pipeline='pipeline_default'
-quick-settings-corner-radius=20
+quick-settings-corner-radius=32
 sigma=32
 static-blur=true
 style-popup=2
