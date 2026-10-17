@@ -9,7 +9,13 @@ rust = { version = "stable", components = ["clippy", "rustfmt", "rust-src"] }
 "npm:agent-browser" = "latest"
 "npm:next-devtools-mcp" = "latest"
 "npm:chrome-devtools-mcp" = "1.9.0"
+"cargo:du-dust" = "latest"
+oh-my-posh = "latest"
+mprocs = "latest"
+gh = "latest"
+rclone = "latest"
+fastfetch = "latest"
 
 [settings]
-idiomatic_version_file_enable_tools = ["node"]
+idiomatic_version_file_enable_tools = ["node", "pnpm"]
 activate_shims = true

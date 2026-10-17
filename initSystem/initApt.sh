@@ -5,15 +5,6 @@ set -euo pipefail
 
 DOT=$HOME/dotfiles
 
-#* github cli (gh) — official steps from https://github.com/cli/cli/blob/trunk/docs/install_linux.md
-(type -p wget >/dev/null || (sudo apt update && sudo apt install wget -y)) \
-	&& sudo mkdir -p -m 755 /etc/apt/keyrings \
-	&& out=$(mktemp) && wget -nv -O$out https://cli.github.com/packages/githubcli-archive-keyring.gpg \
-	&& cat $out | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
-	&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
-	&& sudo mkdir -p -m 755 /etc/apt/sources.list.d \
-	&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-
 #* mise (runtime/tool version manager) — debian's extrepo ships the vendor repo + key, so nothing to fetch by hand
 sudo apt install -y extrepo
 sudo extrepo enable mise
@@ -57,6 +48,7 @@ sudo apt install -y mise
 mkdir -p "$HOME/.zsh/completions"
 mise completion zsh > "$HOME/.zsh/completions/_mise"
 mise install || true
+mise exec -- gh completion -s zsh > "$HOME/.zsh/completions/_gh" || true #* the gh deb shipped this; mise's doesn't
 
 echo "Done. Installed manually when needed (not part of this bootstrap):"
 echo "  nvidia driver (ubuntu-drivers install), docker, vscode,  lm-studio"

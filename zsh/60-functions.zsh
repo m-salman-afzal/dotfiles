@@ -59,13 +59,12 @@ cycle-sink() {
   notify-send -a "Audio Output" -i "$icon" -t 2000 "Audio Output" "$label"
 }
 
-#* System update: snap, flatpak and apt in parallel; each job's output is held back and printed whole,
-#  tagged with its source, when that job finishes, so the three never interleave
+#* System update: snap, flatpak and apt in parallel in an mprocs TUI (mise tool `mprocs`, binary `dekit`) — sidebar
+#  of jobs, select one for its live output; Ctrl+A focuses a pane to answer a prompt, q quits. mprocs runs whole
+#  under sudo because each pane is its own pty and sudo tickets are per-tty, so a `sudo -v` up front wouldn't carry.
 function uuac {
-  sudo -v || return  # one password prompt; the background jobs share this tty's ticket
-  local -a apt=(sudo apt -o Apt::Cmd::Disable-Script-Warning=1)  # apt warns about scripting whenever stdout is a pipe
-  print -r -- "$(sudo snap refresh 2>&1 | sed $'s/^/\e[33m[snap]\e[0m /')" &
-  print -r -- "$({ sudo flatpak update -y && sudo flatpak uninstall --unused -y; } 2>&1 | sed $'s/^/\e[34m[flatpak]\e[0m /')" &
-  print -r -- "$({ $apt update -y && $apt upgrade --with-new-pkgs -y && $apt autoremove --purge -y && $apt clean all -y; } 2>&1 | sed $'s/^/\e[32m[apt]\e[0m /')" &
-  wait
+  sudo "$(mise which dekit)" mprocs --names snap,flatpak,apt \
+    'snap refresh' \
+    'flatpak update -y && flatpak uninstall --unused -y' \
+    'apt update && apt upgrade --with-new-pkgs -y && apt autoremove --purge -y && apt clean'
 }

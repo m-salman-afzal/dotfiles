@@ -1,6 +1,9 @@
 #* Paths
 export PATH=$PATH:$HOME/.local/bin
 export PATH="/var/lib/flatpak/exports/bin:$PATH"
+#* mise shims here, not in 70-mise.zsh: 20-plugins.zsh runs oh-my-posh (a mise tool) before the full
+#* `mise activate`, which then puts the real install dirs ahead of these.
+eval "$(mise activate zsh --shims)"
 
 #* Editor — sudo drops these, so visudo/sudoedit rely on the `editor` alternative instead (set in initApt.sh)
 export EDITOR='nvim'

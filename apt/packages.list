@@ -4,10 +4,8 @@ curl
 dconf-cli
 ddcutil
 extrepo
-fastfetch
 flatpak
 gettext
-gh
 ghostty
 git
 gnome-shell-extensions
@@ -22,10 +20,10 @@ mise
 openlogi
 pkg-config
 ppa-purge
-rclone
 smem
 ubuntu-restricted-addons
 unzip
 whois
+wl-clipboard
 ydotool
 zip

@@ -101,6 +101,12 @@ application-list=['com.slack.Slack.desktop:3', 'app.zen_browser.zen.desktop:3', 
 [battery-power-mode-indicator]
 balanced-enabled=true
 
+[bettertrayicons]
+hide-background-apps=true
+keep-popup-after-click=true
+tray-order=0
+visible-icon-limit=2
+
 [blur-my-shell]
 debug=false
 hacks-level=0
@@ -374,7 +380,7 @@ leftbox-size=0
 multi-monitors=false
 overview-click-to-exit=false
 panel-anchors='{"AUO-0x00000000":"MIDDLE","VSC-XG6250240723":"MIDDLE"}'
-panel-element-positions='{"AUO-0x00000000":[{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"centerMonitor"},{"element":"desktopButton","visible":false,"position":"centerMonitor"},{"element":"taskbar","visible":false,"position":"stackedTL"},{"element":"dateMenu","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"}],"VSC-XG6250240723":[{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"centerMonitor"},{"element":"desktopButton","visible":false,"position":"centerMonitor"},{"element":"taskbar","visible":false,"position":"stackedTL"},{"element":"dateMenu","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"}]}'
+panel-element-positions='{"AUO-0x00000000":[{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"centerBox","visible":false,"position":"centerMonitor"},{"element":"desktopButton","visible":false,"position":"centerMonitor"},{"element":"taskbar","visible":false,"position":"stackedTL"},{"element":"dateMenu","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"}],"VSC-XG6250240723":[{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"centerBox","visible":false,"position":"centerMonitor"},{"element":"desktopButton","visible":false,"position":"centerMonitor"},{"element":"taskbar","visible":false,"position":"stackedTL"},{"element":"dateMenu","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"}]}'
 panel-element-positions-monitors-sync=true
 panel-lengths='{"AUO-0x00000000":100}'
 panel-positions='{"AUO-0x00000000":"TOP","VSC-XG6250240723":"TOP"}'
@@ -951,7 +957,7 @@ window-buttons-theme='auto'
 name=''
 
 [vertical-workspaces]
-aaa-loading-profile=false
+aaa-loading-profile=true
 activate-settings-window=2
 always-activate-selected-window=false
 animation-speed-factor=1

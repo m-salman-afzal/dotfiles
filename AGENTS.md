@@ -1,8 +1,4 @@
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-## What this is
+# What this is
 
 Personal dotfiles for an Ubuntu/GNOME machine, symlinked into `$HOME` with GNU Stow. There is no build, lint, or test
 suite — verification is `zsh -n <file>` / `bash -n <file>` for syntax, then opening a new shell.
@@ -92,8 +88,12 @@ an entry.
   `desktop-security-center`/`prompting-client`/`gnome-3-28-1804`). Don't re-attempt it.
 - Don't "clean up" `/etc/udev/rules.d/80-uinput.rules` (written by `initApt.sh`, not dpkg-owned): Handy's dictation
   typing goes through ydotool → `/dev/uinput` and breaks without it.
-- mise (runtime version manager, replaced nvm) owns node/bun/pnpm/rust, pinned in the stowed
-  `.config/mise/config.toml`; `zsh/70-mise.zsh` is just `mise activate zsh`. `extrepo enable mise` drops in the vendor
+- mise (runtime version manager, replaced nvm) owns node/bun/pnpm/rust plus the global CLIs
+  (`npm:` tools, `cargo:du-dust`, oh-my-posh, gh, rclone, fastfetch, mprocs), pinned in the stowed `.config/mise/config.toml`; `zsh/70-mise.zsh` is
+  just `mise activate zsh`. The shims dir goes on PATH earlier, in `zsh/10-env.zsh`, because `20-plugins.zsh` runs
+  `oh-my-posh init` first. That init bakes the versioned binary path (`installs/oh-my-posh/<ver>/`) into the shell, so
+  a shell open across an oh-my-posh upgrade loses its prompt once mise prunes the old version (24 h,
+  `upgrade.prune_after`) — `exec zsh` fixes it. `cargo:` tools compile from source (no cargo-binstall). `extrepo enable mise` drops in the vendor
   repo (`initApt.sh`, before the `packages.list` install), and the same script then installs mise explicitly and runs
   `mise install` — explicitly because a fresh bootstrap can run before the daily sync has added `mise`/`extrepo` to
   `packages.list`. Adding a tool here means `mise use -g <tool>`, not a new PATH export in `zsh/10-env.zsh` or
@@ -103,7 +103,7 @@ an entry.
   is the one leftover — it is where `pnpm add -g` puts bins, not where pnpm itself lives.
 - mise's `rust` is a front-end to rustup, not a replacement: it installs rustup if absent, leaves toolchains in
   `~/.rustup`, and reuses `~/.cargo` — so `mise activate` puts `~/.cargo/bin` on PATH itself and `cargo install`ed
-  binaries (dust, oha, rustlings) are found with no `mise reshim`. That is why `zsh/10-env.zsh` needs no cargo lines
+  binaries (rustlings) are found with no `mise reshim`. That is why `zsh/10-env.zsh` needs no cargo lines
   at all; `. "$HOME/.cargo/env"` and the `~/.cargo/bin` export were both removed as redundant. Components are listed
   explicitly in `config.toml` rather than trusting rustup's default profile. `rustup` still works directly for
   one-offs (`rustup toolchain list`), but the declared version belongs in `config.toml` and upgrades ride `mise up`. `mise self-update` is refused
