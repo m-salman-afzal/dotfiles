@@ -110,27 +110,25 @@ visible-icon-limit=2
 [blur-my-shell]
 debug=false
 hacks-level=0
-pipelines={'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_03858154645042'>, 'params': <@a{sv} {}>}>, <{'type': <'pixelize'>, 'id': <'effect_18526018635311'>, 'params': <@a{sv} {}>}>, <{'type': <'corner'>, 'id': <'effect_95491176377335'>, 'params': <{'radius': <16>}>}>]>}}
+pipelines={'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'dual_kawase_blur'>, 'id': <'effect_03858154645042'>, 'params': <{'unscaled_radius': <30>, 'brightness': <0.59999999999999998>}>}>, <{'type': <'pixelize'>, 'id': <'effect_18526018635311'>, 'params': <@a{sv} {}>}>]>}, 'pipeline_migrated_dynamic_blur': {'name': <'Migrated dynamic blur'>, 'effects': <[<{'type': <'dual_kawase_blur'>, 'id': <'effect_migrated_dynamic_blur'>, 'params': <{'unscaled_radius': <40>, 'brightness': <0.59999999999999998>}>}>]>}}
 rounded-blur-found=false
-settings-version=2
+settings-version=7
 
 [blur-my-shell/appfolder]
 blur=true
-sigma=20
+pipeline='pipeline_migrated_dynamic_blur'
 style-dialogs=3
 
 [blur-my-shell/applications]
 blacklist=['Plank', 'com.desktop.ding', 'Conky', 'firefox', 'google-chrome', 'app.zen_browser.zen', 'app.zen_browser.zen', 'app.zen_browser.zen']
 blur=true
 blur-on-overview=false
-brightness=0.54000000000000004
 corner-radius=16
 corner-when-maximized=false
 dynamic-opacity=false
 enable-all=false
 opacity=200
 pipeline='pipeline_default'
-sigma=60
 static-blur=true
 whitelist=['org.gnome.Shell.Extensions', 'com.mattjakeman.ExtensionManager', 'org.gnome.Ptyxis', 'com.getmailspring.Mailspring', 'org.gnome.Settings', 'org.gnome.tweaks', 'org.gnome.Nautilus', 'org.gnome.TextEditor', 'io.missioncenter.MissionCenter', 'net.nokyan.Resources', 'de.haeckerfelix.Fragments', 'com.mitchellh.ghostty', 'org.gnome.Software', 'io.github.swordpuffin.rewaita', 'com.github.tchx84.Flatseal', 'com.github.fabito02.chromaleon']
 
@@ -160,19 +158,16 @@ style-components=2
 
 [blur-my-shell/panel]
 blur=false
-brightness=0.46000000000000002
 force-light-text=true
 override-background=false
 override-background-dynamically=true
 pipeline='pipeline_default'
-sigma=21
 static-blur=true
 style-panel=0
 unblur-in-overview=false
 
 [blur-my-shell/popup]
 blur=false
-brightness=0.59999999999999998
 corner-radius=18
 dialog-corner-radius=18
 menu-corner-radius=12
@@ -181,7 +176,6 @@ osd-corner-radius=28
 override-background=false
 pipeline='pipeline_default'
 quick-settings-corner-radius=32
-sigma=32
 static-blur=true
 style-popup=2
 
@@ -191,7 +185,6 @@ pipeline='pipeline_default'
 
 [blur-my-shell/window-list]
 blur=false
-sigma=40
 
 [burn-my-windows]
 active-profile='/home/satop/.config/burn-my-windows/profiles/1785881332602779.conf'
@@ -496,12 +489,15 @@ window-maximized=true
 window-maximized=true
 
 [hide-system-icons]
+hide-backlight=false
 hide-bluetooth=true
+hide-brightness=false
 hide-microphone=false
 hide-network=false
 hide-night-light=true
 hide-power=false
 hide-power-profiles=true
+hide-thunderbolt=false
 hide-volume=false
 
 [just-perfection]
