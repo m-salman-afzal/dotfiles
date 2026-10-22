@@ -1,3 +1,7 @@
+-- Shared by terminal Nvim and VS Code (vscode-neovim). The entry point: editor-specific
+-- config lives in lua/host/terminal.lua and lua/host/vscode.lua, required at the bottom.
+-- (Not lua/vscode.lua: that would shadow vscode-neovim's own require('vscode') module.)
+
 --* Options
 vim.g.mapleader = ' ' -- must precede any <leader> mapping; leader is resolved at map time
 vim.opt.clipboard = 'unnamedplus'
@@ -16,27 +20,6 @@ vim.opt.virtualedit = 'onemore' -- let the cursor sit one past EOL, so backward 
 -- Sole deviation from the default is c:ver25 — command-line as a beam, not a block.
 vim.opt.guicursor = 'n-v-sm:block,i-ci-ve-c:ver25,r-cr-o:hor20'
 
---* Terminal-only UI (vscode-neovim draws its own)
-if not vim.g.vscode then
-  vim.opt.number = true
-  vim.opt.relativenumber = true
-  vim.opt.signcolumn = 'yes'
-  vim.opt.termguicolors = true
-  vim.opt.expandtab = true
-  vim.opt.shiftwidth = 2
-  vim.opt.tabstop = 2
-end
-
---* Clipboard. vscode-neovim ships a provider that routes through VS Code's own
--- vscode.env.clipboard (runtime/vscode/clipboard.lua, loaded by `runtime! vscode/**`
--- from the --cmd-sourced vscode-neovim.vim, so it lands before this file) but only
--- auto-enables it on WSL. Opting in is what makes unnamedplus usable here: the default
--- provider is wl-copy, and GNOME exposes no wlr/ext-data-control, so wl-copy has to map
--- a toplevel and take keyboard focus to call wl_data_device.set_selection — that focus
--- bounce is the Peacock titlebar flash on every dd/yy/cc. Terminal nvim still gets
--- wl-copy, and still flashes; nothing to opt into there.
-vim.g.clipboard = vim.g.vscode_clipboard
-
 --* Keymaps
 -- ponytail: nothing on a bare key — personal maps go behind <leader> so stock motions
 -- keep working on any box. "_ is the black hole register: delete without touching any
@@ -45,3 +28,6 @@ vim.g.clipboard = vim.g.vscode_clipboard
 vim.keymap.set({ 'n', 'x' }, '<leader>d', '"_d', { desc = 'delete, no yank' })
 vim.keymap.set({ 'n', 'x' }, '<leader>x', '"_x', { desc = 'delete char, no yank' })
 vim.keymap.set({ 'n', 'x' }, '<leader>c', '"_c', { desc = 'change, no yank' })
+
+--* Editor-specific config, after the shared part so it sees mapleader and the options
+require(vim.g.vscode and 'host.vscode' or 'host.terminal')
