@@ -449,6 +449,7 @@ always-show-pill=true
 border-radius=17
 dock-position=0
 edge-margin=8
+enable-blur-pill=false
 enable-shadow=false
 enable-transparency=false
 fallback-art-path='/home/satop/Pictures/me/Walima-20260519T133419Z-3-001/Walima/Hanan/HKP08603.JPG'
