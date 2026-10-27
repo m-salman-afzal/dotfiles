@@ -66,5 +66,5 @@ function uuac {
   sudo "$(mise which dekit)" mprocs --names snap,flatpak,apt \
     'snap refresh' \
     'flatpak update -y && flatpak uninstall --unused -y' \
-    'apt update && apt upgrade --with-new-pkgs -y && apt autoremove --purge -y && apt clean'
+    'apt update && apt upgrade --with-new-pkgs -y && apt autoremove --purge -y && apt clean all -y'
 }

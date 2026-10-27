@@ -64,11 +64,10 @@ an entry.
   exhausted by VS Code, bundlers and other file watchers, which then die with
   `ENOSPC: System limit for number of file watchers reached`. Already applied on this machine; a fresh PC gets it from
   the bootstrap. Add future `/etc` config the same way, not as a stow package.
-- Neovim is a flatpak (`io.neovim.nvim`). `initFlatpak.sh` writes `~/.local/bin/nvim` as a wrapper (not a symlink) that
-  launches it via `flatpak run --command=/usr/bin/env … nvim-wrapper`, setting `XDG_{CONFIG,DATA,STATE,CACHE}_HOME` to
-  the host dirs so it uses the stowed `.config/nvim` and keeps plugins/state in `~/.local`.
-  `flatpak override --env=XDG_*` can NOT do this — flatpak re-sets those to the per-app `~/.var/app` dirs after applying
-  overrides (1.16, verified) and silently ignores the override; don't "simplify" the wrapper back into one.
+- Neovim comes from mise as `aqua:neovim/neovim` — the official `nvim-linux-x86_64.tar.gz` release, unpacked, no
+  sandbox. The backend is named explicitly because plain `neovim` resolves to a third-party vfox plugin. It replaced
+  the `io.neovim.nvim` flatpak, whose sandbox hid host tools (mise's node, `/usr/bin`) and needed an XDG-redirecting
+  `~/.local/bin/nvim` wrapper; launch went 0.10 s → 0.01 s. Don't go back to the flatpak.
 - Default editor / terminal live in three places, one per mechanism: `EDITOR`/`VISUAL=nvim` in `zsh/10-env.zsh` (sudo
   strips them, hence the next one); `update-alternatives --set editor /usr/bin/vim.basic` in `initApt.sh` for
   visudo/sudoedit; `.config/xdg-terminals.list` (stowed) naming `ghostty_ghostty.desktop` for the terminal. GNOME's
@@ -89,7 +88,7 @@ an entry.
 - Don't "clean up" `/etc/udev/rules.d/80-uinput.rules` (written by `initApt.sh`, not dpkg-owned): Handy's dictation
   typing goes through ydotool → `/dev/uinput` and breaks without it.
 - mise (runtime version manager, replaced nvm) owns node/bun/pnpm/rust plus the global CLIs
-  (`npm:` tools, `cargo:du-dust`, oh-my-posh, gh, rclone, fastfetch, mprocs), pinned in the stowed `.config/mise/config.toml`; `zsh/70-mise.zsh` is
+  (`npm:` tools, `cargo:du-dust`, oh-my-posh, gh, rclone, fastfetch, mprocs, neovim), pinned in the stowed `.config/mise/config.toml`; `zsh/70-mise.zsh` is
   just `mise activate zsh`. The shims dir goes on PATH earlier, in `zsh/10-env.zsh`, because `20-plugins.zsh` runs
   `oh-my-posh init` first. That init bakes the versioned binary path (`installs/oh-my-posh/<ver>/`) into the shell, so
   a shell open across an oh-my-posh upgrade loses its prompt once mise prunes the old version (24 h,
