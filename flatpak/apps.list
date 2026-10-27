@@ -1,5 +1,4 @@
 app.zen_browser.zen
-com.bitwarden.desktop
 com.getmailspring.Mailspring
 com.github.tchx84.Flatseal
 com.google.Chrome
@@ -31,3 +30,4 @@ org.gnome.seahorse.Application
 org.mozilla.firefox
 org.pulseaudio.pavucontrol
 org.videolan.VLC
+us.zoom.Zoom
