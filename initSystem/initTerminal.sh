@@ -23,7 +23,7 @@ echo
 #* -n is load-bearing under `curl | bash`: without it ssh slurps stdin, i.e. the rest of this script.
 #* no pipe either: `ssh -T git@github.com` exits 1 even on success, and pipefail would hide grep's match.
 until [[ "$(ssh -n -o StrictHostKeyChecking=accept-new -T git@github.com 2>&1 || true)" == *"successfully authenticated"* ]]; do
-  read -rp "GitHub hasn't accepted the key yet — add it, then press Enter to retry... " </dev/tty   # works under curl|bash too
+	read -rp "GitHub hasn't accepted the key yet — add it, then press Enter to retry... " < /dev/tty # works under curl|bash too
 done
 echo "GitHub auth OK."
 
@@ -32,11 +32,10 @@ sudo apt update && sudo apt install -y git stow zsh
 
 #* 4. dotfiles (ssh remote so pushes work later)
 [[ -d ~/dotfiles ]] || git clone git@github.com:m-salman-afzal/dotfiles.git ~/dotfiles
-git -C ~/dotfiles config core.hooksPath .githooks   # pre-push touches the daily-sync stamp
+git -C ~/dotfiles config core.hooksPath .githooks # pre-push touches the daily-sync stamp
 
-#* 5. stow — nuke the distro defaults that block the symlinks, then link
-rm -f ~/.bashrc ~/.profile
-stow -d "$HOME/dotfiles" -t "$HOME" .   # ignores per .stow-local-ignore
+#* 5. stow — .profile/.bashrc aren't in the repo, so the distro defaults stay
+stow -d "$HOME/dotfiles" -t "$HOME" . # ignores per .stow-local-ignore
 
 #* 6. zsh as default shell (asks for your password)
 chsh -s "$(command -v zsh)"

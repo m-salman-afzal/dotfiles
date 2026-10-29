@@ -8,14 +8,19 @@ rust = { version = "stable", components = ["clippy", "rustfmt", "rust-src"] }
 "npm:npm-check-updates" = "latest"
 "npm:agent-browser" = "latest"
 "npm:next-devtools-mcp" = "latest"
-"npm:chrome-devtools-mcp" = "1.9.0"
-"cargo:du-dust" = "latest"
+"npm:chrome-devtools-mcp" = "1.11.0"
 oh-my-posh = "latest"
 mprocs = "latest"
 gh = "latest"
 rclone = "latest"
 fastfetch = "latest"
 "aqua:neovim/neovim" = "latest"
+dust = "latest"
+usage = { version = "latest", workflow = "publish-cli.yml" }
+btop = "latest"
+betterleaks = "latest"
+shellcheck = "latest"
+shfmt = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "pnpm"]

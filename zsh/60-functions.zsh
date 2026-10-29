@@ -1,5 +1,5 @@
 killPort() {
-	sudo kill -9 $(lsof -t -i :"$1")
+  sudo kill -9 $(lsof -t -i :"$1")
 }
 
 # Run a command in a memory-capped cgroup. next dev peaks ~8G warm / >11G on a
@@ -24,7 +24,7 @@ cycle-sink() {
   emulate -L zsh
   local want label icon card profile sink i
   if pactl list short sinks | grep -q Headphones; then
-    want=Speaker  label="Speakers"   icon=audio-speakers-symbolic
+    want=Speaker label="Speakers" icon=audio-speakers-symbolic
   else
     want=Headphones label="Headphones" icon=audio-headphones-symbolic
   fi

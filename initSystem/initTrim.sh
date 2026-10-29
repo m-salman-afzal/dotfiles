@@ -15,7 +15,7 @@ sudo rm -f /var/crash/*
 
 #* kdump — a spare kernel kept resident to dump RAM after a kernel panic: reserves 512 MB (crashkernel=) for a file
 #* nobody reads on a laptop. Purging removes /etc/default/grub.d/kdump-tools.cfg; update-grub drops the param.
-if dpkg -s kdump-tools &>/dev/null; then
+if dpkg -s kdump-tools &> /dev/null; then
 	sudo apt purge -y kdump-tools
 	sudo apt autoremove --purge -y
 	sudo update-grub
@@ -23,7 +23,7 @@ fi
 
 #* docker — hand-installed (apt/ignore.list), so only if present. docker.socket stays: the daemon starts on the first
 #* `docker` command instead of at boot (0.8 s boot, ~240 MB idle for docker + containerd).
-if command -v dockerd &>/dev/null; then
+if command -v dockerd &> /dev/null; then
 	sudo systemctl disable docker.service
 	sudo systemctl enable docker.socket
 fi
@@ -36,15 +36,14 @@ sudo systemctl disable --now ModemManager.service cups.service cups.socket cups.
 #* upsell). No ssh logins here and Pro isn't attached, so nothing reads either. Attach Pro one day: re-enable ua-timer.
 sudo systemctl disable --now motd-news.timer ua-timer.timer
 
-#* gnome-software — App Center's background half: ~270 MB resident + packagekitd, only to poll flatpak updates.
-#* The stowed .config/autostart/org.gnome.Software.desktop (Hidden=true) kills the login autostart; this stops the
-#* overview search from D-Bus-activating it straight back. Updates: open it, or `flatpak update`.
-if command -v gnome-software &>/dev/null; then
+#* gnome-software — its overview search provider D-Bus-activates the whole daemon (~270 MB resident + packagekitd)
+#* on every search. Updates: open it, or `flatpak update`.
+if command -v gnome-software &> /dev/null; then
 	cur=$(gsettings get org.gnome.desktop.search-providers disabled)
 	case $cur in
-		*org.gnome.Software.desktop*) ;;
-		'@as []') gsettings set org.gnome.desktop.search-providers disabled "['org.gnome.Software.desktop']" ;;
-		*) gsettings set org.gnome.desktop.search-providers disabled "${cur%]}, 'org.gnome.Software.desktop']" ;;
+	*org.gnome.Software.desktop*) ;;
+	'@as []') gsettings set org.gnome.desktop.search-providers disabled "['org.gnome.Software.desktop']" ;;
+	*) gsettings set org.gnome.desktop.search-providers disabled "${cur%]}, 'org.gnome.Software.desktop']" ;;
 	esac
 fi
 
@@ -53,10 +52,12 @@ fi
 #* stray `apt install` brings them back, then purge any that are here. Recommends only: pinning a hard Depends
 #* (nautilus, yelp) would block ubuntu-desktop itself. The Flatpaks themselves come from flatpak/apps.list.
 printf 'Package: %s\nPin: release a=*\nPin-Priority: -1\n' "$(tr '\n' ' ' < "$HOME/dotfiles/apt/blocked.list")" \
-	| sudo tee /etc/apt/preferences.d/blocked-debs >/dev/null
+	| sudo tee /etc/apt/preferences.d/blocked-debs > /dev/null
 #* `|| true`: dpkg-query exits 1 for names it has never seen (purged = forgotten), and pipefail would abort on that
-installed=$(dpkg-query -W -f='${db:Status-Abbrev}${Package}\n' $(<"$HOME/dotfiles/apt/blocked.list") 2>/dev/null | sed -n 's/^ii //p' || true)
+# shellcheck disable=SC2046 # one package name per word is the point
+installed=$(dpkg-query -W -f='${db:Status-Abbrev}${Package}\n' $(< "$HOME/dotfiles/apt/blocked.list") 2> /dev/null | sed -n 's/^ii //p' || true)
 if [[ -n $installed ]]; then
+	# shellcheck disable=SC2086 # same
 	sudo apt purge -y $installed
 	sudo apt autoremove --purge -y
 fi

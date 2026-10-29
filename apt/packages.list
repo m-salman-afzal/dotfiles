@@ -1,5 +1,5 @@
 build-essential
-claude-desktop
+cava
 curl
 dconf-cli
 ddcutil
@@ -11,10 +11,8 @@ git
 gnome-shell-extensions
 gnome-software-plugin-flatpak
 gnome-tweaks
-gobject-introspection
 htop
 libavcodec-extra
-libglib2.0-dev
 libinput-tools
 mise
 openlogi

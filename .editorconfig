@@ -1,0 +1,15 @@
+root = true
+
+#* read by shfmt; matches the scripts' existing style (`| cmd` continuation lines, `> file`)
+[{**.sh,**.zsh,.zshrc,.githooks/*}]
+binary_next_line = true
+space_redirects = true
+
+[{**.sh,.githooks/*}]
+indent_style = tab
+
+[{**.zsh,.zshrc}]
+shell_variant = zsh
+indent_style = space
+indent_size = 2
+switch_case_indent = true

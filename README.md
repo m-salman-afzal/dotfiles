@@ -17,30 +17,28 @@ curl -fsSL https://raw.githubusercontent.com/m-salman-afzal/dotfiles/main/initSy
 What it does, in order:
 
 1. **initTerminal.sh** — generates the two SSH keys (auth + commit signing), prints them and waits until they're added
-   to GitHub, clones this repo, stows the symlinks (wiping the distro `.bashrc`/`.profile` first), installs zsh and
+   to GitHub, clones this repo, stows the symlinks (the distro `.bashrc`/`.profile` stay as they are), installs zsh and
    makes it the default shell.
-2. **initApt.sh** — sets up the third-party apt repos (github-cli, mise via `extrepo` — keys fetched fresh
-   from the vendors), then installs every package in `apt/packages.list`, raises the inotify watch/instance limits in
+2. **initApt.sh** — sets up the third-party apt sources (mise via `extrepo`, the ghostty PPA — keys fetched
+   fresh from the vendors) and installs openlogi's GitHub-release .deb, then installs every package in
+   `apt/packages.list`, raises the inotify watch/instance limits in
    `/etc/sysctl.d/99-inotify.conf` (file watchers hit `ENOSPC` on the defaults), makes vim the system `editor`
    alternative, and installs mise plus every tool pinned in `.config/mise/config.toml` (node, bun, pnpm, rust, plus CLIs like oh-my-posh and dust) along
-   with its zsh completions. Installed manually when needed: nvidia driver, docker, vscode, steam, protonvpn,
-   lm-studio.
+   with its zsh completions. Installed manually when needed: nvidia driver, docker, vscode, handy, claude-desktop.
 3. **initGnomeExtension.sh** — installs every extension in `gnome/extensions.list` from extensions.gnome.org, restores
    their settings from `gnome/extensions.dconf`, enables them all. Log out/in to load them.
 4. **initFlatpak.sh** — installs flatpak + flathub and every app in `flatpak/apps.list` (runtimes come along as
    dependencies).
 5. **initSnap.sh** — installs every snap in `snap/apps.list` (bases and content snaps come along as dependencies).
-   Includes ghostty, the default terminal — `.config/xdg-terminals.list` points Ctrl+Alt+T at it.
 6. **initTrim.sh** — turns off stock Ubuntu pieces that only cost resources on a laptop (measured on the Victus,
    2026-09-20). apport + whoopsie: crash reporter, never prevents a crash, autoreport sat failed 30 s at boot, whoopsie
    held 100 MB, and its retracer has OOM-stormed the desktop. kdump-tools: 512 MB of RAM reserved for a kernel-panic
    dump nobody reads. docker.service at boot: socket activation stays, the daemon starts on first use (0.8 s boot,
    240 MB idle). ModemManager + cups/cups-browsed: no modem, no printer. motd-news + ua-timer: Canonical's login-banner
-   news and Ubuntu Pro nags, with no ssh logins and no Pro attached. gnome-software's background half: 270 MB +
-   packagekitd just to poll flatpak updates — the stowed `.config/autostart/org.gnome.Software.desktop` hides the
-   autostart, the script drops its overview search provider. Debs in `apt/blocked.list` (stock apps that Flatpaks
+   news and Ubuntu Pro nags, with no ssh logins and no Pro attached. gnome-software's overview search provider: it
+   D-Bus-activates the whole daemon (270 MB + packagekitd) on every search, so the script drops it. Debs in `apt/blocked.list` (stock apps that Flatpaks
    replace) are pinned to -1, so upgrades can't reinstall them, and are purged. Idempotent. Deliberately not in here: snap, GRUB_TIMEOUT,
    GNOME extensions.
 
-The lists and settings dumps are refreshed automatically by the daily sync in `zsh/80-sync.zsh`, so they always reflect
+The lists and settings dumps are refreshed automatically by the daily sync in `zsh/80-sync-dotfiles.zsh`, so they always reflect
 the current machine.

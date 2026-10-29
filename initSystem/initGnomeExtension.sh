@@ -7,15 +7,18 @@ DOT=$HOME/dotfiles
 EXTDIR=$HOME/.local/share/gnome-shell/extensions
 VER=$(gnome-shell --version | grep -oE '[0-9]+' | head -1)
 
-command -v jq >/dev/null || sudo apt install -y jq   # fresh ubuntu has no jq
+command -v jq > /dev/null || sudo apt install -y jq # fresh ubuntu has no jq
 
 while read -r uuid; do
-  [[ -d $EXTDIR/$uuid ]] && continue   # already installed
-  url=$(curl -fsSL "https://extensions.gnome.org/extension-info/?uuid=$uuid&shell_version=$VER" | jq -r '.download_url // empty') || url=""
-  [[ -z $url ]] && { echo "SKIP $uuid (not on extensions.gnome.org for shell $VER)"; continue; }
-  curl -fsSL "https://extensions.gnome.org$url" -o /tmp/ext.zip
-  gnome-extensions install /tmp/ext.zip && echo "installed $uuid"
-  rm -f /tmp/ext.zip
+	[[ -d $EXTDIR/$uuid ]] && continue # already installed
+	url=$(curl -fsSL "https://extensions.gnome.org/extension-info/?uuid=$uuid&shell_version=$VER" | jq -r '.download_url // empty') || url=""
+	[[ -z $url ]] && {
+		echo "SKIP $uuid (not on extensions.gnome.org for shell $VER)"
+		continue
+	}
+	curl -fsSL "https://extensions.gnome.org$url" -o /tmp/ext.zip
+	gnome-extensions install /tmp/ext.zip && echo "installed $uuid"
+	rm -f /tmp/ext.zip
 done < "$DOT/gnome/extensions.list"
 
 #* settings

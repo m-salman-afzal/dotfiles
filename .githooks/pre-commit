@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#* refuse commits that stage a secret (the daily sync's `add -A` included); its `commit && push` then asks again next shell
+#* shims dir first: GUI git clients don't get the PATH `mise activate` sets
+PATH="$HOME/.local/share/mise/shims:$PATH"
+if ! command -v betterleaks > /dev/null; then
+	echo "pre-commit: betterleaks not installed yet (mise install), skipping secret scan" >&2
+	exit 0
+fi
+exec betterleaks git --pre-commit --staged --redact --no-banner --log-level warn -v .

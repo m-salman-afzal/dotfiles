@@ -3,8 +3,8 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 #* Download zinit if not already exists
 if [ ! -d "$ZINIT_HOME" ]; then
-    mkdir -p "$(dirname $ZINIT_HOME)"
-    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+  mkdir -p "$(dirname $ZINIT_HOME)"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
 #* Source and load zinit
@@ -25,7 +25,7 @@ ZVM_INIT_MODE=sourcing
 #* wl-copy/wl-paste for both.
 #* ponytail: no tmux passthrough wrap, tmux isn't installed
 ZVM_SYSTEM_CLIPBOARD_ENABLED=true
-function _zvm_osc52_copy() { printf '\e]52;c;%s\a' "$(base64 -w0)" > /dev/tty }
+function _zvm_osc52_copy() { printf '\e]52;c;%s\a' "$(base64 -w0)" > /dev/tty; }
 ZVM_CLIPBOARD_COPY_CMD=_zvm_osc52_copy ZVM_CLIPBOARD_PASTE_CMD=:
 #* nvim's Visual grey instead of the plugin's red for v-mode and pasted text. region:none
 #* drops zle's reverse-video region: dd/yy/cc pass through visual-line mode and flashed white

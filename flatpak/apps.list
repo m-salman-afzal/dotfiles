@@ -14,14 +14,13 @@ io.github.flattool.Warehouse
 io.github.maniacx.BudsLink
 io.github.plrigaux.sysd-manager
 net.nokyan.Resources
-org.gnome.Boxes
 org.gnome.Calculator
 org.gnome.Calendar
 org.gnome.Decibels
 org.gnome.Epiphany
-org.gnome.Evince
 org.gnome.Logs
 org.gnome.Loupe
+org.gnome.Papers
 org.gnome.Showtime
 org.gnome.Snapshot
 org.gnome.clocks

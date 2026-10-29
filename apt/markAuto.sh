@@ -11,13 +11,15 @@ demote=$(mktemp)
 
 #* candidates: manual, not a keeper, and >=1 installed reverse dependency
 apt-mark showmanual | LC_ALL=C sort | LC_ALL=C comm -23 - "$DOT/apt/packages.list" \
-  | xargs apt-cache rdepends --installed --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances 2>/dev/null \
-  | awk '/^[^ ]/ && $0 != "Reverse Depends:" { pkg=$0; next }
+	| xargs apt-cache rdepends --installed --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances 2> /dev/null \
+	| awk '/^[^ ]/ && $0 != "Reverse Depends:" { pkg=$0; next }
          /^ /   && pkg != ""                { print pkg; pkg="" }' \
-  | LC_ALL=C sort -u > "$demote"
+	| LC_ALL=C sort -u > "$demote"
 
 if [[ ! -s $demote ]]; then
-  echo "nothing to demote"; rm -f "$demote"; exit 0
+	echo "nothing to demote"
+	rm -f "$demote"
+	exit 0
 fi
 
 xargs sudo apt-mark auto < "$demote" > /dev/null
@@ -26,10 +28,10 @@ rm -f "$demote"
 
 #* safety net: re-promote anything the demotion made removable
 for _ in 1 2 3; do
-  mapfile -t doomed < <(apt-get autoremove --simulate 2>/dev/null | awk '/^Remv/ {print $2}')
-  ((${#doomed[@]})) || break
-  echo "re-promoting ${#doomed[@]} packages autoremove would take: ${doomed[*]}"
-  sudo apt-mark manual "${doomed[@]}" > /dev/null
+	mapfile -t doomed < <(apt-get autoremove --simulate 2> /dev/null | awk '/^Remv/ {print $2}')
+	((${#doomed[@]})) || break
+	echo "re-promoting ${#doomed[@]} packages autoremove would take: ${doomed[*]}"
+	sudo apt-mark manual "${doomed[@]}" > /dev/null
 done
 
 #* regenerate ignore.list from the clean manual set (packages.list is untouched)

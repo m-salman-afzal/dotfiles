@@ -98,15 +98,6 @@ visualization-mode='led-bars'
 [auto-move-windows]
 application-list=['com.slack.Slack.desktop:3', 'app.zen_browser.zen.desktop:3', 'com.google.Chrome.desktop:2', 'com.mitchellh.ghostty.desktop:1', 'com.microsoft.VSCode.desktop:2', 'com.valvesoftware.Steam.desktop:4']
 
-[battery-power-mode-indicator]
-balanced-enabled=true
-
-[bettertrayicons]
-hide-background-apps=true
-keep-popup-after-click=true
-tray-order=0
-visible-icon-limit=2
-
 [blur-my-shell]
 debug=false
 hacks-level=0
@@ -185,21 +176,13 @@ pipeline='pipeline_default'
 
 [blur-my-shell/window-list]
 blur=false
+pipeline='pipeline_default'
 
 [burn-my-windows]
 active-profile='/home/satop/.config/burn-my-windows/profiles/1785881332602779.conf'
 last-extension-version=48
 last-prefs-version=48
 prefs-open-count=3
-
-[caffeine]
-cli-toggle=false
-duration-timer=2
-duration-timer-list=[900, 1800, 3600]
-enable-mpris=true
-indicator-position-max=3
-restore-state=true
-show-indicator='only-active'
 
 [chromaleon]
 accent-color='#3aa16e'
@@ -219,11 +202,6 @@ tint-panel=true
 tint-shell=true
 tinting-strength=1
 user-themes-warning=false
-
-[clipboard-history]
-display-mode=0
-strip-text=true
-window-width-percentage=18
 
 [clipboard-indicator]
 blink-icon-on-copy=true
@@ -258,49 +236,6 @@ menu-size=uint32 16
 notify-sound=uint32 0
 preview-style=uint32 1
 systray-dropper-icon='org.gnome.Settings-color-symbolic'
-
-[copyous]
-auto-hide-search=true
-clipboard-margin-top=6
-clipboard-orientation='vertical'
-clipboard-position-horizontal='top'
-clipboard-position-vertical='fill'
-clipboard-size=500
-database-backend='json'
-disable-hljs-dialog=false
-dynamic-item-height=true
-header-controls-visibility='visible-on-hover'
-item-height=100
-item-width=300
-show-at-cursor=false
-show-at-pointer=true
-show-content-indicator=false
-show-header=false
-show-item-title=true
-show-scrollbar=true
-sync-primary=true
-
-[copyous/file-item]
-file-preview-visibility='file-info'
-
-[copyous/image-item]
-show-image-info=true
-
-[copyous/link-item]
-link-preview-orientation='horizontal'
-show-link-preview=true
-
-[copyous/text-item]
-show-text-info=false
-
-[copyous/theme]
-color-scheme='system'
-theme='yaru'
-
-[custom-window-controls]
-control-button-style=4
-inner-border-thickness=0.5
-outer-border-thickness=0.5
 
 [dash-to-dock]
 background-opacity=0.80000000000000004
@@ -553,266 +488,11 @@ workspace-wrap-around=false
 workspaces-in-app-grid=true
 world-clock=true
 
-[kiwi]
-add-username-to-quick-menu=false
-button-size='normal'
-button-type='titlebuttons'
-custom-dnd-button=true
-dock-blur=false
-enable-firefox-styling=true
-hide-activities-button=true
-lock-icon=false
-move-window-to-new-workspace=false
-notification-indicator-style='accent'
-overview-wallpaper-background=false
-panel-blur=true
-panel-color-inherit=false
-panel-transparency=false
-show-window-controls=false
-show-window-controls-fullscreen-only=false
-show-window-title=false
-
-[kiwimenu]
-activity-menu-visibility=true
-custom-menu-enabled=false
-hide-power-button=false
-icon=8
-macos-accelerators=true
-
-[medialine]
-icon-size=16
-icon-spacing=8
-icon-type='app-icon'
-panel-index=1
-panel-position='left'
-popup-background-color=''
-popup-compact-expand-mode='hover'
-popup-dynamic-bg=true
-popup-dynamic-bg-intensity=0.5
-popup-primary-color='#FFFFFF'
-popup-secondary-color='#888888'
-popup-show-visualizer=true
-scroll-down-action='volume-down'
-scroll-up-action='volume-up'
-show-album=true
-show-artist=true
-show-title=true
-
 [no-screenshot-box]
 screenshot-on-release=false
 
 [notification-timeout]
 timeout=5000
-
-[openbar]
-accent-color=['0.141', '0.122', '0.192']
-apply-accent-shell=true
-apply-all-shell=true
-apply-flatpak=false
-apply-gtk=false
-apply-menu-notif=true
-apply-menu-shell=true
-auto-bgalpha=false
-autofg-bar=false
-autofg-menu=false
-autohg-bar=true
-autohg-menu=true
-autotheme-dark='Dark'
-autotheme-font=true
-autotheme-light='Dark'
-autotheme-refresh=false
-balpha=1.0
-bcolor=['0.788', '0.686', '0.733']
-bg-change=false
-bgalpha=0.0
-bgalpha-wmax=0.0
-bgalpha2=0.0
-bgcolor=['0.224', '0.224', '0.306']
-bgcolor-wmax=['0.118', '0.118', '0.118']
-bgcolor2=['0.278', '0.192', '0.247']
-bgpalette=true
-bguri='file:///usr/share/backgrounds/osselo-Ask_a_friend.jpg'
-bottom-margin=0.0
-boxalpha=0.0
-boxcolor=['0.224', '0.224', '0.306']
-bradius=50.0
-bwidth=10.0
-candyalpha=0.0
-candybar=false
-count1=326232
-count10=1924
-count11=233
-count12=203
-count2=93335
-count3=88287
-count4=19148
-count5=10511
-count6=7644
-count7=6835
-count8=5198
-count9=2450
-dark-accent-color=['0.141', '0.122', '0.192']
-dark-bcolor=['0.788', '0.686', '0.733']
-dark-bgcolor=['0.224', '0.224', '0.306']
-dark-bgcolor-wmax=['0.118', '0.118', '0.118']
-dark-bgcolor2=['0.278', '0.192', '0.247']
-dark-bguri='file:///usr/share/backgrounds/osselo-Ask_a_friend.jpg'
-dark-boxcolor=['0.224', '0.224', '0.306']
-dark-fgcolor=['1.000', '1.000', '1.000']
-dark-hcolor=['0.486', '0.549', '0.643']
-dark-hscd-color=['0.298', '0.204', '0.565']
-dark-iscolor=['0.224', '0.224', '0.306']
-dark-mbcolor=['0.486', '0.549', '0.643']
-dark-mbgcolor=['0.000', '0.000', '0.000']
-dark-mfgcolor=['1.000', '1.000', '1.000']
-dark-mhcolor=['0.486', '0.549', '0.643']
-dark-mscolor=['0.753', '0.380', '0.796']
-dark-mshcolor=['0.753', '0.749', '0.737']
-dark-palette1=['44', '34', '72']
-dark-palette10=['68', '68', '92']
-dark-palette11=['140', '140', '132']
-dark-palette12=['124', '140', '164']
-dark-palette2=['199', '178', '188']
-dark-palette3=['117', '113', '145']
-dark-palette4=['76', '64', '107']
-dark-palette5=['119', '121', '166']
-dark-palette6=['153', '115', '140']
-dark-palette7=['142', '141', '146']
-dark-palette8=['89', '77', '129']
-dark-palette9=['108', '73', '102']
-dark-shcolor=['0.000', '0.000', '0.000']
-dark-smbgcolor=['0.380', '0.208', '0.514']
-dark-vw-color=['0.298', '0.204', '0.565']
-dark-winbcolor=['0.298', '0.204', '0.565']
-default-font='Sans 12'
-fgalpha=1.0
-fgcolor=['1.000', '1.000', '1.000']
-fitts-widgets=true
-gtk-popover=true
-gtk-transparency=1.0
-halpha=0.0
-handle-border=0.0
-hbar-gtk3only=false
-hcolor=['0.486', '0.549', '0.643']
-headerbar-hint=31
-height=10.0
-hscd-color=['0.298', '0.204', '0.565']
-import-export=false
-isalpha=0.0
-iscolor=['0.224', '0.224', '0.306']
-light-bcolor=['0.584', '0.592', '0.753']
-light-bgcolor=['0.224', '0.224', '0.306']
-light-bgcolor-wmax=['0.922', '0.922', '0.922']
-light-bgcolor2=['0.278', '0.192', '0.247']
-light-bguri='file:///usr/share/backgrounds/osselo-Ask_a_friend.jpg'
-light-boxcolor=['0.224', '0.224', '0.306']
-light-hcolor=['0.298', '0.251', '0.420']
-light-hscd-color=['0.298', '0.204', '0.565']
-light-iscolor=['0.224', '0.224', '0.306']
-light-mbcolor=['0.298', '0.251', '0.420']
-light-mbgcolor=['0.149', '0.141', '0.192']
-light-mhcolor=['0.298', '0.251', '0.420']
-light-mscolor=['0.298', '0.204', '0.565']
-light-mshcolor=['0.000', '0.000', '0.000']
-light-palette1=['44', '34', '72']
-light-palette10=['68', '68', '92']
-light-palette11=['140', '140', '132']
-light-palette12=['124', '140', '164']
-light-palette2=['199', '178', '188']
-light-palette3=['117', '113', '145']
-light-palette4=['76', '64', '107']
-light-palette5=['119', '121', '166']
-light-palette6=['153', '115', '140']
-light-palette7=['142', '141', '146']
-light-palette8=['89', '77', '129']
-light-palette9=['108', '73', '102']
-light-shcolor=['0.000', '0.000', '0.000']
-light-smbgcolor=['0.278', '0.192', '0.247']
-light-vw-color=['0.298', '0.204', '0.565']
-light-winbcolor=['0.298', '0.204', '0.565']
-margin=0.0
-mbalpha=0.0
-mbcolor=['0.486', '0.549', '0.643']
-mbg-gradient=true
-mbgalpha=0.94999999999999996
-mbgcolor=['0.000', '0.000', '0.000']
-menu-radius=16.0
-menustyle=true
-mfgalpha=1.0
-mfgcolor=['1.000', '1.000', '1.000']
-mhcolor=['0.486', '0.549', '0.643']
-monitor-height=1440
-monitor-width=2560
-msalpha=0.82999999999999996
-mscolor=['0.753', '0.380', '0.796']
-mshalpha=0.64000000000000001
-mshcolor=['0.753', '0.749', '0.737']
-palette1=['44', '34', '72']
-palette10=['68', '68', '92']
-palette11=['140', '140', '132']
-palette12=['124', '140', '164']
-palette2=['199', '178', '188']
-palette3=['117', '113', '145']
-palette4=['76', '64', '107']
-palette5=['119', '121', '166']
-palette6=['153', '115', '140']
-palette7=['142', '141', '146']
-palette8=['89', '77', '129']
-palette9=['108', '73', '102']
-pause-reload=false
-position='Top'
-qtoggle-radius=16.0
-reloadstyle=true
-set-bottom-margin=false
-set-notif-position=true
-set-overview=true
-set-yarutheme=false
-shalpha=0.0
-shcolor=['0.000', '0.000', '0.000']
-sidebar-hint=100
-slider-height=6.0
-smbgcolor=['0.380', '0.208', '0.514']
-smbgoverride=true
-traffic-light=true
-trigger-autotheme=false
-trigger-reload=false
-view-hint=74
-vpad=0.0
-vw-color=['0.298', '0.204', '0.565']
-winbcolor=['0.298', '0.204', '0.565']
-winbwidth=2.0
-window-hint=75
-wmaxbar=true
-
-[prayertimes]
-asr-method='hanafi'
-auto-location=false
-high-latitude-adjustment='night-seventh'
-include-sunnah=false
-latitude=31.455355000000001
-longitude=73.078785999999994
-preset-methods='karachi'
-reminder=15
-
-[quick-settings-tweaks]
-datemenu-hide-left-box=true
-dnd-quick-toggle-enabled=true
-media-enabled=true
-toggles-layout-enabled=false
-
-[quick-sound-switcher]
-icon-theme='colored'
-omit-device-origins=true
-ports-settings='{"version":3,"ports":[]}'
-
-[screenshot]
-backend='gnome-screenshot'
-capture-delay=0
-click-action='show-menu'
-clipboard-action='set-image-data'
-copy-button-action='set-image-data'
-effect-rescale=100
-save-screenshot=true
 
 [simple-weather]
 always-packaged-icons=true
@@ -839,24 +519,6 @@ show-suntime-as-countdown=true
 symbolic-icons-panel=true
 theme=''
 weather-provider='open-meteo'
-
-[smart-auto-move]
-activate-workspace=false
-config-version=37
-match-threshold=0.49999999999999983
-max-unseen-age=604800
-new-window-max-wait-ms=10000
-new-window-title-stability-ms=600
-overrides='{"org.gnome.Settings":[{"title":"Settings"}],"com.mattjakeman.ExtensionManager":[{"title":"Extension Manager","action":"IGNORE"},{"title":"Extension Manager","action":"IGNORE"}],"Surfshark":[{"title":"Surfshark","action":"IGNORE"}],"org.gnome.tweaks":[{"title":"GNOME Tweaks","action":"IGNORE"}],"snap-store_snap-store":[{"action":"IGNORE"}],"org.gnome.Calculator":[{"action":"IGNORE","threshold":0.7}],"org.gnome.Snapshot":[{"action":"IGNORE","threshold":0.7}],"org.gnome.Nautilus":[{"action":"IGNORE","threshold":0.7}],"net.nokyan.Resources":[{"action":"IGNORE","threshold":0.7}],"proton.vpn.app.gtk":[{"action":"IGNORE","threshold":0.7}],"com.transmissionbt.transmission":[{"title":"Transmission","action":"IGNORE"}],"transmission-gtk":[{"title":"Torrent Options","action":"IGNORE"}]}'
-
-[status-tray]
-app-order=[':1.131@', ':1.148@', ':1.302@', ':1.322@', 'livepatch', 'software_update_available', 'tray_icon_tray_app_4920_1', 'unattended_upgrade']
-disabled-apps=@as []
-icon-mode='original'
-icon-size=16
-overflow-enabled=true
-overflow-icon-style='static'
-overflow-inline-count=0
 
 [tiling-assistant]
 activate-layout0=@as []
@@ -905,13 +567,6 @@ toggle-always-on-top=@as []
 toggle-tiling-popup=@as []
 window-gap=6
 
-[top-bar-organizer]
-center-box-order=['dateMenu']
-hide=['a11y']
-left-box-order=['simple-weather@romanlefler.com', 'vitalsMenu', 'activities']
-right-box-order=['appindicator-kstatusnotifieritem-tray-icon tray app 18640-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4412-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4504-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4391-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4399-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4650-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 20260-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4540-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4475-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4496-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 4576-1', 'appindicator-kstatusnotifieritem-tray-icon tray app 93076-1', 'quickSettings', 'tiling-assistant@leleat-on-github', 'appindicator-kstatusnotifieritem-Mailspring_status_icon_1', 'appindicator-kstatusnotifieritem-chrome_status_icon_1', 'appindicator-kstatusnotifieritem-unattended-upgrade', 'appindicator-kstatusnotifieritem-livepatch', 'appindicator-kstatusnotifieritem-software-update-available', 'appindicator-kstatusnotifieritem-Slack_status_icon_1', 'appindicator-kstatusnotifieritem-tray-icon tray app 66388-1', 'screenRecording', 'clipboardIndicator', 'screenSharing', 'dwellClick', 'a11y', 'keyboard']
-show=@as []
-
 [touchpad-gesture-customization]
 alttab-delay=0
 default-overview-gesture-direction=true
@@ -926,29 +581,6 @@ pinch-4-finger-gesture='NONE'
 vertical-swipe-3-fingers-gesture='OVERVIEW_NAVIGATION'
 vertical-swipe-4-fingers-gesture='VOLUME_CONTROL'
 workspace-switching-states='DEFAULT'
-
-[unite]
-app-menu-ellipsize-mode='middle'
-app-menu-max-width=128
-autofocus-windows=false
-enable-titlebar-actions=true
-extend-left-box=false
-greyscale-tray-icons=false
-hide-activities-button='always'
-hide-app-menu-icon=false
-hide-window-titlebars='always'
-icon-scale-workaround=false
-notifications-position='right'
-reduce-panel-spacing=false
-restrict-to-primary-screen=false
-show-appmenu-button=true
-show-desktop-name=false
-show-legacy-tray=false
-show-window-buttons='always'
-show-window-title='always'
-use-activities-text=false
-window-buttons-placement='left'
-window-buttons-theme='auto'
 
 [user-theme]
 name=''

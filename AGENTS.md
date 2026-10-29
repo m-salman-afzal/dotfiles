@@ -1,122 +1,117 @@
 # What this is
 
-Personal dotfiles for an Ubuntu/GNOME machine, symlinked into `$HOME` with GNU Stow. There is no build, lint, or test
-suite — verification is `zsh -n <file>` / `bash -n <file>` for syntax, then opening a new shell.
+Personal dotfiles for one Ubuntu 26.04 / GNOME laptop, linked into `$HOME` with GNU Stow, plus the scripts that rebuild
+the machine from scratch. No build or test suite: verify with `zsh -n <file>` / `bash -n <file>`
+(+ `shellcheck` and `shfmt -l` for the bash scripts; shfmt takes its style from `.editorconfig`), then a new shell.
 
-## Critical: symlinks
+## Stow
 
-`~/.zshrc`, `~/.gitconfig`, `~/.bashrc`, `~/.profile`, `~/.icons`, `~/.poshthemes`, `~/.config/*` are symlinks into this
-repo. The Edit tool refuses symlink targets — always edit the real file under `~/dotfiles/`.
+- Invocation: `stow -d "$HOME/dotfiles" -t "$HOME" .` — NOT `stow -d "$HOME" -t "$HOME" dotfiles`, which stow 2.4
+  accepts and silently does nothing with.
+- `.stow-local-ignore` REPLACES stow's default ignore list, so `.git`, `README`, and every top-level entry that must not
+  land in `$HOME` (`initSystem`, `zsh`, `apt`, `gnome`, …, this file) has to be listed. New top-level dir → add it.
+- `~/.zshrc`, `~/.gitconfig`, `~/.icons`, `~/.poshthemes`, `~/.vscode/settings.json` and most of
+  `~/.config/*` are symlinks into this repo. The Edit tool refuses symlinks — edit the file under `~/dotfiles/`.
+- `.config/autostart/` is one folded symlink, so login entries that apps write themselves land in the repo too.
 
-Stow invocation: `stow -d "$HOME/dotfiles" -t "$HOME" .` (package `.`). Do NOT use `stow -d "$HOME" -t "$HOME" dotfiles`
-— stow ≥2.4 silently plans nothing when target == stow dir. `.stow-local-ignore` REPLACES stow's default ignore list, so
-`.git`/`README` entries must stay listed there; any new top-level file/dir that shouldn't be linked into `$HOME` needs
-an entry.
+## Generated vs hand-maintained
 
-## Architecture
+`zsh/80-sync-dotfiles.zsh` runs on the first interactive shell of the day (stdin must be a tty; stamp
+`~/.cache/dotfiles-last-sync`), regenerates the files below, stages EVERYTHING in the repo, and asks before committing
+"updated config" and pushing. `.githooks/pre-push` touches the stamp, so any push counts as that day's sync, and
+`.githooks/pre-commit` runs `betterleaks` on the staged diff, so a staged secret fails the commit and the sync asks again next shell
+(`initTerminal.sh` sets `core.hooksPath`; on a clone made another way run `git config core.hooksPath .githooks`). So:
+uncommitted changes always end up in the next sync prompt — don't leave experiments in the repo.
 
-- `.zshrc` only sources `zsh/*.zsh` in glob (numeric) order. Order matters: aliases (40) must load before functions
-  (50/60) that use them — zsh expands aliases at parse time. In `20-plugins.zsh`, fpath-extending plugins load before
-  `compinit`, fzf-tab right after it, autosuggestions/syntax-highlighting last.
-- `zsh/80-sync-dotfiles.zsh` — self-updating repo: on the first interactive shell of a day (stamp file
-  `~/.cache/dotfiles-last-sync`) it regenerates `gnome/extensions.list`, `gnome/extensions.dconf`, the keyboard dumps
-  (`gnome/{input-sources,media-keys,wm-keybindings,shell-keybindings}.dconf`), `flatpak/apps.list`, and `apt/packages.list`,
-  then stages everything, shows the diff, and asks before committing ("updated config") and pushing. The stamp is
-  touched by `.githooks/pre-push` (repo-local `core.hooksPath`, set by `initTerminal.sh`; on a clone made another way,
-  run `git config core.hooksPath .githooks`) — so any manual commit+push (e.g. from VS Code) counts as that day's sync.
-  Consequences: (1) any uncommitted change in this repo lands in the next sync prompt — never leave experiments lying
-  around; (2) never run a full interactive zsh (`zsh -i -c ...`) for testing unless you want the sync to fire.
-- `zsh/81-sync-dircolors.zsh` — monthly background refresh of the dracula dircolors file.
-- `apt/packages.list` is GENERATED: `apt-mark showmanual` minus `apt/ignore.list` (both LC_ALL=C sorted — comm breaks
-  otherwise). `apt/ignore.list` is HAND-maintained: packages that are manual on this machine but unwanted on a fresh
-  one. To drop a package from `packages.list`, add it to `ignore.list` (keep it sorted) — deleting the line directly
-  gets undone by the next sync. If the package is really a dependency (e.g. libs named in some build instructions),
-  `sudo apt-mark auto <pkg>` is better: it leaves both lists and becomes autoremovable. `apt/markAuto.sh` does this in
-  bulk: it demotes every non-keeper manual package that something installed depends on, re-promotes anything
-  `apt autoremove` would then remove (so it never uninstalls), and regenerates `ignore.list`.
-- `apt/blocked.list` is HAND-maintained (LC_ALL=C sorted): debs that a Flatpak replaces, mostly the ubuntu-desktop
-  Recommends a fresh install ships. `initTrim.sh` pins them to -1 in `/etc/apt/preferences.d/blocked-debs` and purges
-  any that are installed; `initApt.sh` filters them out of `packages.list`, since installing a pinned package fails
-  the whole `apt install`. Only Recommends belong here: pinning a hard Depends (`nautilus`, `yelp`) would block
-  `ubuntu-desktop`. Check with `apt-cache rdepends --installed --no-recommends --no-suggests <pkg>` before adding one.
-- `(#q...)` glob qualifiers in the sync require EXTENDED_GLOB, which is off globally; the code wraps in
-  `() { emulate -L zsh -o extendedglob; ... }`. With the option off the pattern is a literal string and `[[ -n ]]` is
-  always true — it degrades silently, not loudly. Keep new glob-qualifier code inside such a wrapper.
-- `gnome/` and `flatpak/` contain GENERATED files (overwritten by the daily sync) — hand-edits there are lost within a
-  day. Uninstalling an extension leaves its keys in dconf and the sync dumps all of `/org/gnome/shell/extensions/`, so
-  to drop one from `extensions.dconf` run `dconf reset -f /org/gnome/shell/extensions/<dir>/`.
-- `initSystem/` — fresh-PC bootstrap chain, run via the curl one-liner in README.md: `initTerminal.sh` (SSH keys → wait
-  for GitHub → clone → stow → zsh default shell), then `initApt.sh` (third-party repos with keys fetched from the
-  vendors, then `apt/packages.list`), then `initGnomeExtension.sh` / `initFlatpak.sh` / `initSnap.sh`, which install
-  from the generated lists. `initTerminal.sh` must stay `curl | bash`-safe (interactive `read`s need `</dev/tty`).
-- `initSystem/initTrim.sh` — last bootstrap step: apport/whoopsie off, kdump-tools purged (frees the 512 MB
-  `crashkernel=` reservation, so it runs `update-grub`), docker.service → socket activation, ModemManager/cups off,
-  motd-news/ua-timer off, gnome-software search provider off, `apt/blocked.list` debs pinned out and purged. All
-  `/etc` + `systemctl`, hence a script. The one `$HOME` piece is stowed:
-  `.config/autostart/org.gnome.Software.desktop` with `Hidden=true` masks the `/etc/xdg/autostart` entry. Idempotent.
-  Deliberately excludes snap, GRUB_TIMEOUT and GNOME extensions — those stay manual for now.
-- `.config/autostart/` is stowed whole (folded dir symlink), so every login entry lands in the repo — including the ones
-  the flatpak Background portal and apps like Slack write themselves. `org.gnome.Software.desktop` is a `Hidden=true`
-  mask of the `/etc/xdg/autostart` entry.
-- System-level (`/etc`) config can't be stowed — stow only targets `$HOME` — so it lives inline in
-  `initSystem/initApt.sh`. Currently that's `/etc/sysctl.d/99-inotify.conf`: `fs.inotify.max_user_watches=524288` +
-  `max_user_instances=1024`, applied with `sudo sysctl --system`. The distro defaults (8192 watches / 128 instances) are
-  exhausted by VS Code, bundlers and other file watchers, which then die with
-  `ENOSPC: System limit for number of file watchers reached`. Already applied on this machine; a fresh PC gets it from
-  the bootstrap. Add future `/etc` config the same way, not as a stow package.
-- Neovim comes from mise as `aqua:neovim/neovim` — the official `nvim-linux-x86_64.tar.gz` release, unpacked, no
-  sandbox. The backend is named explicitly because plain `neovim` resolves to a third-party vfox plugin. It replaced
-  the `io.neovim.nvim` flatpak, whose sandbox hid host tools (mise's node, `/usr/bin`) and needed an XDG-redirecting
-  `~/.local/bin/nvim` wrapper; launch went 0.10 s → 0.01 s. Don't go back to the flatpak.
-- Default editor / terminal live in three places, one per mechanism: `EDITOR`/`VISUAL=nvim` in `zsh/10-env.zsh` (sudo
-  strips them, hence the next one); `update-alternatives --set editor /usr/bin/vim.basic` in `initApt.sh` for
-  visudo/sudoedit; `.config/xdg-terminals.list` (stowed) naming `ghostty_ghostty.desktop` for the terminal. GNOME's
-  Ctrl+Alt+T on 26.04 runs `xdg-terminal-exec`, which reads that list — do NOT add the old custom-keybinding or
-  `xdg-mime application/x-terminal` workarounds; both are stale and neither is applied here. Ghostty comes from
-  `snap/apps.list`, and its snap registers the winning `x-terminal-emulator` alternative on its own. Desktop id is the
-  snap's `ghostty_ghostty.desktop`, not `com.mitchellh.ghostty.desktop`.
-- `snap/apps.list` is GENERATED, same shape as apt's: `snap list` minus the base/snapd-noted snaps (those arrive as
-  deps) minus the HAND-maintained `snap/ignore.list` (both LC_ALL=C sorted — comm breaks otherwise). `ignore.list` holds
-  the Canonical preinstalls and content snaps (gnome-\*, mesa, gtk-common-themes, snap-store…) that a fresh Ubuntu
-  already has. To drop a snap, add it to `ignore.list`, don't delete the `apps.list` line — the next sync puts it back.
-  `initSnap.sh` installs plain, then retries `--classic` on failure, so classic-only snaps (ghostty) need no metadata in
-  the list. The hand-maintained ignore list is unavoidable, unlike flatpak's `--app`: snapd records no install reason
-  (checked on 2.76.1 — no `snap list` flag, no `/v2/snaps` field, `snap changes` is pruned) and `snap autoremove` has
-  been an open request for years. Deriving it from `seed.yaml` + content-slot providers in `snap connections` was tried
-  and misclassifies ~a third of the list (drops `bibata-all-cursor`, keeps
-  `desktop-security-center`/`prompting-client`/`gnome-3-28-1804`). Don't re-attempt it.
-- Don't "clean up" `/etc/udev/rules.d/80-uinput.rules` (written by `initApt.sh`, not dpkg-owned): Handy's dictation
-  typing goes through ydotool → `/dev/uinput` and breaks without it.
-- mise (runtime version manager, replaced nvm) owns node/bun/pnpm/rust plus the global CLIs
-  (`npm:` tools, `cargo:du-dust`, oh-my-posh, gh, rclone, fastfetch, mprocs, neovim), pinned in the stowed `.config/mise/config.toml`; `zsh/70-mise.zsh` is
-  just `mise activate zsh`. The shims dir goes on PATH earlier, in `zsh/10-env.zsh`, because `20-plugins.zsh` runs
-  `oh-my-posh init` first. That init bakes the versioned binary path (`installs/oh-my-posh/<ver>/`) into the shell, so
-  a shell open across an oh-my-posh upgrade loses its prompt once mise prunes the old version (24 h,
-  `upgrade.prune_after`) — `exec zsh` fixes it. `cargo:` tools compile from source (no cargo-binstall). `extrepo enable mise` drops in the vendor
-  repo (`initApt.sh`, before the `packages.list` install), and the same script then installs mise explicitly and runs
-  `mise install` — explicitly because a fresh bootstrap can run before the daily sync has added `mise`/`extrepo` to
-  `packages.list`. Adding a tool here means `mise use -g <tool>`, not a new PATH export in `zsh/10-env.zsh` or
-  `.profile`; both used to carry hand-rolled volta/cargo PATH lines and should not again. Note `rustup self
-  uninstall` rewrites `.profile`/`.bashrc` to strip its own PATH line — always pass `--no-modify-path`, or it edits
-  this repo through the stow symlinks. `PNPM_HOME`
-  is the one leftover — it is where `pnpm add -g` puts bins, not where pnpm itself lives.
-- mise's `rust` is a front-end to rustup, not a replacement: it installs rustup if absent, leaves toolchains in
-  `~/.rustup`, and reuses `~/.cargo` — so `mise activate` puts `~/.cargo/bin` on PATH itself and `cargo install`ed
-  binaries (rustlings) are found with no `mise reshim`. That is why `zsh/10-env.zsh` needs no cargo lines
-  at all; `. "$HOME/.cargo/env"` and the `~/.cargo/bin` export were both removed as redundant. Components are listed
-  explicitly in `config.toml` rather than trusting rustup's default profile. `rustup` still works directly for
-  one-offs (`rustup toolchain list`), but the declared version belongs in `config.toml` and upgrades ride `mise up`. `mise self-update` is refused
-  on an apt build (use apt); `mise up` upgrades the tools. Completions are GENERATED, so not stowed: `initApt.sh` writes
-  `~/.zsh/completions/_mise`, a dir put on `FPATH` by `zsh/10-env.zsh` (hence before `20-plugins.zsh`'s `compinit`).
-  Re-run that line after a mise upgrade.
-- `.bashrc` (and its nvm block, stale `/home/salman/...` oh-my-posh path, etc.) is DEPRECATED — zsh is the shell here
-  and bash is unused. Leave it alone; do not "fix" or modernise it, even when a change elsewhere has an obvious bash
-  counterpart.
-- Aliases: `ls` is aliased — scripts/subshells that parse `ls` output must use `command ls`.
+| Generated (hand-edits are overwritten daily) | Source | Hand-maintained input |
+|---|---|---|
+| `apt/packages.list` | `apt-mark showmanual` − ignore list | `apt/ignore.list` |
+| `snap/apps.list` | `snap list` − bases/snapd − ignore list | `snap/ignore.list` |
+| `flatpak/apps.list` | `flatpak list --app` | — |
+| `gnome/extensions.list` | `ls ~/.local/share/gnome-shell/extensions` | — |
+| `gnome/extensions.dconf` | `dconf dump /org/gnome/shell/extensions/`, private keys stripped by an awk filter | — |
+| `gnome/{input-sources,media-keys,wm-keybindings,shell-keybindings}.dconf` | `dconf dump` | — |
+
+- All lists are `LC_ALL=C` sorted; `comm` breaks otherwise. Keep hand-edited lists sorted the same way.
+- To drop an apt package or snap from the generated list, add it to the ignore list — deleting the line is undone by
+  the next sync. A package that is really a dependency is better `sudo apt-mark auto <pkg>`: it leaves both lists and
+  becomes autoremovable. `apt/markAuto.sh` does that in bulk and never uninstalls anything.
+- `apt/blocked.list` (hand, sorted): debs a Flatpak replaces. `initTrim.sh` pins them to -1 and purges them;
+  `initApt.sh` filters them out of `packages.list`. Only Recommends belong there — pinning a hard Depends blocks
+  `ubuntu-desktop`. Check: `apt-cache rdepends --installed --no-recommends --no-suggests <pkg>`.
+- `extensions.dconf` holds every key under `/org/gnome/shell/extensions/`, including uninstalled extensions'. To drop
+  one: `dconf reset -f /org/gnome/shell/extensions/<dir>/`. A new extension that stores private data (devices, window
+  titles, history) needs a line in the sync's awk filter.
+- snapd records no install reason, so `snap/ignore.list` (Canonical preinstalls, content snaps) can't be derived;
+  deriving it from `seed.yaml`/`snap connections` was tried and misclassifies a third of the list.
+
+## Shell
+
+- `.zshrc` sources `zsh/*.zsh` in numeric order: 10 env/PATH, 20 zinit plugins + oh-my-posh, 30 options, 40 aliases,
+  45 cleanup (space-reclaim aliases), 50 git, 60 functions, 70 `mise activate`, 80 daily sync, 81 monthly dircolors refresh, 90 secrets.
+- Aliases (40) must load before functions that use them (50/60): zsh expands aliases at parse time.
+- In 20: plugins that extend `fpath` before `compinit`, fzf-tab right after it, autosuggestions/syntax-highlighting
+  last. fzf comes from zinit (`gh-r`).
+- `ls` is aliased to `ls -la --color` — code that parses `ls` output uses `command ls`.
+- `(#q…)` glob qualifiers need EXTENDED_GLOB, which is off. Wrap them in `() { emulate -L zsh -o extendedglob; … }`
+  like 80/81 do — with the option off the pattern is a literal string and `[[ -n … ]]` is silently always true.
+- `zsh/90-secrets.zsh` is committed EMPTY: `.gitattributes` gives it `filter=secrets`, whose `clean = cat >/dev/null`
+  lives in the stowed `.gitconfig`. Real values exist only on the machine. Never weaken that filter.
+- `zsh -i` sources the whole config; the sync fires only with a tty on stdin. Test syntax with `zsh -n` instead.
+
+## Tools: mise
+
+- mise (apt package, vendor repo via `extrepo enable mise`) owns node, bun, pnpm, rust, neovim and the CLIs (`npm:`
+  tools, `cargo:du-dust`, oh-my-posh, gh, rclone, fastfetch, mprocs, betterleaks, shellcheck, shfmt), pinned in the stowed `.config/mise/config.toml`.
+  New CLI → `mise use -g <tool>`, never a PATH line in `zsh/10-env.zsh`.
+- Neovim is `aqua:neovim/neovim` (the official release tarball), named explicitly: plain `neovim` resolves to a vfox
+  plugin.
+- PATH order: 10 puts the mise shims on PATH (`mise activate --shims`) because 20 runs `oh-my-posh init` before 70's
+  full `mise activate`. oh-my-posh's init bakes its versioned install path into the shell, so after `mise up` prunes the
+  old version, open shells lose the prompt — `exec zsh`.
+- mise's `rust` drives rustup: toolchains in `~/.rustup`, `cargo install`ed bins in `~/.cargo/bin`, which
+  `mise activate` already puts on PATH. Components are listed in `config.toml`.
+- `PNPM_HOME` (in 10) is only where `pnpm add -g` puts bins; pnpm itself is mise's.
+- `mise self-update` is refused on the apt build — upgrade mise with apt, tools with `mise up`. Zsh completions
+  (`~/.zsh/completions/_mise`, `_gh`) are generated by `initApt.sh`, not stowed; that dir is on FPATH from 10.
+
+## Bootstrap (`initSystem/`, order in README.md)
+
+`initTerminal.sh` (SSH keys → wait for GitHub → clone → `core.hooksPath` → stow → zsh) → `initApt.sh` →
+`initGnomeExtension.sh` → `initFlatpak.sh` → `initSnap.sh` → `initTrim.sh`. All idempotent.
+
+- `initTerminal.sh` runs under `curl | bash`: interactive `read`s need `</dev/tty`, and `ssh` needs `-n`.
+- One package with no installation candidate fails the whole `apt install` of `packages.list`, so `initApt.sh` puts
+  every third-party deb's source in place first: mise (`extrepo`), ghostty (PPA), openlogi (GitHub-release .deb, no
+  repo — apt never upgrades it). A new third-party deb in `packages.list` needs a step there too.
+- `/etc` config can't be stowed, so it lives inline in `initApt.sh`: `/etc/sysctl.d/99-inotify.conf` (raised inotify
+  limits; defaults run out under VS Code/bundlers) and `/etc/udev/rules.d/80-uinput.rules`, which Handy's dictation
+  needs (it types via ydotool → `/dev/uinput`). Neither file is dpkg-owned; don't "clean up" either. New `/etc` config
+  goes in that script too.
+- `initTrim.sh` disables stock services this laptop doesn't need (apport/whoopsie, kdump, docker at boot → socket
+  activation, ModemManager, cups, motd-news, ua-timer, GNOME Software's search provider) and applies
+  `apt/blocked.list`. It deliberately leaves snap,
+  GRUB_TIMEOUT and GNOME extensions alone.
+- `.profile`/`.bashrc` are not in the repo: zsh is the login shell, so the distro defaults stay.
+- Hand-installed, outside the bootstrap: nvidia driver, docker, VS Code, Handy, claude-desktop, plus AppImages in
+  `~/Applications` (managed by AppManager).
+
+## Defaults
+
+- Editor: `EDITOR`/`VISUAL=nvim` in `zsh/10-env.zsh`, `core.editor = nvim` in `.gitconfig`; sudo strips env, so
+  `initApt.sh` sets the system `editor` alternative to vim for visudo/sudoedit.
+- Terminal: Ghostty (deb, desktop id `com.mitchellh.ghostty.desktop`). GNOME's Ctrl+Alt+T runs `xdg-terminal-exec`,
+  which reads the stowed `.config/xdg-terminals.list` — no custom keybinding or `xdg-mime` workaround needed.
+
+## Removing software
+
+A package with no apt reverse deps is not necessarily unused: GNOME extensions call host binaries apt can't see (e.g.
+`cava` ← dynamic-music-pill, soundbar). Before removing a "leaf" package, grep `~/.local/share/gnome-shell/extensions`
+for it.
 
 ## Conventions
 
-- Commit signing is SSH-based; `.gitconfig` hardcodes `~/.ssh/gitCommitSigningKey.pub` — the bootstrap generates keys
-  with exactly those names.
-- Section comments use `#*` prefix.
-- Force-pushing rewritten history is acceptable here (single-user repo).
+- Section comments use a `#*` prefix.
+- Commits are SSH-signed with `~/.ssh/gitCommitSigningKey.pub` (path hardcoded in `.gitconfig`; `initTerminal.sh`
+  generates exactly that key).
+- Single-user repo: force-pushing rewritten history is fine.

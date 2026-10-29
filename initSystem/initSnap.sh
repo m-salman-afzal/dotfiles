@@ -5,7 +5,7 @@ set -euo pipefail
 
 while read -r app; do
 	[[ -z $app ]] && continue
-	snap list "$app" &>/dev/null && continue   # already installed
+	snap list "$app" &> /dev/null && continue # already installed
 	sudo snap install "$app" || sudo snap install --classic "$app"
 done < "$HOME/dotfiles/snap/apps.list"
 
