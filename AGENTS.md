@@ -48,15 +48,13 @@ uncommitted changes always end up in the next sync prompt — don't leave experi
 ## Shell
 
 - `.zshrc` sources `zsh/*.zsh` in numeric order: 10 env/PATH, 20 zinit plugins + oh-my-posh, 30 options, 40 aliases,
-  45 cleanup (space-reclaim aliases), 50 git, 60 functions, 70 `mise activate`, 80 daily sync, 81 monthly dircolors refresh, 90 secrets.
+  45 cleanup (space-reclaim aliases), 50 git, 60 functions, 70 `mise activate`, 80 daily sync, 81 monthly dircolors refresh.
 - Aliases (40) must load before functions that use them (50/60): zsh expands aliases at parse time.
 - In 20: plugins that extend `fpath` before `compinit`, fzf-tab right after it, autosuggestions/syntax-highlighting
   last. fzf comes from zinit (`gh-r`).
 - `ls` is aliased to `ls -la --color` — code that parses `ls` output uses `command ls`.
 - `(#q…)` glob qualifiers need EXTENDED_GLOB, which is off. Wrap them in `() { emulate -L zsh -o extendedglob; … }`
   like 80/81 do — with the option off the pattern is a literal string and `[[ -n … ]]` is silently always true.
-- `zsh/90-secrets.zsh` is committed EMPTY: `.gitattributes` gives it `filter=secrets`, whose `clean = cat >/dev/null`
-  lives in the stowed `.gitconfig`. Real values exist only on the machine. Never weaken that filter.
 - `zsh -i` sources the whole config; the sync fires only with a tty on stdin. Test syntax with `zsh -n` instead.
 
 ## Tools: mise
