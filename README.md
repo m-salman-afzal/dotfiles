@@ -10,6 +10,7 @@ curl -fsSL https://raw.githubusercontent.com/m-salman-afzal/dotfiles/main/initSy
   && bash ~/dotfiles/initSystem/initApt.sh \
   && bash ~/dotfiles/initSystem/initGnomeExtension.sh \
   && bash ~/dotfiles/initSystem/initFlatpak.sh \
+  && bash ~/dotfiles/initSystem/initAppImage.sh \
   && bash ~/dotfiles/initSystem/initSnap.sh \
   && bash ~/dotfiles/initSystem/initTrim.sh
 ```
@@ -24,13 +25,15 @@ What it does, in order:
    `apt/packages.list`, raises the inotify watch/instance limits in
    `/etc/sysctl.d/99-inotify.conf` (file watchers hit `ENOSPC` on the defaults), makes vim the system `editor`
    alternative, and installs mise plus every tool pinned in `.config/mise/config.toml` (node, bun, pnpm, rust, plus CLIs like oh-my-posh and dust) along
-   with its zsh completions. Installed manually when needed: nvidia driver, docker, vscode, handy, claude-desktop.
+   with its zsh completions. Installed manually when needed: nvidia driver, docker, vscode, claude-desktop.
 3. **initGnomeExtension.sh** — installs every extension in `gnome/extensions.list` from extensions.gnome.org, restores
    their settings from `gnome/extensions.dconf`, enables them all. Log out/in to load them.
 4. **initFlatpak.sh** — installs flatpak + flathub and every app in `flatpak/apps.list` (runtimes come along as
    dependencies).
-5. **initSnap.sh** — installs every snap in `snap/apps.list` (bases and content snaps come along as dependencies).
-6. **initTrim.sh** — turns off stock Ubuntu pieces that only cost resources on a laptop (measured on the Victus,
+5. **initAppImage.sh** — installs AppManager, restores its per-app overrides (`appimage/custom.json`: custom update
+   links, prerelease toggles), then downloads every AppImage in `appimage/apps.list` and installs it through AppManager.
+6. **initSnap.sh** — installs every snap in `snap/apps.list` (bases and content snaps come along as dependencies).
+7. **initTrim.sh** — turns off stock Ubuntu pieces that only cost resources on a laptop (measured on the Victus,
    2026-09-20). apport + whoopsie: crash reporter, never prevents a crash, autoreport sat failed 30 s at boot, whoopsie
    held 100 MB, and its retracer has OOM-stormed the desktop. kdump-tools: 512 MB of RAM reserved for a kernel-panic
    dump nobody reads. docker.service at boot: socket activation stays, the daemon starts on first use (0.8 s boot,
@@ -40,5 +43,5 @@ What it does, in order:
    replace) are pinned to -1, so upgrades can't reinstall them, and are purged. Idempotent. Deliberately not in here: snap, GRUB_TIMEOUT,
    GNOME extensions.
 
-The lists and settings dumps are refreshed automatically by the daily sync in `zsh/80-sync-dotfiles.zsh`, so they always reflect
+The lists and settings dumps are refreshed automatically by the daily sync in `zsh/80-sync-dotfiles.zsh` (one refresher per kind in `zsh/sync/`), so they always reflect
 the current machine.

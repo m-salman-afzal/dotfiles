@@ -1,0 +1,21 @@
+{
+  "entries": [
+    {
+      "custom_update_link": "https://api2.cursor.sh/updates/download/golden/linux-x64/cursor/latest",
+      "name": "Cursor",
+      "prerelease_enabled": false,
+      "updates_enabled": true
+    },
+    {
+      "name": "Helium",
+      "prerelease_enabled": true,
+      "updates_enabled": true
+    },
+    {
+      "custom_update_link": "https://lmstudio.ai/download/latest/linux/x64",
+      "name": "LM-Studio",
+      "prerelease_enabled": false,
+      "updates_enabled": true
+    }
+  ]
+}

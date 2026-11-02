@@ -26,7 +26,6 @@ go-mtpfs
 grep
 grub-theme-breeze
 gzip
-handy
 hostname
 ibus-table-cangjie-big
 ibus-table-cangjie3
@@ -81,7 +80,7 @@ libzbar0t64
 libzxing3
 linux-generic
 linux-headers-7.0.0-15-generic
-lm-studio
+linux-modules-nvidia-615-open-generic
 m17n-db
 memtester
 meson
@@ -89,7 +88,7 @@ mutter
 ncurses-base
 ncurses-bin
 network-manager-openconnect
-nvidia-driver-595
+nvidia-driver-615-open
 nvtop
 oxygen-sounds
 pastebinit

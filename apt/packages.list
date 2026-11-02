@@ -11,14 +11,12 @@ git
 gnome-shell-extensions
 gnome-software-plugin-flatpak
 gnome-tweaks
-htop
 libavcodec-extra
 libinput-tools
 mise
 openlogi
 pkg-config
 ppa-purge
-smem
 ubuntu-restricted-addons
 unzip
 whois

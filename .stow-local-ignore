@@ -6,6 +6,7 @@
 ^/zsh
 ^/gnome
 ^/flatpak
+^/appimage
 ^/snap
 ^/apt
 ^/\.githooks

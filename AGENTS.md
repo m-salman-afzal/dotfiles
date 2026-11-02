@@ -23,11 +23,17 @@ the machine from scratch. No build or test suite: verify with `zsh -n <file>` / 
 (`initTerminal.sh` sets `core.hooksPath`; on a clone made another way run `git config core.hooksPath .githooks`). So:
 uncommitted changes always end up in the next sync prompt — don't leave experiments in the repo.
 
+Each kind below is refreshed by its own `zsh/sync/<kind>.zsh` (gnome, flatpak, appimage, snap, apt), which 80 sources
+inside its function between the daily gate and the commit prompt — so they share its scope (`local`, extendedglob), and
+`.zshrc`'s `zsh/*.zsh` glob never loads them on their own. A new tracked kind = a new file there.
+
 | Generated (hand-edits are overwritten daily) | Source | Hand-maintained input |
 |---|---|---|
 | `apt/packages.list` | `apt-mark showmanual` − ignore list | `apt/ignore.list` |
 | `snap/apps.list` | `snap list` − bases/snapd − ignore list | `snap/ignore.list` |
 | `flatpak/apps.list` | `flatpak list --app` | — |
+| `appimage/apps.list` | AppManager's `installations.json`: `name<TAB>source` per app | — |
+| `appimage/custom.json` | AppManager's `custom.json`, entries sorted by name | — |
 | `gnome/extensions.list` | `ls ~/.local/share/gnome-shell/extensions` | — |
 | `gnome/extensions.dconf` | `dconf dump /org/gnome/shell/extensions/`, private keys stripped by an awk filter | — |
 | `gnome/{input-sources,media-keys,wm-keybindings,shell-keybindings}.dconf` | `dconf dump` | — |
@@ -41,14 +47,14 @@ uncommitted changes always end up in the next sync prompt — don't leave experi
   `ubuntu-desktop`. Check: `apt-cache rdepends --installed --no-recommends --no-suggests <pkg>`.
 - `extensions.dconf` holds every key under `/org/gnome/shell/extensions/`, including uninstalled extensions'. To drop
   one: `dconf reset -f /org/gnome/shell/extensions/<dir>/`. A new extension that stores private data (devices, window
-  titles, history) needs a line in the sync's awk filter.
+  titles, history) needs a line in the awk filter in `zsh/sync/gnome.zsh`.
 - snapd records no install reason, so `snap/ignore.list` (Canonical preinstalls, content snaps) can't be derived;
   deriving it from `seed.yaml`/`snap connections` was tried and misclassifies a third of the list.
 
 ## Shell
 
 - `.zshrc` sources `zsh/*.zsh` in numeric order: 10 env/PATH, 20 zinit plugins + oh-my-posh, 30 options, 40 aliases,
-  45 cleanup (space-reclaim aliases), 50 git, 60 functions, 70 `mise activate`, 80 daily sync, 81 monthly dircolors refresh.
+  45 cleanup (space-reclaim aliases), 50 git, 60 functions, 70 `mise activate`, 80 daily sync (+ `zsh/sync/*.zsh`), 81 monthly dircolors refresh.
 - Aliases (40) must load before functions that use them (50/60): zsh expands aliases at parse time.
 - In 20: plugins that extend `fpath` before `compinit`, fzf-tab right after it, autosuggestions/syntax-highlighting
   last. fzf comes from zinit (`gh-r`).
@@ -76,7 +82,7 @@ uncommitted changes always end up in the next sync prompt — don't leave experi
 ## Bootstrap (`initSystem/`, order in README.md)
 
 `initTerminal.sh` (SSH keys → wait for GitHub → clone → `core.hooksPath` → stow → zsh) → `initApt.sh` →
-`initGnomeExtension.sh` → `initFlatpak.sh` → `initSnap.sh` → `initTrim.sh`. All idempotent.
+`initGnomeExtension.sh` → `initFlatpak.sh` → `initAppImage.sh` → `initSnap.sh` → `initTrim.sh`. All idempotent.
 
 - `initTerminal.sh` runs under `curl | bash`: interactive `read`s need `</dev/tty`, and `ssh` needs `-n`.
 - One package with no installation candidate fails the whole `apt install` of `packages.list`, so `initApt.sh` puts
@@ -91,15 +97,22 @@ uncommitted changes always end up in the next sync prompt — don't leave experi
   `apt/blocked.list`. It deliberately leaves snap,
   GRUB_TIMEOUT and GNOME extensions alone.
 - `.profile`/`.bashrc` are not in the repo: zsh is the login shell, so the distro defaults stay.
-- Hand-installed, outside the bootstrap: nvidia driver, docker, VS Code, Handy, claude-desktop, plus AppImages in
-  `~/Applications` (managed by AppManager).
+- Hand-installed, outside the bootstrap: nvidia driver, docker, VS Code, claude-desktop.
+- AppImages live in `~/Applications`, managed by AppManager (itself an AppImage, `~/.local/bin/app-manager`). An
+  `apps.list` source is what AppManager uses to update the app: the custom update link, else the AppImage's embedded
+  zsync info, else its update link. An app with none gets an empty source and `initAppImage.sh` skips it — give it a
+  custom update link in AppManager. Don't stow AppManager's `custom.json`: it saves by rename, which replaces a symlink.
+- GNOME's own launches (custom keybindings, autostart `Exec`/`TryExec`) don't have `~/.local/bin` on PATH, so they
+  call `/home/satop/Applications/<Name>` by full path. AppImages ship no systemd/D-Bus units: never `DBusActivatable=true`.
 
 ## Defaults
 
 - Editor: `EDITOR`/`VISUAL=nvim` in `zsh/10-env.zsh`, `core.editor = nvim` in `.gitconfig`; sudo strips env, so
   `initApt.sh` sets the system `editor` alternative to vim for visudo/sudoedit.
-- Terminal: Ghostty (deb, desktop id `com.mitchellh.ghostty.desktop`). GNOME's Ctrl+Alt+T runs `xdg-terminal-exec`,
-  which reads the stowed `.config/xdg-terminals.list` — no custom keybinding or `xdg-mime` workaround needed.
+- Terminal: Ghostty (deb, desktop id `com.mitchellh.ghostty.desktop`). Ctrl+Alt+T is the custom keybinding in
+  `gnome/media-keys.dconf` (the stock `terminal` key is empty); apps that ask for a terminal go through
+  `xdg-terminal-exec`, which reads the stowed `.config/xdg-terminals.list`. Keep it a deb, not the AppImage: the
+  AppImage's bundled GTK 4.24 broke the `performable:` Ctrl+V paste (Ghostty passed a raw ^V to the shell, 2026-11-02).
 
 ## Removing software
 

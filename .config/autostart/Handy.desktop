@@ -3,6 +3,6 @@ Type=Application
 Version=1.0
 Name=Handy
 Comment=Handystartup script
-Exec=/usr/bin/handy 
+Exec=/home/satop/Applications/Handy 
 StartupNotify=false
 Terminal=false

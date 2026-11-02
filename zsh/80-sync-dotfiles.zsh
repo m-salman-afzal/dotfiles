@@ -7,39 +7,12 @@
   #  pushes only on go-ahead. Silent when nothing changed. Stamp file = last run.
   [[ -t 0 && (! -e $HOME/.cache/dotfiles-last-sync || -n $HOME/.cache/dotfiles-last-sync(#qNm+0)) ]] || return 0
 
-  #* refresh gnome extension list + settings so new installs get committed too
-  command ls $HOME/.local/share/gnome-shell/extensions > $HOME/dotfiles/gnome/extensions.list # command: dodge the ls alias
-  #  awk drops only the private bits: window titles, bt MACs, phone pairing state.
-  #  everything else in those extensions still syncs
-  dconf dump /org/gnome/shell/extensions/ | awk '
-    /^\[/ { sec=$0; if (sec ~ /^\[gsconnect\/device/) next }   # pairing state: certs, caps
-    sec ~ /^\[gsconnect\/device/ { next }
-    sec == "[SmartAutoMoveNG]" && /^saved-windows=/ { next }
-    sec == "[Bluetooth-Battery-Meter]" && /^(device-list|galaxy-buds-list|gattbas-list|upower-device-list)=/ { next }
-    sec == "[gsconnect]" && /^devices=/ { next }
-    sec == "[dynamic-music-pill]" && /^playback-history=/ { next }   # what was watched/played
-    { print }
-  ' > $HOME/dotfiles/gnome/extensions.dconf
-
-  #* refresh keyboard layout + xkb options (caps:escape lives here)
-  dconf dump /org/gnome/desktop/input-sources/ > $HOME/dotfiles/gnome/input-sources.dconf
-
-  #* refresh custom keyboard shortcuts (app launchers, wm, shell)
-  dconf dump /org/gnome/settings-daemon/plugins/media-keys/ > $HOME/dotfiles/gnome/media-keys.dconf
-  dconf dump /org/gnome/desktop/wm/keybindings/ > $HOME/dotfiles/gnome/wm-keybindings.dconf
-  dconf dump /org/gnome/shell/keybindings/ > $HOME/dotfiles/gnome/shell-keybindings.dconf
-
-  #* refresh flatpak app list (runtimes excluded; they install as deps)
-  flatpak list --app --columns=application > $HOME/dotfiles/flatpak/apps.list
-
-  #* refresh snap list — bases/snapd drop out by their Notes column (they arrive as deps);
-  #  preinstalled canonical bits and content snaps are hand-listed in snap/ignore.list
-  snap list | awk 'NR>1 && $NF !~ /base|snapd/ {print $1}' | LC_ALL=C sort \
-    | LC_ALL=C comm -23 - $HOME/dotfiles/snap/ignore.list > $HOME/dotfiles/snap/apps.list
-
-  #* refresh apt manual-package list, minus baseline noise (apt/ignore.list)
-  #  LC_ALL=C: ignore.list is C-sorted; comm errors out if collations differ
-  apt-mark showmanual | LC_ALL=C sort | LC_ALL=C comm -23 - $HOME/dotfiles/apt/ignore.list > $HOME/dotfiles/apt/packages.list
+  #* refresh the generated lists/dumps, one file per kind (gnome, flatpak, appimage, snap, apt).
+  #  sourced, not run: they share this function's scope (locals, extendedglob). Not matched by .zshrc's zsh/*.zsh
+  local f
+  for f in $HOME/dotfiles/zsh/sync/*.zsh; do
+    source $f
+  done
 
   #* commit + push, gated on a keypress
   git -C $HOME/dotfiles add -A # stage everything so untracked files show in the diff

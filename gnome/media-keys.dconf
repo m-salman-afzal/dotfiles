@@ -9,7 +9,7 @@ name='Ghostty'
 
 [custom-keybindings/custom1]
 binding='<Control><Alt>space'
-command='handy --toggle-transcription'
+command='/home/satop/Applications/Handy --toggle-transcription'
 name='handy'
 
 [custom-keybindings/custom2]

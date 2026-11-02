@@ -28,8 +28,8 @@ grep -vxFf "$DOT/apt/blocked.list" "$DOT/apt/packages.list" | xargs -r sudo apt 
 sudo apt install -y vim
 sudo update-alternatives --set editor /usr/bin/vim.basic
 
-#* ydotool /dev/uinput access — Handy (voice dictation, apt/ignore.list: hand-installed .deb, not part of this
-#* bootstrap) types its transcript by faking keystrokes. Left on its own it uses enigo → the XDG RemoteDesktop
+#* ydotool /dev/uinput access — Handy (voice dictation, an AppImage from appimage/apps.list, installed later by
+#* initAppImage.sh) types its transcript by faking keystrokes. Left on its own it uses enigo → the XDG RemoteDesktop
 #* portal, and GNOME re-prompts "Allow remote interaction" on EVERY paste with no way to persist the grant.
 #* ydotool injects through /dev/uinput instead and never touches the portal. The udev rule is the part Handy's
 #* README omits: the node is root:root by default, so ydotoold can't open it as you. Not stowable (/etc).
@@ -60,4 +60,4 @@ mise install || true
 mise exec -- gh completion -s zsh > "$HOME/.zsh/completions/_gh" || true #* the gh deb shipped this; mise's doesn't
 
 echo "Done. Installed manually when needed (not part of this bootstrap):"
-echo "  nvidia driver (ubuntu-drivers install), docker, vscode, handy"
+echo "  nvidia driver (ubuntu-drivers install), docker, vscode"
