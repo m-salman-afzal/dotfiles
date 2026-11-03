@@ -29,4 +29,5 @@ org.gnome.seahorse.Application
 org.mozilla.firefox
 org.pulseaudio.pavucontrol
 org.videolan.VLC
+page.codeberg.libre_menu_editor.LibreMenuEditor
 us.zoom.Zoom
