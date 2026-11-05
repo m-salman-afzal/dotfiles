@@ -47,6 +47,12 @@ systemctl --user enable --now ydotool.service || true
 printf 'fs.inotify.max_user_watches=524288\nfs.inotify.max_user_instances=1024\n' | sudo tee /etc/sysctl.d/99-inotify.conf > /dev/null
 sudo sysctl --system > /dev/null
 
+#* wl-copy shim — GNOME has no clipboard data-control protocol, so the real wl-copy steals focus and the terminal
+#* blinks on every copy. The shim turns copies made inside Ghostty or VS Code terminals into OSC 52 and passes
+#* everything else to /usr/bin/wl-copy. A copy, not a symlink: /usr/local/bin is on root's PATH too, so it must not
+#* be user-writable.
+sudo install -m 755 "$DOT/usr-local-bin/wl-copy" /usr/local/bin/wl-copy
+
 #* mise — installed explicitly (like vim above) so a fresh bootstrap works even before the daily sync has added
 #* it to packages.list; the apt line is a no-op once it's in there. `mise install` pulls every tool pinned in the
 #* stowed .config/mise/config.toml. Last in the file and `|| true`-guarded because it's the slow, network-bound,

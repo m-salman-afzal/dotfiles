@@ -1,0 +1,37 @@
+#!/bin/sh
+#* wl-copy shim, installed to /usr/local/bin (ahead of /usr/bin) by initSystem/initApt.sh.
+#* GNOME's compositor has no data-control protocol, so the real wl-copy maps a hidden window and steals keyboard
+#* focus to set the clipboard: the terminal blinks inactive→active on every copy (Claude Code, turbo, nvim, `| wl-copy`).
+#* Inside Ghostty or VS Code's terminal, hand the text to the terminal as OSC 52 instead; the terminal sets the clipboard
+#* without a focus change (Ghostty natively, VS Code through the xterm clipboard addon it always loads).
+#* Anything else (other terminals, GUI callers, images, --clear, text given as arguments) runs the real wl-copy.
+# shortcut: OSC 52 only sticks while the terminal is the focused window (Mutter's rule), so a copy from an unfocused
+# terminal is silently dropped; if background copies matter, fall back to the real wl-copy for them.
+real=/usr/bin/wl-copy
+case $TERM_PROGRAM in ghostty | vscode) ;; *) exec "$real" "$@" ;; esac
+{ true >/dev/tty; } 2>/dev/null || exec "$real" "$@"
+
+sel=c type=
+for a; do
+	if [ "$type" = next ]; then
+		case $a in text/*) type= ;; *) exec "$real" "$@" ;; esac
+		continue
+	fi
+	case $a in
+	-p | --primary) sel=p ;;
+	-f | --foreground) ;;
+	-t | --type) type=next ;;
+	--type=text/*) ;;
+	*) exec "$real" "$@" ;;
+	esac
+done
+
+tmp=$(mktemp) || exec "$real" "$@"
+trap 'rm -f "$tmp"' EXIT
+cat >"$tmp"
+#* OSC 52 is text-only: an image piped in without --type still goes to the real wl-copy
+if [ -s "$tmp" ] && [ "$(file -b --mime-encoding "$tmp")" = binary ]; then
+	"$real" "$@" <"$tmp"
+	exit
+fi
+printf '\033]52;%s;%s\a' "$sel" "$(base64 -w0 "$tmp")" >/dev/tty

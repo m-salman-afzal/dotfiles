@@ -10,6 +10,7 @@
 ^/snap
 ^/apt
 ^/\.githooks
+^/usr-local-bin
 ^/CLAUDE.md
 ^/AGENTS.md
 ^/\.editorconfig

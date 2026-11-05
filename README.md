@@ -23,7 +23,8 @@ What it does, in order:
 2. **initApt.sh** — sets up the third-party apt sources (mise via `extrepo`, the ghostty PPA — keys fetched
    fresh from the vendors) and installs openlogi's GitHub-release .deb, then installs every package in
    `apt/packages.list`, raises the inotify watch/instance limits in
-   `/etc/sysctl.d/99-inotify.conf` (file watchers hit `ENOSPC` on the defaults), makes vim the system `editor`
+   `/etc/sysctl.d/99-inotify.conf` (file watchers hit `ENOSPC` on the defaults), installs the
+   `/usr/local/bin/wl-copy` OSC 52 shim (stops the focus-steal blink on copy), makes vim the system `editor`
    alternative, and installs mise plus every tool pinned in `.config/mise/config.toml` (node, bun, pnpm, rust, plus CLIs like oh-my-posh and dust) along
    with its zsh completions. Installed manually when needed: nvidia driver, docker, vscode, claude-desktop.
 3. **initGnomeExtension.sh** — installs every extension in `gnome/extensions.list` from extensions.gnome.org, restores

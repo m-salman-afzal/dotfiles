@@ -92,6 +92,10 @@ inside its function between the daily gate and the commit prompt — so they sha
   limits; defaults run out under VS Code/bundlers) and `/etc/udev/rules.d/80-uinput.rules`, which Handy's dictation
   needs (it types via ydotool → `/dev/uinput`). Neither file is dpkg-owned; don't "clean up" either. New `/etc` config
   goes in that script too.
+- `/usr/local/bin/wl-copy` is a shim from `usr-local-bin/wl-copy`, which `initApt.sh` installs as a copy. Inside
+  Ghostty and VS Code terminals it sends copies as OSC 52, because the real wl-copy steals focus on GNOME (no
+  data-control protocol) and makes the window blink. Edit the repo file, then re-run the `sudo install` line. It
+  isn't dpkg-owned; don't "clean it up".
 - `initTrim.sh` disables stock services this laptop doesn't need (apport/whoopsie, kdump, docker at boot → socket
   activation, ModemManager, cups, motd-news, ua-timer, GNOME Software's search provider) and applies
   `apt/blocked.list`. It deliberately leaves snap,

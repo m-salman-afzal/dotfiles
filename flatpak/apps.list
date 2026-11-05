@@ -25,7 +25,6 @@ org.gnome.Papers
 org.gnome.Showtime
 org.gnome.Snapshot
 org.gnome.clocks
-org.gnome.seahorse.Application
 org.mozilla.firefox
 org.pulseaudio.pavucontrol
 org.videolan.VLC
