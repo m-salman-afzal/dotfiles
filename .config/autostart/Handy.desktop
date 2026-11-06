@@ -1,8 +1,14 @@
 [Desktop Entry]
-Type=Application
-Version=1.0
+Comment=Handy
+Exec="/home/satop/Applications/Handy"
+StartupWMClass=handy
+Icon=handy
 Name=Handy
-Comment=Handystartup script
-Exec=/home/satop/Applications/Handy 
-StartupNotify=false
-Terminal=false
+Type=Application
+X-AppImage-Version=0.10.0
+Actions=Uninstall;
+
+[Desktop Action Uninstall]
+Name=Move to Trash
+Exec=/home/satop/Applications/AppManager uninstall "/home/satop/Applications/Handy"
+Icon=user-trash
