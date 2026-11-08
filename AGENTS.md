@@ -66,7 +66,7 @@ inside its function between the daily gate and the commit prompt — so they sha
 ## Tools: mise
 
 - mise (apt package, vendor repo via `extrepo enable mise`) owns node, bun, pnpm, rust, neovim and the CLIs (`npm:`
-  tools, `cargo:du-dust`, oh-my-posh, gh, rclone, fastfetch, mprocs, betterleaks, shellcheck, shfmt), pinned in the stowed `.config/mise/config.toml`.
+  tools, `cargo:du-dust`, oh-my-posh, gh, rclone, fastfetch, dekit, betterleaks, shellcheck, shfmt), pinned in the stowed `.config/mise/config.toml`.
   New CLI → `mise use -g <tool>`, never a PATH line in `zsh/10-env.zsh`.
 - Neovim is `aqua:neovim/neovim` (the official release tarball), named explicitly: plain `neovim` resolves to a vfox
   plugin.

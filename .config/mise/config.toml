@@ -11,7 +11,6 @@ rust = { version = "stable", components = ["clippy", "rustfmt", "rust-src"] }
 "npm:next-devtools-mcp" = "latest"
 "npm:chrome-devtools-mcp" = "1.11.0"
 oh-my-posh = "latest"
-mprocs = "latest"
 gh = "latest"
 rclone = "latest"
 fastfetch = "latest"
@@ -21,6 +20,15 @@ btop = "latest"
 betterleaks = "latest"
 shellcheck = "latest"
 shfmt = "latest"
+tmux = "latest"
+codex = "latest"
+copilot = "latest"
+opencode = "latest"
+grok = "latest"
+pi = "latest"
+antigravity-cli = "latest"
+dekit = "latest"
+rust-analyzer = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "pnpm"]

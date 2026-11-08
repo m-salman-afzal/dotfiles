@@ -59,8 +59,8 @@ cycle-sink() {
   notify-send -a "Audio Output" -i "$icon" -t 2000 "Audio Output" "$label"
 }
 
-#* System update: snap, flatpak and apt in parallel in an mprocs TUI (mise tool `mprocs`, binary `dekit`) — sidebar
-#  of jobs, select one for its live output; Ctrl+A focuses a pane to answer a prompt, q quits. mprocs runs whole
+#* System update: snap, flatpak and apt in parallel in a `dekit mprocs` TUI (mise tool `dekit`) — sidebar
+#  of jobs, select one for its live output; Ctrl+A focuses a pane to answer a prompt, q quits. dekit runs whole
 #  under sudo because each pane is its own pty and sudo tickets are per-tty, so a `sudo -v` up front wouldn't carry.
 function uuac {
   sudo "$(mise which dekit)" mprocs --names snap,flatpak,apt \
