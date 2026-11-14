@@ -10,9 +10,6 @@ alias disableKernelIpv6="sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sudo
 
 alias enableKernelIpv6="sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0 && sudo sysctl -w net.ipv6.conf.default.disable_ipv6=0"
 
-#* claude
-alias claude="$HOME/.local/bin/claude"
-
 #* rclone
 alias mountChatlyCdn="rclone mount r2CloudflareStorageChatly:chatly ~/r2mount --daemon"
 alias mountProtonDrive="rclone mount protonDrive: ~/protonDriveMount --daemon"

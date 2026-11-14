@@ -62,9 +62,10 @@ cycle-sink() {
 #* System update: snap, flatpak and apt in parallel in a `dekit mprocs` TUI (mise tool `dekit`) — sidebar
 #  of jobs, select one for its live output; Ctrl+A focuses a pane to answer a prompt, q quits. dekit runs whole
 #  under sudo because each pane is its own pty and sudo tickets are per-tty, so a `sudo -v` up front wouldn't carry.
+#  Progress-Fancy=0: dpkg's bottom progress bar sets a scroll region, and dekit keeps no scrollback while one is set.
 function uuac {
   sudo "$(mise which dekit)" mprocs --names snap,flatpak,apt \
     'snap refresh' \
     'flatpak update -y && flatpak uninstall --unused -y' \
-    'apt update && apt upgrade --with-new-pkgs -y && apt autoremove --purge -y && apt clean all -y'
+    'apt update && apt -o Dpkg::Progress-Fancy=0 upgrade --with-new-pkgs -y && apt -o Dpkg::Progress-Fancy=0 autoremove --purge -y && apt clean all -y'
 }

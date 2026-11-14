@@ -29,7 +29,9 @@ pi = "latest"
 antigravity-cli = "latest"
 dekit = "latest"
 rust-analyzer = "latest"
+claude = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "pnpm"]
 activate_shims = true
+minimum_release_age_excludes = ["claude"]
