@@ -7,6 +7,12 @@
       "updates_enabled": true
     },
     {
+      "custom_update_link": "https://github.com/cjpais/Handy",
+      "name": "Handy",
+      "prerelease_enabled": false,
+      "updates_enabled": true
+    },
+    {
       "name": "Helium",
       "prerelease_enabled": true,
       "updates_enabled": true
