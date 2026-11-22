@@ -9,7 +9,7 @@ rust = { version = "stable", components = ["clippy", "rustfmt", "rust-src"] }
 "npm:agent-browser" = "latest"
 "npm:agent-desktop" = "latest"
 "npm:next-devtools-mcp" = "latest"
-"npm:chrome-devtools-mcp" = "1.11.0"
+"npm:chrome-devtools-mcp" = "1.13.0"
 oh-my-posh = "latest"
 gh = "latest"
 rclone = "latest"

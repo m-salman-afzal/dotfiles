@@ -4,8 +4,9 @@ alias gb="g branch"
 
 gdrb() {
   git remote prune origin
-  git branch -vv | grep ': gone]' | awk '{print $1}' > /tmp/merged-branches
-  cat /tmp/merged-branches | xargs git branch -D
+  # for-each-ref, not `git branch -vv`: that prefixes worktree/current branches with + / *
+  git for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)' refs/heads |
+    grep . | xargs -r git branch -D
 }
 alias gf="g fetch"
 alias gfo="gf origin"

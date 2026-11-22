@@ -7,6 +7,12 @@
       "updates_enabled": true
     },
     {
+      "custom_update_link": "https://api2.cursor.sh/updates/download/golden/linux-x64/sand/latest",
+      "name": "Grok Bot",
+      "prerelease_enabled": false,
+      "updates_enabled": true
+    },
+    {
       "custom_update_link": "https://github.com/cjpais/Handy",
       "name": "Handy",
       "prerelease_enabled": false,

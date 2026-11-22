@@ -1,4 +1,5 @@
 app.zen_browser.zen
+com.discordapp.Discord
 com.getmailspring.Mailspring
 com.github.tchx84.Flatseal
 com.google.Chrome
@@ -10,8 +11,6 @@ com.slack.Slack
 com.stremio.Stremio
 com.valvesoftware.Steam
 de.haeckerfelix.Fragments
-io.github.alainm23.planify
-io.github.flattool.Warehouse
 io.github.maniacx.BudsLink
 io.github.plrigaux.sysd-manager
 io.gitlab.adhami3310.Impression
