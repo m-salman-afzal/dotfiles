@@ -64,10 +64,11 @@ cycle-sink() {
 #  under sudo because each pane is its own pty and sudo tickets are per-tty, so a `sudo -v` up front wouldn't carry.
 #  Progress-Fancy=0: dpkg's bottom progress bar sets a scroll region, and dekit keeps no scrollback while one is set.
 #  mise drops back to $USER (expanded here, before sudo) so tools land in ~/.local/share/mise, not root's.
+#  Updates only: autoremove, clean and unused flatpak runtimes are bigBangCleanup's (45-cleanup.zsh).
 function uuac {
   sudo "$(mise which dekit)" mprocs --names snap,flatpak,apt,mise \
     'snap refresh' \
-    'flatpak update -y && flatpak uninstall --unused -y' \
-    'apt update && apt -o Dpkg::Progress-Fancy=0 upgrade --with-new-pkgs -y && apt -o Dpkg::Progress-Fancy=0 autoremove --purge -y && apt clean all -y' \
+    'flatpak update -y' \
+    'apt update && apt -o Dpkg::Progress-Fancy=0 upgrade --with-new-pkgs -y' \
     "sudo -u $USER mise upgrade"
 }

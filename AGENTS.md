@@ -54,7 +54,7 @@ inside its function between the daily gate and the commit prompt — so they sha
 ## Shell
 
 - `.zshrc` sources `zsh/*.zsh` in numeric order: 10 env/PATH, 20 zinit plugins + oh-my-posh, 30 options, 40 aliases,
-  45 cleanup (space-reclaim aliases), 50 git, 60 functions, 70 `mise activate`, 80 daily sync (+ `zsh/sync/*.zsh`), 81 monthly dircolors refresh.
+  45 cleanup (one space-reclaim command per tool + `bigBangCleanup`, which asks y/N for each in turn), 50 git, 60 functions, 70 `mise activate`, 80 daily sync (+ `zsh/sync/*.zsh`), 81 monthly dircolors refresh.
 - Aliases (40) must load before functions that use them (50/60): zsh expands aliases at parse time.
 - In 20: plugins that extend `fpath` before `compinit`, fzf-tab right after it, autosuggestions/syntax-highlighting
   last. fzf comes from zinit (`gh-r`).
