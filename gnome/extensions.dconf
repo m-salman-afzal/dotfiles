@@ -96,7 +96,7 @@ use-vertical-gradient=false
 visualization-mode='led-bars'
 
 [auto-move-windows]
-application-list=['com.slack.Slack.desktop:3', 'app.zen_browser.zen.desktop:3', 'com.google.Chrome.desktop:2', 'com.mitchellh.ghostty.desktop:1', 'com.microsoft.VSCode.desktop:2', 'com.valvesoftware.Steam.desktop:4']
+application-list=['com.slack.Slack.desktop:3', 'app.zen_browser.zen.desktop:3', 'com.google.Chrome.desktop:2', 'com.mitchellh.ghostty.desktop:1', 'com.microsoft.VSCode.desktop:2', 'com.valvesoftware.Steam.desktop:4', 'com.github.AppManager.desktop:1', 'com.jetbrains.DataGrip.desktop:2']
 
 [blur-my-shell]
 debug=false
@@ -198,9 +198,9 @@ last-prefs-version=48
 prefs-open-count=3
 
 [chromaleon]
-accent-color='#3aa16e'
+accent-color='#757acc'
 create-shortcut=false
-custom-color=true
+custom-color=false
 custom-css=true
 darker=true
 gnome-colors=false

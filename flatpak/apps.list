@@ -25,7 +25,9 @@ org.gnome.Loupe
 org.gnome.Papers
 org.gnome.Showtime
 org.gnome.Snapshot
+org.gnome.baobab
 org.gnome.clocks
+org.ladybird.Ladybird
 org.mozilla.firefox
 org.pulseaudio.pavucontrol
 org.videolan.VLC
